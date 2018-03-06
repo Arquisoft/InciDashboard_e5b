@@ -1,4 +1,4 @@
-package uo.asw.apacheKafka;
+package uo.asw.apacheKafka.consumer;
 
 import javax.annotation.ManagedBean;
 

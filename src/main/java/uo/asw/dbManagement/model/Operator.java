@@ -1,34 +1,33 @@
 package uo.asw.dbManagement.model;
 
-import javax.persistence.*;
 import java.util.Set; //A collection that contains no duplicate elements
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 @Entity
-public class Operator {// XXX Cambiar cosas!!!
+public class Operator {
 	
 	@Id
 	@GeneratedValue
 	private long id; 
 	@Column(unique=true) 
-	private String dni; 
-	private String name; 
-	private String lastName; 
+	private String identifier;
+	private String name;  
 	private String role;
 	
 	private String password;
 	@Transient // propiedad que no se almacena en la tabla.
 	private String passwordConfirm; // Este campo solo sirve para pasar el valor del campo "Repita Password"
 								   // del formulario y validar que tiene el mismo valor que el password
-
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+		
+	@OneToMany(mappedBy="operator", cascade=CascadeType.ALL)
 	private Set<Incidence> incidences;
-
-	public Operator(String dni, String name, String lastName) {
-		super();
-		this.dni = dni;
-		this.name = name;
-		this.lastName = lastName;
-	}
 
 	public Operator() {}
 
@@ -40,12 +39,12 @@ public class Operator {// XXX Cambiar cosas!!!
 		this.id = id;
 	}
 
-	public String getDni() {
-		return dni;
+	public String getIdentifier() {
+		return identifier;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 	public String getName() {
@@ -56,24 +55,12 @@ public class Operator {// XXX Cambiar cosas!!!
 		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getRole() {
+		return role;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
-	public Set<Incidence> getIncidences() {
-		return incidences;
-	}
-
-	public void setIncidences(Set<Incidence> incidences) {
-		this.incidences = incidences;
-	}
-
-	public String getFullName() {
-		return this.name + " " + this.lastName;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getPassword() {
@@ -92,12 +79,12 @@ public class Operator {// XXX Cambiar cosas!!!
 		this.passwordConfirm = passwordConfirm;
 	}
 
-	public String getRole() {
-		return role;
+	public Set<Incidence> getIncidences() {
+		return incidences;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setIncidences(Set<Incidence> incidences) {
+		this.incidences = incidences;
 	}
 	
 }

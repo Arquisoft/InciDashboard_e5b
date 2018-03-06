@@ -6,9 +6,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class RIncidenceP {
 	
-	public JSONObject StringToJson(String JSONString) {
+	/**
+	 * Se encarga de parsear el String que le llega, convirtiéndolo a un objeto JSON, 
+	 * y transformando dicho JSON en un objeto Incidence.
+	 * 
+	 * @param JSONString
+	 * @return
+	 */
+	public Incidence jsonStringToIncidence(String JSONString) {
 		JSONObject json = new JSONObject(JSONString);
-		return json;
+		
+		//TODO - Parsear el json a incidence
+		
+		return incidence;
 	}
 	
 }
