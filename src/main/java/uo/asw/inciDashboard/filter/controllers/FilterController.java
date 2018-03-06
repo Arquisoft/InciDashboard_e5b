@@ -1,8 +1,11 @@
 package uo.asw.inciDashboard.filter.controllers;
 
+import org.springframework.stereotype.Controller;
+
 import uo.asw.inciDashboard.entities.Filter;
 import uo.asw.inciDashboard.filter.SetFilter;
 
+@Controller
 public class FilterController implements SetFilter {
 
 	@Override
