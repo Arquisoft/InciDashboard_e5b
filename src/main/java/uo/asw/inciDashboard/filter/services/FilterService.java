@@ -8,8 +8,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uo.asw.inciDashboard.entities.Filter;
-import uo.asw.inciDashboard.filter.repositories.FilterRepository;
+import uo.asw.dbManagement.FilterRepository;
+import uo.asw.dbManagement.model.Filter;
 
 @Service
 public class FilterService {

@@ -1,4 +1,4 @@
-package uo.asw.inciDashboard.entities;
+package uo.asw.dbManagement.model;
 
 import javax.persistence.Entity;
 

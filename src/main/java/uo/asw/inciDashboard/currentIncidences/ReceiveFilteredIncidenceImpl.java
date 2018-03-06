@@ -2,7 +2,7 @@ package uo.asw.inciDashboard.currentIncidences;
 
 import org.springframework.stereotype.Component;
 
-import uo.asw.inciDashboard.entities.Incidence;
+import uo.asw.dbManagement.model.Incidence;
 
 @Component
 public class ReceiveFilteredIncidenceImpl implements ReceiveFilteredIncidence {

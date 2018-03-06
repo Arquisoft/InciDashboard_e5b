@@ -1,6 +1,6 @@
 package uo.asw.inciDashboard.currentIncidences;
 
-import uo.asw.inciDashboard.entities.Incidence;
+import uo.asw.dbManagement.model.Incidence;
 
 public interface ReceiveFilteredIncidence {
 	public void receiveIncidence(Incidence incidence);
