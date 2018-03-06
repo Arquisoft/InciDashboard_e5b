@@ -2,14 +2,20 @@ package uo.asw.apacheKafka.consumer;
 
 import javax.annotation.ManagedBean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+
+import uo.asw.inciDashboard.filter.ReceiveIncidence;
 
 @ManagedBean
 public class MessageListener {
-	//private static final Logger logger = Logger.getLogger(MessageListener.class);
 
+	@Autowired
+	private ReceiveIncidence receiveIncidence;
+	
 	@KafkaListener(topics = "exampleTopic")
 	public void listen(String data) {
-		//logger.info("New message received: \"" + data + "\"");
+		System.out.println(data);// TODO - QUITAR CUANDO ACABE DE PROBARSE
+		receiveIncidence.receiveIncidence(data);
 	}
 }

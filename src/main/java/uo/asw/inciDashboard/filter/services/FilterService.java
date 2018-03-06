@@ -30,6 +30,10 @@ public class FilterService {
 	public Filter getFilter(Long id) {
 		return filterRepository.findOne(id);
 	}
+	
+	public Filter getFilter() {
+		return getFilters().get(0);
+	}
 
 	public void addFilter(Filter Filter) {
 		filterRepository.save(Filter);
