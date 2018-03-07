@@ -7,33 +7,43 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Operator {
+public class Agent {
 	
 	@Id
 	@GeneratedValue
-	private long id; 
-	@Column(unique=true) 
-	private String identifier;
-	private String name;  
-	private String role; // = "ROLE_OPERATOR"
+	private Long id;
 	
+	@NotNull
+	@Column(unique=true)
+	private String identifier;
+	
+	@NotNull
 	private String password;
-	@Transient
-	private String passwordConfirm; //TODO - quitar?
-		
-	@OneToMany(mappedBy="operator")
+	
+	@NotNull
+	private String name;
+	
+	@NotNull
+	private String email;
+	
+	private String location;
+	
+	@NotNull
+	private String kind;
+	
+	@OneToMany(mappedBy = "agent")
 	private Set<Incidence> incidences;
+	
+	public Agent(){}
 
-	public Operator() {}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -45,22 +55,6 @@ public class Operator {
 		this.identifier = identifier;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -69,12 +63,36 @@ public class Operator {
 		this.password = password;
 	}
 
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	public String getName() {
+		return name;
 	}
 
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public Set<Incidence> getIncidences() {
