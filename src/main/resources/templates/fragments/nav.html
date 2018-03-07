@@ -14,33 +14,28 @@
 		
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
-				<li><a href="/" th:text="#{home}">Home</a></li>
+				<li><a href="/" th:text="#{home}">Inicio</a></li>
 				
-				<li id= "marks-menu" class="dropdown">
- 					<a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{notes.management}">
- 						Gestión de notas <span class="caret"></span>
+				<li id= "incidences-menu" class="dropdown">
+ 					<a class="dropdown-toggle" data-toggle="dropdown" href="#"">
+ 						Incidencias <span class="caret"></span>
  					</a>
 	 				<ul class="dropdown-menu">
-		 				<li sec:authorize="hasRole('ROLE_PROFESSOR')">
-		 					<a href="/mark/add" th:text="#{notes.add}">Agregar Nota</a>
+		 				<li>
+		 					<a href="/incidences/currentIncidences">Actuales</a>
 		 				</li>
 		 				<li>
-		 					<a href="/mark/list" th:text="#{notes.see}">Ver Notas</a>
+		 					<a href="/incidences/operator">Asignadas a mí</a>
+		 				</li>
+		 				<li>
+		 					<a href="/incidences/categories/select">Por categorías</a>
 		 				</li>
 	 				</ul>
  				</li>
  				
- 				<li id= "users-menu" class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
- 					<a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{users.management}">
- 						Gestión de Usuarios <span class="caret"></span>
- 					</a>
- 					<ul class="dropdown-menu">
- 						<li><a href="/user/add" th:text="#{users.add}">Agregar Usuario</a></li>
- 						<li><a href="/user/list" th:text="#{users.see}">Ver Usuarios</a></li>
- 					</ul>
- 				</li>
 			</ul>
 			
+			<!-- QUITAR si no se va a internacionalizar -->
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a id="btnLanguage" href="#" class="dropdown-toggle" 
@@ -67,6 +62,7 @@
 					</ul>
 				</li>
 
+				<!-- QUITAR si los operarios no se pueden registrar -->
 				<li sec:authorize="!isAuthenticated()">
 					<a href="/signup" th:text="#{signup.message}"> 
 						<span class="glyphicon glyphicon-user"></span> 
