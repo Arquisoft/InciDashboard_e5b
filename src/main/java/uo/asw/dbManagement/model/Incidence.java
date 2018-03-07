@@ -10,7 +10,8 @@ import javax.persistence.ManyToOne;
 public class Incidence {
 	
 	/*
-	 *	Cada incidencia puede contener los siguientes campos: nombre de usuario y password, 
+	 *	Cada incidencia puede contener los siguientes campos: 
+	 *	nombre de usuario y password, 
 	 *	nombre de la incidencia, descripción, localización (se obtendrá automáticamente del dispositivo si es posible), 
 	 *	etiquetas (lista de palabras separadas por comas que permitirán categorizar las incidencias), 
 	 *	información adicional (fotos, vídeos, etc.). 
@@ -25,8 +26,6 @@ public class Incidence {
 	 *
 	 * 	Si hay valores de alguna propiedad que los filtros consideran peligroso, se marcará dicha incidencia como peligrosa.
 	 */
-	
-
 	
 	//TODO - Completar
 	

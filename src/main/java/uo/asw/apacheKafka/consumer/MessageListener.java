@@ -13,7 +13,7 @@ public class MessageListener {
 	@Autowired
 	private ReceiveIncidence receiveIncidence;
 	
-	@KafkaListener(topics = "exampleTopic")
+	@KafkaListener(topics = "incidences") //TODO - topics????
 	public void listen(String data) {
 		System.out.println(data);// TODO - QUITAR CUANDO ACABE DE PROBARSE
 		receiveIncidence.receiveIncidence(data);

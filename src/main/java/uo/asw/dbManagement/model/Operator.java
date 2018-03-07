@@ -1,6 +1,6 @@
 package uo.asw.dbManagement.model;
 
-import java.util.Set; //A collection that contains no duplicate elements
+import java.util.Set; 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,12 +19,11 @@ public class Operator {
 	@Column(unique=true) 
 	private String identifier;
 	private String name;  
-	private String role;
+	private String role; // = "ROLE_OPERATOR"
 	
 	private String password;
-	@Transient // propiedad que no se almacena en la tabla.
-	private String passwordConfirm; // Este campo solo sirve para pasar el valor del campo "Repita Password"
-								   // del formulario y validar que tiene el mismo valor que el password
+	@Transient
+	private String passwordConfirm; //TODO - quitar?
 		
 	@OneToMany(mappedBy="operator", cascade=CascadeType.ALL)
 	private Set<Incidence> incidences;
