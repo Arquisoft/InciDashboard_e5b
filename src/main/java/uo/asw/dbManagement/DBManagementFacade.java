@@ -11,9 +11,9 @@ public interface DBManagementFacade {
 
 	public void updateFilter(Filter Filter);	
 	
-	public Incidence getIncidence(Long idIncidence);
+	public Incidence getIncidence(long idIncidence);
 	
-	public List<Incidence> getOperatorIncidences(Long idOperator); //TODO - Cuando este implementado y funcione, hacer que devuelva Page<Incidence> para meter paginacion
+	public List<Incidence> getOperatorIncidences(long idOperator); //TODO - Cuando este implementado y funcione, hacer que devuelva Page<Incidence> para meter paginacion
 
 	public List<Incidence> getIncidencesOfCategory(List<String> categories); //TODO - Cuando este implementado y funcione, hacer que devuelva Page<Incidence> para meter paginacion
 

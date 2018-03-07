@@ -1,6 +1,7 @@
 package uo.asw.inciDashboard.storedIncidences;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -23,8 +24,12 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String showOperatorIncidences(Model model, Principal principal) {
 		// TODO Auto-generated method stub
 		//TODO - Obtener el operario en sesión, sacar su id y pasarlo al metodo de abajo 
+		
+		//Saco el id del operario en sesión
+		long id=Long.parseLong(principal.getName());
+		
 		model.addAttribute("listIncidences", 
-				dBManagement.getOperatorIncidences());
+				dBManagement.getOperatorIncidences(id));
 		return "incidences/operator";
 	}
 	
@@ -37,13 +42,14 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	
 	@Override
 	@RequestMapping("/incidences/categories/show")
-	public String showIncidencesOfCategoryGet(Model model) {
+	public String showIncidencesOfCategoryGet(Model model, @ModelAttribute List<String> categorys) {
 		/*
 		 * TODO
 		 * Recibe una lista de categorias en la petición, y hay que pasar dicha lista a dbManagement
 		 */
+				
 		model.addAttribute("listIncidences", 
-				dBManagement.getIncidencesOfCategory());
+				dBManagement.getIncidencesOfCategory(categorys));
 		// Deberia devolver las incidencias paginadas Page<Incidence>
 		return "incidences/categories/show";
 	}
@@ -52,7 +58,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	@RequestMapping("/incidences/update/{idIncidence}")
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
 		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
-		model.addAttribute("incidence", dBManagement.getIncidence());
+		model.addAttribute("incidence", dBManagement.getIncidence(idIncidence));
 		return "incidences/update";
 	}
 
@@ -60,7 +66,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	@RequestMapping(value ="/incidences/update/{idIncidence}", method = RequestMethod.POST)
 	public String updateIncidencePost(@ModelAttribute Incidence incidence) { 
 		dBManagement.updateIncidence(incidence);
-		//Retornar alguna vista
+		return "incidences/update"; 
 	}
 
 }
