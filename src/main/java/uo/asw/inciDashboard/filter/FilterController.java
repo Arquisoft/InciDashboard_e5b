@@ -7,26 +7,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Filter;
-import uo.asw.inciDashboard.filter.services.FilterService;
 
 @Controller
 public class FilterController implements SetFilter {
 
 	@Autowired
-	private FilterService filterService;
+	private DBManagementFacade dbManagement;
 	
 	@Override
 	@RequestMapping("/incidences/filter")
 	public String setFilterGet(Model model) {
-		model.addAttribute("filter", filterService.getFilter()); // TODO - mejorar??
+		model.addAttribute("filter", dbManagement.getFilter()); // TODO - mejorar??
 		return "operator/filter";
 	}
 
 	@Override
 	@RequestMapping(value ="/incidences/filter", method = RequestMethod.POST)
 	public String setFilterPost(@ModelAttribute Filter filter) {
-		filterService.addFilter(filter); // TODO - mejorar??
+		dbManagement.updateFilter(filter); // TODO - mejorar??
 		return "operator/filter";
 	}
 

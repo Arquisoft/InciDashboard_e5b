@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.DBManagementFacadeImpl;
 import uo.asw.dbManagement.model.Incidence;
 
 public class StoredIncidencesController implements ShowOperatorIncidences, ShowIncidencesOfCategory, UpdateIncidence {
 
 	@Autowired
-	private DBManagementFacadeImpl dBManagement;
+	private DBManagementFacade dBManagement;
 
 	@Override
 	@RequestMapping("/incidences/operator")

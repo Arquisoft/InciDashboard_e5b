@@ -64,74 +64,86 @@ public class Incidence {
 	public Agent getAgent() {
 		return agent;
 	}
-	public void setAgent(Agent agent) {
+	public Incidence setAgent(Agent agent) {
 		this.agent = agent;
+		return this;
 	}
 	public Operator getOperator() {
 		return operator;
 	}
-	public void setOperator(Operator operator) {
+	public Incidence setOperator(Operator operator) {
 		this.operator = operator;
+		return this;
 	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public Incidence setName(String name) {
 		this.name = name;
+		return this;
 	}
 	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+	public Incidence setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 	public String getLocation() {
 		return location;
 	}
-	public void setLocation(String location) {
+	public Incidence setLocation(String location) {
 		this.location = location;
+		return this;
 	}
 	public List<String> getTags() {
 		return tags;
 	}
-	public void setTags(List<String> tags) {
+	public Incidence setTags(List<String> tags) {
 		this.tags = tags;
+		return this;
 	}
 	public Map<String, Object> getAdditional() {
 		return additional;
 	}
-	public void setAdditional(Map<String, Object> additional) {
+	public Incidence setAdditional(Map<String, Object> additional) {
 		this.additional = additional;
+		return this;
 	}
 	public Map<String, Object> getProperties() {
 		return properties;
 	}
-	public void setProperties(Map<String, Object> properties) {
+	public Incidence setProperties(Map<String, Object> properties) {
 		this.properties = properties;
+		return this;
 	}
 	public String getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public Incidence setStatus(String status) {
 		this.status = status;
+		return this;
 	}
 	public String getOperatorComments() {
 		return operatorComments;
 	}
-	public void setOperatorComments(String operatorComments) {
+	public Incidence setOperatorComments(String operatorComments) {
 		this.operatorComments = operatorComments;
+		return this;
 	}
 	public String getExpiration() {
 		return expiration;
 	}
-	public void setExpiration(String expiration) {
+	public Incidence setExpiration(String expiration) {
 		this.expiration = expiration;
+		return this;
 	}
 	public boolean isDangerous() {
 		return dangerous;
 	}
-	public void setDangerous(boolean dangerous) {
+	public Incidence setDangerous(boolean dangerous) {
 		this.dangerous = dangerous;
+		return this;
 	}
 	
 }
