@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import uo.asw.dbManagement.IncidencesRepository;
 import uo.asw.dbManagement.model.Incidence;
@@ -15,12 +16,12 @@ public class StoredIncidencesController implements StoredIncidences {
 	private IncidencesRepository incidencesRepository;
 
 	@Override
-	@RequestMapping("/operator/{idOperator}/incidences")
+	@RequestMapping("/incidences/operator/{idOperator}")
 	public String showOperatorIncidences(Model model, @PathVariable Long idOperator) {
 		// TODO Auto-generated method stub
 		model.addAttribute("listIncidences", 
 				incidencesRepository.getOperatorIncidences(idOperator));
-		return "operator/incidences";
+		return ;
 	}
 	
 	//XXX MAL!!! --> Hay que repensar esto. Se necesita un post seguramente, o pasar por params por get
@@ -29,17 +30,18 @@ public class StoredIncidencesController implements StoredIncidences {
 	public String showIncidencesOfCategoryGet(Model model) {
 		model.addAttribute("listIncidences", 
 				incidencesRepository.getIncidencesOfCategory(categorias));
-		return "operator/incidences";
+		return ;
 	}
 
 	@Override
 	@RequestMapping("/incidences/update/{idIncidence}")
 	public String updateIncidenceGet(@PathVariable Long idIncidence) {
 		// TODO Auto-generated method stub
-		return "incidence/update";
+		return "incidences/update";
 	}
 
 	@Override
+	@RequestMapping(value ="/incidences/update/{idIncidence}", method = RequestMethod.POST)
 	public String updateIncidencePost(@ModelAttribute Incidence incidence) {
 		// TODO Auto-generated method stub
 		incidencesRepository.save(incidence);

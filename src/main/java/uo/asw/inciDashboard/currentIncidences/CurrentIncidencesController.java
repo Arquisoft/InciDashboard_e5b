@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CurrentIncidencesController implements GetCurrentIncidences {
 
 	@Override
-	@RequestMapping("/operator/currentIncidences")
+	@RequestMapping("/incidences/currentIncidences")
 	public String getCurrentIncidences() {
 		// TODO - implementar??
-		return "operator/currentIncidences";
+		return "incidences/currentIncidences";
 	}
 
 }

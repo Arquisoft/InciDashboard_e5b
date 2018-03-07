@@ -17,14 +17,14 @@ public class FilterController implements SetFilter {
 	private FilterService filterService;
 	
 	@Override
-	@RequestMapping("/operator/filter")
+	@RequestMapping("/incidences/filter")
 	public String setFilterGet(Model model) {
 		model.addAttribute("filter", filterService.getFilter()); // TODO - mejorar??
 		return "operator/filter";
 	}
 
 	@Override
-	@RequestMapping(value ="/operator/filter", method = RequestMethod.POST)
+	@RequestMapping(value ="/incidences/filter", method = RequestMethod.POST)
 	public String setFilterPost(@ModelAttribute Filter filter) {
 		filterService.addFilter(filter); // TODO - mejorar??
 		return "operator/filter";
