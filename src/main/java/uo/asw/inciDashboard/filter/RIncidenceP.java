@@ -1,4 +1,4 @@
-package uo.asw.inciDashboard.filter.services;
+package uo.asw.inciDashboard.filter;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.inciDashboard.currentIncidences.ReceiveFilteredIncidence;
-import uo.asw.inciDashboard.filter.services.RIncidenceP;
 
 @Component
 public class ReceiveIncidenceImpl implements ReceiveIncidence {
