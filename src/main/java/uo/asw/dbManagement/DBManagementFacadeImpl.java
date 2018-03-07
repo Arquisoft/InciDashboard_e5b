@@ -1,6 +1,5 @@
 package uo.asw.dbManagement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,13 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	@Autowired
 	private IncidencesRepository incidencesRepository;
 	
-	public Filter getFilter() {
-		List<Filter> filters = new ArrayList<Filter>();
+	public Filter getFilter(Long idFilter) {
+		
+		/*List<Filter> filters = new ArrayList<Filter>();
 		filterRepository.findAll().forEach(filters::add);
-		return filters.get(0);
+		return filters.get(0);*/
+		return filterRepository.findById(idFilter);
+		
 	}
 
 	public void updateFilter(Filter Filter) {
