@@ -23,6 +23,6 @@ public interface DBManagementFacade {
 	public List<Incidence> getIncidencesOfCategory(List<String> categories); //TODO - Cuando este implementado y funcione, hacer que devuelva Page<Incidence> para meter paginacion
 	
 	//@Query("UPDATE Incidence SET incidence = ?2 WHERE id = ?1")
-	public void updateIncidence(long idIncidence, Incidence incidence);//¿?¿?¿
+	public void updateIncidence(Incidence incidence);//¿?¿?¿
 	
 }
