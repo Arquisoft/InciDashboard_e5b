@@ -3,11 +3,10 @@ package uo.asw.validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.*;
 
 import uo.asw.dbManagement.model.Operator;
-import uo.asw.dbManagement.model.OperatorsService;
+import uo.asw.dbManagement.services.OperatorsService;
 
 @Component
 public class LoginFormValidator implements Validator{

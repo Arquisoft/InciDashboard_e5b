@@ -1,4 +1,4 @@
-package uo.asw.dbManagement.model;
+package uo.asw.dbManagement.services;
 
 import org.springframework.stereotype.Service;
 

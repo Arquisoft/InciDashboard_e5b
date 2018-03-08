@@ -1,7 +1,7 @@
 package uo.asw.validators;
 
 import uo.asw.dbManagement.model.Operator;
-import uo.asw.dbManagement.model.OperatorsService;
+import uo.asw.dbManagement.services.OperatorsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

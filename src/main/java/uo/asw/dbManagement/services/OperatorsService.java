@@ -1,4 +1,4 @@
-package uo.asw.dbManagement.model;
+package uo.asw.dbManagement.services;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import uo.asw.dbManagement.model.Operator;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
 
 @Service
