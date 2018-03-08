@@ -1,5 +1,6 @@
 package uo.asw.dbManagement.model;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -103,8 +104,9 @@ public class Incidence {
 		return tags;
 	}
 
-	public void setTags(String[] tags) {
+	public Incidence setTags(String[] tags) {
 		this.tags = tags;
+		return this;
 	}
 	
 	public String getStatus() {
@@ -140,8 +142,96 @@ public class Incidence {
 		return properties;
 	}
 
-	public void setProperties(Set<Property> properties) {
+	public Incidence setProperties(Set<Property> properties) {
 		this.properties = properties;
+		return this;
 	}
 
+	@Override
+	public String toString() {
+		return "Incidence [id=" + id + ", agent=" + agent + ", operator=" + operator + ", name=" + name
+				+ ", description=" + description + ", location=" + location + ", tags=" + Arrays.toString(tags)
+				+ ", properties=" + properties + ", status=" + status + ", operatorComments=" + operatorComments
+				+ ", expiration=" + expiration + ", dangerous=" + dangerous + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((agent == null) ? 0 : agent.hashCode());
+		result = prime * result + (dangerous ? 1231 : 1237);
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((expiration == null) ? 0 : expiration.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((operator == null) ? 0 : operator.hashCode());
+		result = prime * result + ((operatorComments == null) ? 0 : operatorComments.hashCode());
+		result = prime * result + ((properties == null) ? 0 : properties.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + Arrays.hashCode(tags);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Incidence other = (Incidence) obj;
+		if (agent == null) {
+			if (other.agent != null)
+				return false;
+		} else if (!agent.equals(other.agent))
+			return false;
+		if (dangerous != other.dangerous)
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (expiration == null) {
+			if (other.expiration != null)
+				return false;
+		} else if (!expiration.equals(other.expiration))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (operator == null) {
+			if (other.operator != null)
+				return false;
+		} else if (!operator.equals(other.operator))
+			return false;
+		if (operatorComments == null) {
+			if (other.operatorComments != null)
+				return false;
+		} else if (!operatorComments.equals(other.operatorComments))
+			return false;
+		if (properties == null) {
+			if (other.properties != null)
+				return false;
+		} else if (!properties.equals(other.properties))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (!Arrays.equals(tags, other.tags))
+			return false;
+		return true;
+	}
+	
 }

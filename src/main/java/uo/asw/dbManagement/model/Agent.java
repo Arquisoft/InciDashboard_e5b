@@ -38,6 +38,13 @@ public class Agent {
 	private Set<Incidence> incidences;
 	
 	public Agent(){}
+	
+	public Agent(String identifier, String password, String kind) {
+		super();
+		this.identifier = identifier;
+		this.password = password;
+		this.kind = kind;
+	}
 
 	public Long getId() {
 		return id;
@@ -101,6 +108,69 @@ public class Agent {
 
 	public void setIncidences(Set<Incidence> incidences) {
 		this.incidences = incidences;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "Agent [id=" + id + ", identifier=" + identifier + ", password=" + password + ", name=" + name
+				+ ", email=" + email + ", location=" + location + ", kind=" + kind + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
+		result = prime * result + ((kind == null) ? 0 : kind.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Agent other = (Agent) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (identifier == null) {
+			if (other.identifier != null)
+				return false;
+		} else if (!identifier.equals(other.identifier))
+			return false;
+		if (kind == null) {
+			if (other.kind != null)
+				return false;
+		} else if (!kind.equals(other.kind))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		return true;
 	}
 	
 }
