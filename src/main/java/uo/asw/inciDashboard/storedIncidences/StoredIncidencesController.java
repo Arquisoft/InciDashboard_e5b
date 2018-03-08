@@ -23,8 +23,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String showOperatorIncidences(Model model, Principal principal) {
 		// TODO Auto-generated method stub
 		//TODO - Obtener el operario en sesión, sacar su id y pasarlo al metodo de abajo 
-		model.addAttribute("listIncidences", 
-				dBManagement.getOperatorIncidences());
+		//model.addAttribute("listIncidences", dBManagement.getOperatorIncidences());
 		return "incidences/operator";
 	}
 	
@@ -42,8 +41,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		 * TODO
 		 * Recibe una lista de categorias en la petición, y hay que pasar dicha lista a dbManagement
 		 */
-		model.addAttribute("listIncidences", 
-				dBManagement.getIncidencesOfCategory());
+		//model.addAttribute("listIncidences", dBManagement.getIncidencesOfCategory());
 		// Deberia devolver las incidencias paginadas Page<Incidence>
 		return "incidences/categories/show";
 	}
@@ -52,15 +50,16 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	@RequestMapping("/incidences/update/{idIncidence}")
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
 		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
-		model.addAttribute("incidence", dBManagement.getIncidence());
+		//model.addAttribute("incidence", dBManagement.getIncidence());
 		return "incidences/update";
 	}
 
 	@Override
 	@RequestMapping(value ="/incidences/update/{idIncidence}", method = RequestMethod.POST)
 	public String updateIncidencePost(@ModelAttribute Incidence incidence) { 
-		dBManagement.updateIncidence(incidence);
+		//dBManagement.updateIncidence(incidence);
 		//Retornar alguna vista
+		return "";
 	}
 
 }

@@ -37,12 +37,12 @@ public class RIncidenceP {
 		
 		//dbManagement.getAgent(login,password,kind);
 		
-		Incidence incidence = new Incidence();
-		incidence
-				.setName(name)
-				.setDescription(description).
+//		Incidence incidence = new Incidence();
+//		incidence
+//				.setName(name)
+//				.setDescription(description).
 		
-		return incidence;
+		return new Incidence();
 	}
 	
 	public String getString(List<String> names, JSONObject json, String key) {

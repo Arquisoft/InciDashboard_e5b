@@ -21,8 +21,8 @@ public class ReceiveIncidenceImpl implements ReceiveIncidence {
 		
 		//Aplicamos el filtro y comprobamos si pasa o no y si tiene valores peligrosos o no
 		
-		if(pasaFiltro)
-			receiveFilteredIncidence.receiveFilteredIncidence(incidence);
+//		if(pasaFiltro)
+//			receiveFilteredIncidence.receiveFilteredIncidence(incidence);
 			
 	}
 
