@@ -44,9 +44,12 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		 * TODO
 		 * Recibe una lista de categorias en la petición, y hay que pasar dicha lista a dbManagement
 		 */
-		//model.addAttribute("listIncidences", dBManagement.getIncidencesOfCategory());
+		
+//		model.addAttribute("listIncidences", 
+//				dBManagement.getIncidencesOfCategory(categorys));
+		String[] s = new String[1];//TODO quitar?
 		model.addAttribute("listIncidences", 
-				dBManagement.getIncidencesOfCategory(categorys));
+				dBManagement.getIncidencesOfCategory(s));
 		// Deberia devolver las incidencias paginadas Page<Incidence>
 		return "incidences/categories/show";
 	}

@@ -3,6 +3,7 @@ package uo.asw.dbManagement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Filter;
 import uo.asw.dbManagement.model.Incidence;
@@ -10,6 +11,7 @@ import uo.asw.dbManagement.repositories.FilterRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
 
+@Service
 public class DBManagementFacadeImpl implements DBManagementFacade{
 
 	@Autowired
@@ -42,7 +44,7 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		return incidencesRepository.getOperatorIncidences(idOperator);
 	}
 
-	public List<Incidence> getIncidencesOfCategory(List<String> categories) {
+	public List<Incidence> getIncidencesOfCategory(String[] categories) {
 		return incidencesRepository.getIncidencesOfCategory(categories);
 	}
 

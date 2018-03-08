@@ -1,8 +1,5 @@
 package uo.asw.dbManagement.model;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -45,9 +42,9 @@ public class Incidence {
 	private String name;
 	private String description;
 	private String location;
-	private List<String> tags;
-	private Map<String, Object> additional;
-	private Map<String, Object> properties;
+	private String[] tags;
+	//private Map<String, Object> additional;
+	//private Map<String, Object> properties;
 	private String status;
 	private String operatorComments;
 	private String expiration;
@@ -96,27 +93,29 @@ public class Incidence {
 		this.location = location;
 		return this;
 	}
-	public List<String> getTags() {
+
+	public String[] getTags() {
 		return tags;
 	}
-	public Incidence setTags(List<String> tags) {
+
+	public void setTags(String[] tags) {
 		this.tags = tags;
-		return this;
 	}
-	public Map<String, Object> getAdditional() {
-		return additional;
-	}
-	public Incidence setAdditional(Map<String, Object> additional) {
-		this.additional = additional;
-		return this;
-	}
-	public Map<String, Object> getProperties() {
-		return properties;
-	}
-	public Incidence setProperties(Map<String, Object> properties) {
-		this.properties = properties;
-		return this;
-	}
+
+	//	public Map<String, Object> getAdditional() {
+//		return additional;
+//	}
+//	public Incidence setAdditional(Map<String, Object> additional) {
+//		this.additional = additional;
+//		return this;
+//	}
+//	public Map<String, Object> getProperties() {
+//		return properties;
+//	}
+//	public Incidence setProperties(Map<String, Object> properties) {
+//		this.properties = properties;
+//		return this;
+//	}
 	public String getStatus() {
 		return status;
 	}
