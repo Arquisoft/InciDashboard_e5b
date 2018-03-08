@@ -1,10 +1,13 @@
 package uo.asw.dbManagement.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Incidence {
@@ -44,7 +47,9 @@ public class Incidence {
 	private String location;
 	private String[] tags;
 	//private Map<String, Object> additional;
-	//private Map<String, Object> properties;
+	@OneToMany(mappedBy="incidence")
+	private Set<Property> properties;
+	
 	private String status;
 	private String operatorComments;
 	private String expiration;
@@ -101,21 +106,7 @@ public class Incidence {
 	public void setTags(String[] tags) {
 		this.tags = tags;
 	}
-
-	//	public Map<String, Object> getAdditional() {
-//		return additional;
-//	}
-//	public Incidence setAdditional(Map<String, Object> additional) {
-//		this.additional = additional;
-//		return this;
-//	}
-//	public Map<String, Object> getProperties() {
-//		return properties;
-//	}
-//	public Incidence setProperties(Map<String, Object> properties) {
-//		this.properties = properties;
-//		return this;
-//	}
+	
 	public String getStatus() {
 		return status;
 	}
@@ -144,5 +135,13 @@ public class Incidence {
 		this.dangerous = dangerous;
 		return this;
 	}
-	
+
+	public Set<Property> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Set<Property> properties) {
+		this.properties = properties;
+	}
+
 }

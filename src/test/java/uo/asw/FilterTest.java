@@ -13,12 +13,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringBootTest(classes = InciDashboardE5bApplication.class)
 @WebAppConfiguration
 /**
- * Prueba la API REST
- * Plantillas para los tests extraidos de los tutoriales de Spring (https://spring.io/guides/tutorials/bookmarks/)
- * @since 0.0.1
+ * Prueba el componente Filter
  */
 public class FilterTest {
-
 
     @Before
     public void setUp() {
@@ -29,7 +26,5 @@ public class FilterTest {
     public void test() {
     		assertTrue(true);
     }
-
-    
 
 }
