@@ -1,6 +1,7 @@
 package uo.asw.inciDashboard.storedIncidences;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import uo.asw.dbManagement.DBManagementFacade;
-import uo.asw.dbManagement.DBManagementFacadeImpl;
 import uo.asw.dbManagement.model.Incidence;
 
 public class StoredIncidencesController implements ShowOperatorIncidences, ShowIncidencesOfCategory, UpdateIncidence {
@@ -24,8 +24,9 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		// TODO Auto-generated method stub
 		//TODO - Obtener el operario en sesión, sacar su id y pasarlo al metodo de abajo 
 		//model.addAttribute("listIncidences", dBManagement.getOperatorIncidences());
-		model.addAttribute("listIncidences", 
-				dBManagement.getOperatorIncidences(id));
+		//principal.getName();
+//		model.addAttribute("listIncidences", 
+//				dBManagement.getOperatorIncidences(id));
 		return "incidences/operator";
 	}
 	
@@ -38,7 +39,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	
 	@Override
 	@RequestMapping("/incidences/categories/show")
-	public String showIncidencesOfCategoryGet(Model model) {
+	public String showIncidencesOfCategoryGet(Model model, List<String> categorys) {
 		/*
 		 * TODO
 		 * Recibe una lista de categorias en la petición, y hay que pasar dicha lista a dbManagement
