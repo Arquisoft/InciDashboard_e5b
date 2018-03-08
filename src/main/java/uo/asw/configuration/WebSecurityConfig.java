@@ -26,7 +26,7 @@ protected void configure(HttpSecurity http) throws Exception {
     http
     	.csrf().disable()
 		.authorizeRequests()
-		     .antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup", "/login/**").permitAll()
+		     .antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup", "/login/**","/goToHomeAfterLogin").permitAll()
 		     //TODO -  implementar
 		     .anyRequest().authenticated()
 		        .and()
