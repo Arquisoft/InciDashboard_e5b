@@ -24,6 +24,8 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		// TODO Auto-generated method stub
 		//TODO - Obtener el operario en sesión, sacar su id y pasarlo al metodo de abajo 
 		//model.addAttribute("listIncidences", dBManagement.getOperatorIncidences());
+		model.addAttribute("listIncidences", 
+				dBManagement.getOperatorIncidences(id));
 		return "incidences/operator";
 	}
 	
@@ -42,6 +44,8 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		 * Recibe una lista de categorias en la petición, y hay que pasar dicha lista a dbManagement
 		 */
 		//model.addAttribute("listIncidences", dBManagement.getIncidencesOfCategory());
+		model.addAttribute("listIncidences", 
+				dBManagement.getIncidencesOfCategory(categorys));
 		// Deberia devolver las incidencias paginadas Page<Incidence>
 		return "incidences/categories/show";
 	}
@@ -51,6 +55,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
 		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
 		//model.addAttribute("incidence", dBManagement.getIncidence());
+		model.addAttribute("incidence", dBManagement.getIncidence(idIncidence));
 		return "incidences/update";
 	}
 
