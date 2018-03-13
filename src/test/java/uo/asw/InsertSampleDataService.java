@@ -16,6 +16,7 @@ public class InsertSampleDataService {
 
 	@PostConstruct
 	public void init() {
+		System.out.println("HOLA");
 		Agent agent1 = new Agent("316683136", "1234", "Person");
 		agent1.setName("Juan");
 		agent1.setEmail("email@email.com");

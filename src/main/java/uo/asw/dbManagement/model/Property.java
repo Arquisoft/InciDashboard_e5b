@@ -3,6 +3,7 @@ package uo.asw.dbManagement.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,6 +16,7 @@ public class Property {
 		private String value;
 		
 		@ManyToOne
+		@JoinColumn(name="incidence_id")
 		private Incidence incidence;
 		
 		public Property() {}

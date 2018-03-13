@@ -51,7 +51,7 @@ public class Incidence {
 	@OneToMany(mappedBy="incidence")
 	private Set<Property> properties;
 	
-	private String status;
+	private String status; //open, in process, closed, canceled
 	private String operatorComments;
 	private String expiration;
 	private boolean dangerous;

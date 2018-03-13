@@ -15,6 +15,8 @@ import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Agent;
 import uo.asw.dbManagement.model.Operator;
 import uo.asw.dbManagement.model.Property;
+import uo.asw.util.exception.BusinessException;
+import uo.asw.util.exception.Check;
 
 @Service
 public class RIncidenceP {
@@ -28,8 +30,9 @@ public class RIncidenceP {
 	 * 
 	 * @param JSONString
 	 * @return
+	 * @throws BusinessException 
 	 */
-	public Incidence jsonStringToIncidence(String JSONString) {
+	public Incidence jsonStringToIncidence(String JSONString) throws BusinessException {
 		JSONObject json = new JSONObject(JSONString);
 		List<String> names = Arrays.asList(JSONObject.getNames(json));
 		
@@ -50,6 +53,8 @@ public class RIncidenceP {
 		Agent agent = dbManagement.getAgent(login,password,kind);
 		Operator operator = dbManagement.getOperator(operatorIdentifier);
 		
+		Check.isNotNull(agent, "That agent doesn't exists");	
+		
 		Incidence incidence = new Incidence();
 		incidence
 				.setAgent(agent)
@@ -61,6 +66,7 @@ public class RIncidenceP {
 				.setProperties(properties)
 				.setStatus(status)
 				.setExpiration(expiration);
+		
 		
 		System.out.println(incidence);
 		
