@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import uo.asw.dbManagement.model.Agent;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Operator;
+import uo.asw.dbManagement.model.Property;
 import uo.asw.dbManagement.repositories.AgentsRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
@@ -49,11 +50,22 @@ public class InsertSampleDataService {
 				Incidence i1 = new Incidence(UuidGenerator.getUuid());
 				Incidence i2 = new Incidence(UuidGenerator.getUuid());
 				
-				i1.setAgent(agent1).setOperator(operator1).setName("NombreInc1").setDescription("DescripcionInc1");
-				i2.setAgent(agent1).setOperator(operator1).setName("NombreInc2").setDescription("DescripcionInc2");
+			 	Set<Property> i1Properties = new HashSet<Property>();
+			    	i1Properties.add(new Property("temperatura", "10"));
+			    	i1Properties.add(new Property("aire", "mucho"));
+
+			    	Set<Property> i2Properties = new HashSet<Property>();
+			    	i2Properties.add(new Property("temperatura", "20"));
+			    	i2Properties.add(new Property("aire", "poco"));
 				
-				add(i1);
+			    //String[] i1Tags = {"tiempo", "normal"};
+			    	Set<String> i1Tags = new HashSet<>(); i1Tags.add("tiempo"); i1Tags.add("normal");
+			    	
+				i1.setAgent(agent1).setOperator(operator1).setName("NombreInc1").setDescription("DescripcionInc1").setProperties(i1Properties).setTags(i1Tags);
+				i2.setAgent(agent1).setOperator(operator1).setName("NombreInc2").setDescription("DescripcionInc2").setProperties(i2Properties);
+				
 				add(i2);
+				add(i1);
 			}
 		};
 		

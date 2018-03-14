@@ -43,7 +43,10 @@ public class RIncidenceP {
 		String name = getString(names, json, "name");
 		String description = getString(names, json, "description");
 		String location = getString(names, json, "location");
-		String[] tags = getStringArray(names, json, "tags");
+		
+		String[] tagsArray = getStringArray(names, json, "tags");
+		Set<String> tags = new HashSet<String>(Arrays.asList(tagsArray));
+		
 //		Map<String, Object> additional ;
 		Set<Property> properties = getSetProperties(names, json);
 		

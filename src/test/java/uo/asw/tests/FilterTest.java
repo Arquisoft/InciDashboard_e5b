@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import uo.asw.InciDashboardE5bApplication;
-import uo.asw.apacheKafka.producer.KafkaProducer;
 import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Property;
@@ -30,9 +29,6 @@ import uo.asw.util.exception.BusinessException;
  */
 public class FilterTest {
 
-	@Autowired
-	private KafkaProducer kafkaProducer;
-	
 	@Autowired
 	private RIncidenceP rIncidenceP;
 	
@@ -105,6 +101,8 @@ public class FilterTest {
 	    	propertiesTest.add(new Property("prop1", "val1"));
 	    	propertiesTest.add(new Property("prop2", "val2"));
 	    	
+	    Set<String> tagsTest = new HashSet<>(); tagsTest.add("tag1"); tagsTest.add("tag2");
+	    	
 	    	Incidence incidenceTest = new Incidence("uuid");
 	    	
 	    	incidenceTest
@@ -112,7 +110,7 @@ public class FilterTest {
 	    	.setName("Incidencia")
 	    	.setDescription("Descripcion")
 	    	.setLocation("1.4,12.3")
-	    	.setTags( new String[] {"tag1","tag2"} )
+	    	.setTags( tagsTest )
 	    	.setProperties(propertiesTest)
 	    	.setStatus("open")
 	    	.setExpiration("14:60");
@@ -151,6 +149,8 @@ public class FilterTest {
 	    propertiesTest.add(new Property("prop1", "val1"));
 	    propertiesTest.add(new Property("prop2", "val2"));
 	    	
+	    Set<String> tagsTest = new HashSet<>(); tagsTest.add("tag1"); tagsTest.add("tag2");
+	    
 	    Incidence incidenceTest = new Incidence("uuid");
 	    	
 	    	incidenceTest
@@ -159,7 +159,7 @@ public class FilterTest {
 			.setName("Incidencia")
 			.setDescription("Descripcion")
 			.setLocation("1.4,12.3")
-			.setTags( new String[] {"tag1","tag2"} )
+			.setTags( tagsTest )
 			.setProperties(propertiesTest)
 			.setStatus("open")
 			.setExpiration("14:60");
@@ -201,6 +201,8 @@ public class FilterTest {
 	    	propertiesTest.add(new Property("prop1", "val1"));
 	    	propertiesTest.add(new Property("prop2", "val2"));
 	    	
+	    	Set<String> tagsTest = new HashSet<>(); tagsTest.add("tag1"); tagsTest.add("tag2");
+	    	
 	    	Incidence incidenceTest = new Incidence("uuid");
 	    	
 	    	incidenceTest
@@ -209,7 +211,7 @@ public class FilterTest {
 	    	.setName("Incidencia")
 	    	.setDescription("Descripcion")
 	    	.setLocation("1.4,12.3")
-	    	.setTags( new String[] {"tag1","tag2"} )
+	    	.setTags( tagsTest )
 	    	.setProperties(propertiesTest)
 	    	.setStatus("open")
 	    	.setExpiration("14:60");
@@ -265,7 +267,7 @@ public class FilterTest {
 			    			+ "\"expiration\": \"14:60\""
 		    			+ "}";
 	    	
-	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
+	    	rIncidenceP.jsonStringToIncidence(json);
     }
     
     
