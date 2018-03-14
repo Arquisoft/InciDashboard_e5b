@@ -13,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Operator;
+import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class OperatorsService {
 	
 	@Autowired
 	private OperatorsRepository operatorsRepository;
+	
+	@Autowired
+	private IncidencesRepository incidencesRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -62,6 +67,11 @@ public class OperatorsService {
 	public boolean passwordsIguales(String password,String passwordEncriptada) {
 		
 		return bCryptPasswordEncoder.matches(password, passwordEncriptada);
+	}
+	
+	public List<Incidence> getOperatorIncidences(String identifier){
+		
+		return incidencesRepository.getOperatorIncidences(identifier);
 	}
 	
 	/*public Page<Operator> searchUsersByidentifierAndName(Pageable pageable, String searchText){

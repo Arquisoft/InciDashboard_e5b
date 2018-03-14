@@ -13,22 +13,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Incidence;
+import uo.asw.dbManagement.services.OperatorsService;
 
 @Controller
 public class StoredIncidencesController implements ShowOperatorIncidences, ShowIncidencesOfCategory, UpdateIncidence {
 
 	@Autowired
 	private DBManagementFacade dBManagement;
+	
+	@Autowired
+	private OperatorsService operatorsService;
 
 	@Override
 	@RequestMapping("/incidences/operator")
-	public String showOperatorIncidences(Model model, Principal principal) {
-		// TODO Auto-generated method stub
-		//TODO - Obtener el operario en sesión, sacar su id y pasarlo al metodo de abajo 
-		//model.addAttribute("listIncidences", dBManagement.getOperatorIncidences());
-		//principal.getName();
-//		model.addAttribute("listIncidences", 
-//				dBManagement.getOperatorIncidences(id));
+	public String showOperatorIncidences(Model model,Principal principal) {
+		
+		String identifier=principal.getName();
+		List<Incidence> operatorIncidences=operatorsService.getOperatorIncidences(identifier);
+		model.addAttribute("operatorIncidences", operatorIncidences);
 		return "incidences/operator";
 	}
 	

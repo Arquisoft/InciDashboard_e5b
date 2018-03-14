@@ -2,6 +2,7 @@ package uo.asw.dbManagement.model;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,6 +35,9 @@ public class Incidence {
 	@GeneratedValue
 	private long id;
 	
+	@Column(unique=true) 
+	private String identifier;
+
 	@ManyToOne
 	@JoinColumn(name="agent_id")
 	private Agent agent;
@@ -56,6 +60,10 @@ public class Incidence {
 	private boolean dangerous;
 	
 	public Incidence() {}
+	
+	public Incidence(String identifier) {
+				this.identifier = identifier;
+			}
 	
 	public long getId() {
 		return id;
@@ -142,6 +150,14 @@ public class Incidence {
 
 	public void setProperties(Set<Property> properties) {
 		this.properties = properties;
+	}
+	
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 }
