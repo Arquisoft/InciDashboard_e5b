@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.inciDashboard.currentIncidences.ReceiveFilteredIncidence;
+import uo.asw.util.exception.BusinessException;
 
 @Component
 public class ReceiveIncidenceImpl implements ReceiveIncidence {
@@ -17,7 +18,13 @@ public class ReceiveIncidenceImpl implements ReceiveIncidence {
 	
 	@Override
 	public void receiveIncidence(String jsonStringIncidence) {
-		Incidence incidence = rIncidenceP.jsonStringToIncidence(jsonStringIncidence);
+		Incidence incidence;
+		try {
+			incidence = rIncidenceP.jsonStringToIncidence(jsonStringIncidence);
+		} catch (BusinessException e) {
+			return;
+		}
+		
 		
 		//Aplicamos el filtro y comprobamos si pasa o no y si tiene valores peligrosos o no
 		
