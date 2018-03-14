@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	
-	FilterTest.class
+	//FilterTest.class
 	//,ApacheKafkaTest.class
 	
 })

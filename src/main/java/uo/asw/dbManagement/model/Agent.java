@@ -38,6 +38,13 @@ public class Agent {
 	private Set<Incidence> incidences;
 	
 	public Agent(){}
+	
+	public Agent(String identifier, String password, String kind) {
+		super();
+		this.identifier=identifier;
+		this.password=password;
+		this.kind=kind;
+	}
 
 	public Long getId() {
 		return id;

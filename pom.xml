@@ -103,13 +103,6 @@
 		    <artifactId>json</artifactId>
 		</dependency>
 		
-		<!-- Kafka -->
-		<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
-            <version>1.2.1.RELEASE</version>
-        </dependency>
-		
 	</dependencies>
 
 	<build>
