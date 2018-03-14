@@ -24,6 +24,7 @@ public class CurrentIncidencesController implements GetCurrentIncidences {
 	public String getCurrentIncidences() {
 		Page<Incidence> incidences = new PageImpl<Incidence>(new ArrayList<Incidence>());
 		//model.addAttribute("incidencesList", incidences.getContent()); ???????
+		//
 		//model.addAttribute("page", incidences);
 		return "incidences/currentIncidences";
 	}

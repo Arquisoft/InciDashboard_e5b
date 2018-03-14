@@ -9,7 +9,7 @@
 	<nav th:replace="fragments/nav" />
 	
 	<div class="container" style="text-align: center">
-	<h2 th:text="#{users.title}">Incidencias</h2>
+	<h2 th:text="#{incidences.title}">Incidencias</h2>
 		<form th:action="@{/logout}" method="POST">
 				<button class="btn btn-primary" id="logout" type="submit" name="logout">Cerrar sesion</button>
 		</form>
@@ -28,17 +28,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="user : ${usersList}">
-						<td th:text="${user.dni}">71888888X</td>
-						<td th:text="${user.name}">Nombre del alumno</td>
-						<td th:text="${user.lastName}">Apellidos del alumno</td>
-						<td><a th:href="${'/user/details/' + user.id}" th:text="#{details}">detalles</a></td>
-						<td><a th:href="${'/user/edit/' + user.id}" th:text="#{modify.message}">modificar</a></td>
-						<td><a th:href="${'/user/delete/' + user.id}" th:text="#{remove}">eliminar</a></td>
+					<tr th:each="incidence : ${incidenceList}">
+						<td th:text="${incidence.id}">1</td>
+						<td th:text="${incidence.name}">"x"</td>
+						<td th:text="${incidence.description}">"x"</td>
+						<td><a th:href="${incidence.location}" th:text="#{location}">"x"</a></td>
+						<td><a th:href="${incidence.status}" th:text="#{}"></a>"x"</td>
+						<td><a th:href="${incidence.expiration}" th:text="#{}"></a>"x"</td>
+						<td><a th:href="${incidence.operatorComments}" th:text="#{}"></a>"x"</td>
+						<td><a th:href="${incidence.dangerous}" th:text="#{}"></a>"ALTO"</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		
+			<iframe width="600" height="450" frameborder="0" style="border: 0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&q=Incidencia+Chunga&center=43.3634557,-5.845935" allowfullscreen> </iframe>
+
+		
+		
+		
 		<footer th:replace="fragments/pagination"/>
 	</div>
 	<footer th:replace="fragments/footer" />
