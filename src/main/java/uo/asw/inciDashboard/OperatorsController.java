@@ -81,7 +81,5 @@ public class OperatorsController {
 			return "redirect:login";
 		}
 	}
-	
-	
 
 }

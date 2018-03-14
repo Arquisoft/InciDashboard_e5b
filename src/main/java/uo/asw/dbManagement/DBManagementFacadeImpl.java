@@ -47,8 +47,8 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		return incidencesRepository.findOne(idIncidence);
 	}
 	
-	public List<Incidence> getOperatorIncidences(String identifier) {
-		return incidencesRepository.getOperatorIncidences(identifier);
+	public List<Incidence> getOperatorIncidences(Long idOperator) {
+		return incidencesRepository.getOperatorIncidences(idOperator);
 	}
 
 	public List<Incidence> getIncidencesOfCategory(String[] categories) {
