@@ -35,7 +35,8 @@ public class RIncidenceP {
 	public Incidence jsonStringToIncidence(String JSONString) throws BusinessException {
 		JSONObject json = new JSONObject(JSONString);
 		List<String> names = Arrays.asList(JSONObject.getNames(json));
-		
+				
+		String identifier = getString(names, json, "identifier");
 		String login = getString(names, json, "login");
 		String password = getString(names, json, "password");
 		String kind = getString(names, json, "kind");
@@ -53,9 +54,10 @@ public class RIncidenceP {
 		Agent agent = dbManagement.getAgent(login,password,kind);
 		Operator operator = dbManagement.getOperator(operatorIdentifier);
 		
-		Check.isNotNull(agent, "That agent doesn't exists");	
+		Check.isNotNull(identifier, "Every incidence must have an identifier");
+		Check.isNotNull(agent, "Every incidence must have an existing agent");
 		
-		Incidence incidence = new Incidence();
+		Incidence incidence = new Incidence(identifier);
 		incidence
 				.setAgent(agent)
 				.setOperator(operator)
@@ -68,7 +70,7 @@ public class RIncidenceP {
 				.setExpiration(expiration);
 		
 		
-		System.out.println(incidence);
+		//System.out.println(incidence);
 		
 		return incidence;
 	}

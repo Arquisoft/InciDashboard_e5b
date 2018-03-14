@@ -63,7 +63,6 @@ public class Property {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((incidence == null) ? 0 : incidence.hashCode());
 			result = prime * result + ((property == null) ? 0 : property.hashCode());
 			result = prime * result + ((value == null) ? 0 : value.hashCode());
 			return result;
@@ -78,11 +77,6 @@ public class Property {
 			if (getClass() != obj.getClass())
 				return false;
 			Property other = (Property) obj;
-			if (incidence == null) {
-				if (other.incidence != null)
-					return false;
-			} else if (!incidence.equals(other.incidence))
-				return false;
 			if (property == null) {
 				if (other.property != null)
 					return false;
@@ -95,7 +89,5 @@ public class Property {
 				return false;
 			return true;
 		}
-		
-		
 		
 }
