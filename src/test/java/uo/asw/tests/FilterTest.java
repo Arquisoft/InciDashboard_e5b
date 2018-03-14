@@ -72,7 +72,7 @@ public class FilterTest {
 			.setName("Incidencia")
 			.setDescription("Descripcion");
 	    	
-	    	assertTrue(incidence.equals(incidenceTest));
+	    	assertTrue(incidence.equalFields(incidenceTest));
     }
     
     /**
@@ -117,7 +117,7 @@ public class FilterTest {
 	    	.setStatus("open")
 	    	.setExpiration("14:60");
 	    	
-	    	assertTrue(incidence.equals(incidenceTest));
+	    	assertTrue(incidence.equalFields(incidenceTest));
     }
    
     /**
@@ -164,10 +164,7 @@ public class FilterTest {
 			.setStatus("open")
 			.setExpiration("14:60");
 	    	
-	    	System.out.println("\n\n\n"+incidence+"\n\n\n");//TODO . quitar
-	    	System.out.println("\n\n\n"+incidenceTest+"\n\n\n");
-	    	
-	    	assertTrue(incidence.equals(incidenceTest));
+	    	assertTrue(incidence.equalFields(incidenceTest));
     }
     
     /**
