@@ -18,7 +18,7 @@ public class Operator {
 	@Column(unique=true) 
 	private String identifier;
 	private String name;  
-	private String role; // = "ROLE_OPERATOR"
+	private String role = "ROLE_OPERATOR";
 	
 	private String password;
 	@Transient
@@ -28,6 +28,11 @@ public class Operator {
 	private Set<Incidence> incidences;
 
 	public Operator() {}
+	
+	public Operator(String identifier,String name) {
+		this.identifier=identifier;
+		this.name=name;
+	}
 
 	public long getId() {
 		return id;

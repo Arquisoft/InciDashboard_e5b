@@ -13,6 +13,6 @@ public interface IncidencesRepository extends CrudRepository<Incidence, Long>{
 	public List<Incidence> getOperatorIncidences(Long idOperator);
 	
 	//@Query("SELECT i FROM Incidence i WHERE i.tags MEMBER OF ?1") //TODO - revisar
-	@Query("SELECT i FROM Incidence i")//TODO - está mal!! Hay que implementarlo
-	public List<Incidence> getIncidencesOfCategory(String[] categorias);
+	@Query("SELECT i FROM Incidence i where ?1 IN i.tags")//TODO - está mal!! Hay que implementarlo
+	public List<Incidence> getIncidencesOfCategory(String category);
 }

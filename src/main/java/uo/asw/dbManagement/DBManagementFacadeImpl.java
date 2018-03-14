@@ -1,5 +1,6 @@
 package uo.asw.dbManagement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,18 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	}
 
 	public List<Incidence> getIncidencesOfCategory(String[] categories) {
-		return incidencesRepository.getIncidencesOfCategory(categories);
+		
+		List<Incidence> incidenciasConAlMenosUnaDeEsasCategorias=new ArrayList<Incidence>();
+		for (String category : categories) {
+			List<Incidence> incidenciasConEsaCategoria=incidencesRepository.getIncidencesOfCategory(category);
+			for (Incidence incidence : incidenciasConEsaCategoria) {
+				if(!incidenciasConAlMenosUnaDeEsasCategorias.contains(incidence)) {
+					incidenciasConAlMenosUnaDeEsasCategorias.add(incidence);
+				}
+			}
+		}
+		return incidenciasConAlMenosUnaDeEsasCategorias;
+		
 	}
 
 	public void updateIncidence(Incidence incidence) {
