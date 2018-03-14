@@ -34,11 +34,6 @@ public class Operator {
 		this.name=name;
 	}
 
-	public Operator(String identifier, String name) {
-		this.identifier = identifier;
-		this.name = name;
-	}
-
 	public long getId() {
 		return id;
 	}

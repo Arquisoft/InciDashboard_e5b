@@ -62,6 +62,23 @@ public class InsertSampleDataService {
 		
 		operatorsRepository.save(operator1);
 		incidencesRepository.save(operator1Incidences);
+		
+		Operator opreator2 = new Operator("AAAAAAA2", "Juan");
+		opreator2.setPassword("123456");
+		Operator opreator3 = new Operator("AAAAAAA3", "Francisco");
+		opreator3.setPassword("123456");
+		Operator opreator4 = new Operator("AAAAAAA4", "Rodrigo");
+		opreator4.setPassword("123456");
+		Operator opreator5 = new Operator("AAAAAAA5", "Pepe");
+		opreator5.setPassword("123456");
+		Operator opreator6 = new Operator("AAAAAAA6", "Alberto");
+		opreator6.setPassword("123456");
+
+		operatorsRepository.save(opreator2);
+		operatorsRepository.save(opreator3);
+		operatorsRepository.save(opreator4);
+		operatorsRepository.save(opreator5);
+		operatorsRepository.save(opreator6);
 	}
 	
 	
