@@ -168,6 +168,56 @@ public class FilterTest {
     }
     
     /**
+     * Comprueba que RIncidenceP parsea correctamente todos los datos
+     * de una incidencia (operador incluido) en JSON a un objeto Incidence 
+     * No existe un operador con ese identificador, pero la incidencia se crea igual,
+     * solo que el campo operador está a null
+     * 
+     * @throws BusinessException
+     */
+    @Test
+    public void testRIncidencePValidDataOperatorDoesntExists() throws BusinessException {
+	    	String json = "{"
+	    			+ "\"identifier\": \"uuid\","
+	    			+ "\"login\": \"316683136\","
+	    			+ "\"password\": \"1234\","
+	    			+ "\"kind\": \"Person\","
+	    			+ "\"name\": \"Incidencia\","
+	    			+ "\"description\": \"Descripcion\","
+	    			+ "\"location\": \"1.4,12.3\","
+	    			+ "\"tags\": [\"tag1\",\"tag2\"],"
+	    			+ "\"properties\": ["
+	    			+ "{\"prop1\": \"val1\"},"
+	    			+ "{\"prop2\": \"val2\"}"
+	    			+ "],"
+	    			+ "\"status\": \"open\","
+	    			+ "\"operatorIdentifier\": \"XXXXX\","
+	    			+ "\"expiration\": \"14:60\""
+	    			+ "}";
+	    	
+	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
+	    	
+	    	Set<Property> propertiesTest = new HashSet<Property>();
+	    	propertiesTest.add(new Property("prop1", "val1"));
+	    	propertiesTest.add(new Property("prop2", "val2"));
+	    	
+	    	Incidence incidenceTest = new Incidence("uuid");
+	    	
+	    	incidenceTest
+	    	.setAgent(dbManagement.getAgent("316683136", "1234", "Person"))
+	    	.setOperator(dbManagement.getOperator("XXXXX"))
+	    	.setName("Incidencia")
+	    	.setDescription("Descripcion")
+	    	.setLocation("1.4,12.3")
+	    	.setTags( new String[] {"tag1","tag2"} )
+	    	.setProperties(propertiesTest)
+	    	.setStatus("open")
+	    	.setExpiration("14:60");
+	    	
+	    	assertTrue(incidence.equalFields(incidenceTest) && incidence.getOperator()==null);
+    }
+    
+    /**
      * La incidencia no tiene identificador, por lo que se debe lanzar una excepcion.
      * @throws BusinessException
      */
@@ -189,7 +239,7 @@ public class FilterTest {
 		    			+ "\"expiration\": \"14:60\""
 	    			+ "}";
 	    	
-	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
+	    	rIncidenceP.jsonStringToIncidence(json);
     }
     
     /**
