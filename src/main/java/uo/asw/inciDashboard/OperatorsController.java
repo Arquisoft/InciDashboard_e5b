@@ -1,6 +1,8 @@
 package uo.asw.inciDashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,6 +68,18 @@ public class OperatorsController {
 		}
 		securityService.autoLogin(operator.getIdentifier(), operator.getPassword());
 		return "redirect:home";
+	}
+	
+	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.GET)
+	public String goToHomeAfterLogin(Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth.isAuthenticated()) {
+			return "redirect:home";
+		}
+		else {
+			return "redirect:login";
+		}
 	}
 
 }
