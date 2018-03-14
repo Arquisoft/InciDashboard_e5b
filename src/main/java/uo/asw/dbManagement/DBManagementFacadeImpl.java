@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uo.asw.dbManagement.model.Agent;
 import uo.asw.dbManagement.model.Filter;
 import uo.asw.dbManagement.model.Incidence;
+import uo.asw.dbManagement.model.Operator;
+import uo.asw.dbManagement.repositories.AgentsRepository;
 import uo.asw.dbManagement.repositories.FilterRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
@@ -23,6 +26,9 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	
 	@Autowired
 	private IncidencesRepository incidencesRepository;
+	
+	@Autowired
+	private AgentsRepository agentsRepository;
 	
 	public Filter getFilter(Long idFilter) {
 		
@@ -62,6 +68,16 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 
 	public void updateIncidence(Incidence incidence) {
 		incidencesRepository.save(incidence);
+	}
+
+	@Override
+	public Agent getAgent(String login, String password, String kind) {
+		return agentsRepository.findByLoginPasswordAndKind(login, password, kind);
+	}
+
+	@Override
+	public Operator getOperator(String identifier) {
+		return operatorsRepository.findByIdentifier(identifier);
 	}
 
 }
