@@ -56,7 +56,7 @@ public class Incidence {
 		name="incidence_tags",
 	    joinColumns=@JoinColumn(name="incidence_ID")
 	)
-	private Set<String> tags;
+	private Set<String> tags = new HashSet<>();;
 	
 	@ElementCollection
 	@CollectionTable(
