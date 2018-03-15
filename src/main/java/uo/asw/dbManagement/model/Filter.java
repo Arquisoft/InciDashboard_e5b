@@ -62,7 +62,7 @@ public class Filter {
 	/**
 	 * Guarda el valor de la propiedad con la que se va a comparar
 	 */
-	private Object propertyValue;
+	private String propertyValue;
 	
 	
 	public Filter() {}
@@ -81,8 +81,9 @@ public class Filter {
 	}
 
 
-	public void setFilterResponse(FilterResponse filterResponse) {
+	public Filter setFilterResponse(FilterResponse filterResponse) {
 		this.filterResponse = filterResponse;
+		return this;
 	}
 
 
@@ -91,8 +92,9 @@ public class Filter {
 	}
 
 
-	public void setApplyOn(ApplyOn applyOn) {
+	public Filter setApplyOn(ApplyOn applyOn) {
 		this.applyOn = applyOn;
+		return this;
 	}
 
 
@@ -101,8 +103,9 @@ public class Filter {
 	}
 
 
-	public void setPropertyType(PropertyType propertyType) {
+	public Filter setPropertyType(PropertyType propertyType) {
 		this.propertyType = propertyType;
+		return this;
 	}
 
 
@@ -111,8 +114,9 @@ public class Filter {
 	}
 
 
-	public void setFilterOperation(FilterOperation filterOperation) {
+	public Filter setFilterOperation(FilterOperation filterOperation) {
 		this.filterOperation = filterOperation;
+		return this;
 	}
 
 
@@ -121,8 +125,9 @@ public class Filter {
 	}
 
 
-	public void setTag(String tag) {
+	public Filter setTag(String tag) {
 		this.tag = tag;
+		return this;
 	}
 
 
@@ -131,18 +136,20 @@ public class Filter {
 	}
 
 
-	public void setPropertyName(String propertyName) {
+	public Filter setPropertyName(String propertyName) {
 		this.propertyName = propertyName;
+		return this;
 	}
 
 
-	public Object getPropertyValue() {
+	public String getPropertyValue() {
 		return propertyValue;
 	}
 
 
-	public void setPropertyValue(Object propertyValue) {
+	public Filter setPropertyValue(String propertyValue) {
 		this.propertyValue = propertyValue;
+		return this;
 	}
 
 }

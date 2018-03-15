@@ -8,12 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import uo.asw.dbManagement.DBManagementFacade;
+import uo.asw.dbManagement.model.Filter;
 
 @Controller
 public class FilterController implements SetFilter {
 
 	@Autowired
 	private DBManagementFacade dbManagement;
+	
+	@Autowired
+	private FilterService filterService;
 	
 	@Override
 	@RequestMapping("/incidences/filter")
@@ -25,11 +29,19 @@ public class FilterController implements SetFilter {
 	@Override
 	@RequestMapping(value ="/incidences/filter", method = RequestMethod.POST)
 	public String setFilterPost(@RequestParam String filterResponse,
-			@RequestParam(required=false) String applyOn, 
-			@RequestParam(required=false) String propertyType,
-			@RequestParam(required=false) String filterOperation) {
+			@RequestParam(required=false, value="tag")String applyOn, 
+			@RequestParam(required=false, value="string") String propertyType,
+			@RequestParam(required=false, value="contains") String filterOperation,
+			@RequestParam(required=false) String tag,
+			@RequestParam(required=false) String propertyName,
+			@RequestParam(required=false) String propertyValue) {
 		
-		dbManagement.updateFilter(filter); // TODO - mejorar??
+		Filter filter = filterService.createFilter(
+				filterResponse, applyOn, propertyType, filterOperation,
+				tag, propertyName, propertyValue);
+		
+		dbManagement.updateFilter(filter);
+		
 		return "operator/filter";
 	}
 
