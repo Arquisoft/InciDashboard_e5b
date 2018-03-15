@@ -55,7 +55,6 @@ public class FilterService {
 	public PropertyType getPropertyTypeAsEnum(String propertyType) throws BusinessException {
 		if(propertyType=="string") return PropertyType.STRING;
 		else if(propertyType=="double") return PropertyType.DOUBLE;
-		else if(propertyType=="integer") return PropertyType.INTEGER;
 		else if(propertyType=="boolean") return PropertyType.BOOLEAN;
 		else throw new BusinessException("Wrong param");
 	}
