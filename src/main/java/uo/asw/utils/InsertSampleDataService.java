@@ -51,8 +51,10 @@ public class InsertSampleDataService {
 					Incidence i2 = new Incidence(UuidGenerator.getUuid());
 					
 					i1.setAgent(agent1).setOperator(operator1).setName("NombreInc1").setDescription("DescripcionInc1");
+					String[] tags1= {"fuego"};
+					i1.setTags(tags1);
 					i2.setAgent(agent1).setOperator(operator1).setName("NombreInc2").setDescription("DescripcionInc2");
-					
+					i2.setTags(tags1);
 					add(i1);
 					add(i2);
 				}

@@ -38,6 +38,8 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String showIncidencesOfCategorySelect(Model model) {
 		//TODO - Devuelve una vista con un formulario para indicar las categorias
 		// Dicha vista hara una peticion get a la direccion del metodo de abajo
+		List<String> categorys=operatorsService.findAllCategorys();
+		model.addAttribute("categorys", categorys);
 		return "incidences/categories/select";
 	}
 	
