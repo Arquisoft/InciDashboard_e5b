@@ -35,9 +35,19 @@ public class Incidence {
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(unique=true) 
+	
+	@Column(unique=true)
 	private String identifier;
 	
+	public String getIdentifier() {
+		return identifier;
+	}
+
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="agent_id")
 	private Agent agent;
@@ -61,8 +71,9 @@ public class Incidence {
 	
 	public Incidence() {}
 	
+
 	public Incidence(String identifier) {
-		this.identifier = identifier;
+			this.identifier = identifier;
 	}
 
 	public long getId() {

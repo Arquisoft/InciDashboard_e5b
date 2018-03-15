@@ -1,3 +1,4 @@
+
 package uo.asw.inciDashboard.currentIncidences;
 
 import java.util.ArrayList;
@@ -30,3 +31,4 @@ public class CurrentIncidencesController implements GetCurrentIncidences {
 	}
 
 }
+
