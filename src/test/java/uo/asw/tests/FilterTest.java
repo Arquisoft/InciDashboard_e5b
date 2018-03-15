@@ -2,9 +2,6 @@ package uo.asw.tests;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,8 +14,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import uo.asw.InciDashboardE5bApplication;
 import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Incidence;
-import uo.asw.dbManagement.model.Property;
 import uo.asw.inciDashboard.filter.RIncidenceP;
+import uo.asw.inciDashboard.filter.properties.FilterResponse;
 import uo.asw.util.exception.BusinessException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,233 +40,153 @@ public class FilterTest {
     public void setUp() {
     	
     }
+    
+    String jsonBasicIncidence = "{"
+			+ "\"identifier\": \"uuid\","
+			+ "\"login\": \"316683136\","
+			+ "\"password\": \"1234\","
+			+ "\"kind\": \"Person\","
+			+ "\"name\": \"Incidencia\","
+			+ "\"description\": \"Descripcion\""
+		+ "}";
+
+    String jsonIncidenceWithTagFuego = "{"
+    		+ "\"identifier\": \"uuid\","
+    		+ "\"login\": \"316683136\","
+    		+ "\"password\": \"1234\","
+    		+ "\"kind\": \"Person\","
+    		+ "\"name\": \"Incidencia\","
+    		+ "\"description\": \"Descripcion\","
+    		+ "\"tags\": [\"fuego\",\"calor\"]"
+    		+ "}";
+    
+    String jsonIncidenceWithOutTagFuego = "{"
+    		+ "\"identifier\": \"uuid\","
+    		+ "\"login\": \"316683136\","
+    		+ "\"password\": \"1234\","
+    		+ "\"kind\": \"Person\","
+    		+ "\"name\": \"Incidencia\","
+    		+ "\"description\": \"Descripcion\","
+    		+ "\"tags\": [\"calor\"]"
+    		+ "}";
+    
+    String jsonIncidenceWithProperties1 = "{"
+    		+ "\"identifier\": \"uuid\","
+    		+ "\"login\": \"316683136\","
+    		+ "\"password\": \"1234\","
+    		+ "\"kind\": \"Person\","
+    		+ "\"name\": \"Incidencia\","
+    		+ "\"description\": \"Descripcion\","
+    		+ "\"properties\": ["
+			+ "{\"temperatura\": \"10\"},"
+			+ "{\"peligro\": \"true\"},"
+			+ "{\"aire\": \"mucho\"}"
+			+ "]"
+    		+ "}";
+        	
+    String jsonIncidenceWithProperties2 = "{"
+    		+ "\"identifier\": \"uuid\","
+    		+ "\"login\": \"316683136\","
+    		+ "\"password\": \"1234\","
+    		+ "\"kind\": \"Person\","
+    		+ "\"name\": \"Incidencia\","
+    		+ "\"description\": \"Descripcion\","
+    		+ "\"properties\": ["
+			+ "{\"temperatura\": \"20\"},"
+			+ "{\"peligro\": \"false\"},"
+			+ "{\"aire\": \"poco\"}"
+			+ "]"
+    		+ "}";
+    
+    String jsonIncidenceWithOnlyOneProperty = "{"
+    		+ "\"identifier\": \"uuid\","
+    		+ "\"login\": \"316683136\","
+    		+ "\"password\": \"1234\","
+    		+ "\"kind\": \"Person\","
+    		+ "\"name\": \"Incidencia\","
+    		+ "\"description\": \"Descripcion\","
+    		+ "\"properties\": ["
+			+ "{\"prop\": \"val\"}"
+			+ "]"
+    		+ "}";
+    
+    /**
+     * Para comprobar que la incidencia pasa el filtro (sin marcarla como peligrosa),
+     * comprobamos que la incidencia despues de aplicar el filtro no es null 
+     * y que todos sus campos coinciden con los de la incidencia antes de pasar el filtro
+     */
+    public void assertIncidencePassTheFilter(Incidence incidenceBeforeFilter, Incidence incidenceAfterFilter) {
+    		assertTrue(incidenceAfterFilter != null && incidenceBeforeFilter.equalFields(incidenceAfterFilter));
+    }
 
     /**
-     * Comprueba que RIncidenceP parsea correctamente los datos basicos
-     * de una incidencia en JSON a un objeto Incidence
-     * @throws BusinessException
+     * Para comprobar que la incidencia NO pasa el filtro, comprobamos que 
+     * la incidencia despues de aplicar el filtro es null
      */
-    @Test
-    public void testRIncidencePBasicValidData() throws BusinessException {
-	    	String json = "{"
-	    					+ "\"identifier\": \"uuid\","
-			    			+ "\"login\": \"316683136\","
-			    			+ "\"password\": \"1234\","
-			    			+ "\"kind\": \"Person\","
-			    			+ "\"name\": \"Incidencia\","
-			    			+ "\"description\": \"Descripcion\""
-		    			+ "}";
-	    	
-	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
-	    	
-	    	Incidence incidenceTest = new Incidence("uuid"); 
-	    	incidenceTest
-			.setAgent(dbManagement.getAgent("316683136", "1234", "Person"))
-			.setName("Incidencia")
-			.setDescription("Descripcion");
-	    	
-	    	assertTrue(incidence.equalFields(incidenceTest));
+    public void assertIncidenceDontPassTheFilter(Incidence incidenceAfterFilter) {
+    		assertTrue(incidenceAfterFilter == null);
     }
     
     /**
-     * Comprueba que RIncidenceP parsea correctamente todos los datos
-     * de una incidencia (salvo el operador) en JSON a un objeto Incidence 
-     * @throws BusinessException
+     * Para comprobar que la incidencia pasa el filtro y es marcada como peligrosa
+     * comprobamos que la incidencia despues de aplicar el filtro no es null,
+     * que su campo Dangerous es true, y que todos sus campos (salvo Dangerous) 
+     * coinciden con los de la incidencia antes de pasar el filtro
      */
-    @Test
-    public void testRIncidencePValidData() throws BusinessException {
-	    	String json = "{"
-		    			+ "\"identifier\": \"uuid\","
-		    			+ "\"login\": \"316683136\","
-		    			+ "\"password\": \"1234\","
-		    			+ "\"kind\": \"Person\","
-		    			+ "\"name\": \"Incidencia\","
-		    			+ "\"description\": \"Descripcion\","
-		    			+ "\"location\": \"1.4,12.3\","
-		    			+ "\"tags\": [\"tag1\",\"tag2\"],"
-		    			+ "\"properties\": ["
-		    			+ "{\"prop1\": \"val1\"},"
-		    			+ "{\"prop2\": \"val2\"}"
-		    			+ "],"
-		    			+ "\"status\": \"open\","
-		    			+ "\"expiration\": \"14:60\""
-	    			+ "}";
-	    	
-	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
-	    	
-	    	Set<Property> propertiesTest = new HashSet<Property>();
-	    	propertiesTest.add(new Property("prop1", "val1"));
-	    	propertiesTest.add(new Property("prop2", "val2"));
-	    	
-	    Set<String> tagsTest = new HashSet<>(); tagsTest.add("tag1"); tagsTest.add("tag2");
-	    	
-	    	Incidence incidenceTest = new Incidence("uuid");
-	    	
-	    	incidenceTest
-	    	.setAgent(dbManagement.getAgent("316683136", "1234", "Person"))
-	    	.setName("Incidencia")
-	    	.setDescription("Descripcion")
-	    	.setLocation("1.4,12.3")
-	    	.setTags( tagsTest )
-	    	.setProperties(propertiesTest)
-	    	.setStatus("open")
-	    	.setExpiration("14:60");
-	    	
-	    	assertTrue(incidence.equalFields(incidenceTest));
+    public void assertIncidenceWasMarkedAsDangerousByTheFilter(
+    		Incidence incidenceBeforeFilter, Incidence incidenceAfterFilter) {
+    	
+    		incidenceBeforeFilter.setDangerous(true); // lo ponemos a true para comparar debajo
+    	
+    		assertTrue(incidenceAfterFilter != null && 
+    				incidenceAfterFilter.isDangerous() &&
+    				incidenceBeforeFilter.equalFields(incidenceAfterFilter));
     }
-   
-    /**
-     * Comprueba que RIncidenceP parsea correctamente todos los datos
-     * de una incidencia (operador incluido) en JSON a un objeto Incidence 
-     * @throws BusinessException
-     */
+    
     @Test
-    public void testRIncidencePValidDataWithOperator() throws BusinessException {
-	    	String json = "{"
-	    					+ "\"identifier\": \"uuid\","
-			    			+ "\"login\": \"316683136\","
-			    			+ "\"password\": \"1234\","
-			    			+ "\"kind\": \"Person\","
-			    			+ "\"name\": \"Incidencia\","
-			    			+ "\"description\": \"Descripcion\","
-			    			+ "\"location\": \"1.4,12.3\","
-			    			+ "\"tags\": [\"tag1\",\"tag2\"],"
-			    			+ "\"properties\": ["
-			    							+ "{\"prop1\": \"val1\"},"
-			    							+ "{\"prop2\": \"val2\"}"
-			    							+ "],"
-			    			+ "\"status\": \"open\","
-			    			+ "\"operatorIdentifier\": \"99999999A\","
-			    			+ "\"expiration\": \"14:60\""
-		    			+ "}";
-	    	
-	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
-	    	
-	    Set<Property> propertiesTest = new HashSet<Property>();
-	    propertiesTest.add(new Property("prop1", "val1"));
-	    propertiesTest.add(new Property("prop2", "val2"));
-	    	
-	    Set<String> tagsTest = new HashSet<>(); tagsTest.add("tag1"); tagsTest.add("tag2");
-	    
-	    Incidence incidenceTest = new Incidence("uuid");
-	    	
-	    	incidenceTest
-			.setAgent(dbManagement.getAgent("316683136", "1234", "Person"))
-			.setOperator(dbManagement.getOperator("99999999A"))
-			.setName("Incidencia")
-			.setDescription("Descripcion")
-			.setLocation("1.4,12.3")
-			.setTags( tagsTest )
-			.setProperties(propertiesTest)
-			.setStatus("open")
-			.setExpiration("14:60");
-	    	
-	    	assertTrue(incidence.equalFields(incidenceTest));
+    public void testAssertIncidencePassTheFilter() throws BusinessException {
+     	Incidence incidence = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
+     	assertIncidencePassTheFilter(incidence, incidence);
+    }
+	
+    @Test
+    public void testAssertIncidenceWasMarkedAsDangerousByTheFilter() throws BusinessException {
+     	Incidence incidence = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
+     	assertIncidencePassTheFilter(incidence, incidence.setDangerous(true));
     }
     
     /**
-     * Comprueba que RIncidenceP parsea correctamente todos los datos
-     * de una incidencia (operador incluido) en JSON a un objeto Incidence 
-     * No existe un operador con ese identificador, pero la incidencia se crea igual,
-     * solo que el campo operador está a null
+     * Establecemos la respuesta ACCEPT_ALL para dejar pasar todas las incidencias
      * 
      * @throws BusinessException
      */
     @Test
-    public void testRIncidencePValidDataOperatorDoesntExists() throws BusinessException {
-	    	String json = "{"
-	    			+ "\"identifier\": \"uuid\","
-	    			+ "\"login\": \"316683136\","
-	    			+ "\"password\": \"1234\","
-	    			+ "\"kind\": \"Person\","
-	    			+ "\"name\": \"Incidencia\","
-	    			+ "\"description\": \"Descripcion\","
-	    			+ "\"location\": \"1.4,12.3\","
-	    			+ "\"tags\": [\"tag1\",\"tag2\"],"
-	    			+ "\"properties\": ["
-	    			+ "{\"prop1\": \"val1\"},"
-	    			+ "{\"prop2\": \"val2\"}"
-	    			+ "],"
-	    			+ "\"status\": \"open\","
-	    			+ "\"operatorIdentifier\": \"XXXXX\","
-	    			+ "\"expiration\": \"14:60\""
-	    			+ "}";
+    public void testRIncidencePBasicValidData() throws BusinessException {
+	   
+    		dbManagement.updateFilter(dbManagement.getFilter().setFilterResponse(FilterResponse.ACCEPT_ALL));
+    	
+	    	Incidence incidence1 = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
+	    	Incidence incidence2 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithTagFuego);
+	    	Incidence incidence3 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOutTagFuego);
+	    	Incidence incidence4 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties1);
+	    	Incidence incidence5 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties2);
+	    	Incidence incidence6 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOnlyOneProperty);
 	    	
-	    	Incidence incidence = rIncidenceP.jsonStringToIncidence(json);
+	    	Incidence filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
+	    	Incidence filteredIncidence2 = dbManagement.getFilter().applyFilter(incidence2);
+	    	Incidence filteredIncidence3 = dbManagement.getFilter().applyFilter(incidence3);
+	    	Incidence filteredIncidence4 = dbManagement.getFilter().applyFilter(incidence4);
+	    	Incidence filteredIncidence5 = dbManagement.getFilter().applyFilter(incidence5);
+	    	Incidence filteredIncidence6 = dbManagement.getFilter().applyFilter(incidence6);
 	    	
-	    	Set<Property> propertiesTest = new HashSet<Property>();
-	    	propertiesTest.add(new Property("prop1", "val1"));
-	    	propertiesTest.add(new Property("prop2", "val2"));
+	    	assertIncidencePassTheFilter(incidence1, filteredIncidence1);
+	    	assertIncidencePassTheFilter(incidence2, filteredIncidence2);
+	    	assertIncidencePassTheFilter(incidence3, filteredIncidence3);
+	    	assertIncidencePassTheFilter(incidence4, filteredIncidence4);
+	    	assertIncidencePassTheFilter(incidence5, filteredIncidence5);
+	    	assertIncidencePassTheFilter(incidence6, filteredIncidence6);
 	    	
-	    	Set<String> tagsTest = new HashSet<>(); tagsTest.add("tag1"); tagsTest.add("tag2");
-	    	
-	    	Incidence incidenceTest = new Incidence("uuid");
-	    	
-	    	incidenceTest
-	    	.setAgent(dbManagement.getAgent("316683136", "1234", "Person"))
-	    	.setOperator(dbManagement.getOperator("XXXXX"))
-	    	.setName("Incidencia")
-	    	.setDescription("Descripcion")
-	    	.setLocation("1.4,12.3")
-	    	.setTags( tagsTest )
-	    	.setProperties(propertiesTest)
-	    	.setStatus("open")
-	    	.setExpiration("14:60");
-	    	
-	    	assertTrue(incidence.equalFields(incidenceTest) && incidence.getOperator()==null);
     }
-    
-    /**
-     * La incidencia no tiene identificador, por lo que se debe lanzar una excepcion.
-     * @throws BusinessException
-     */
-    @Test(expected = BusinessException.class)
-    public void testRIncidencePInvalidHasntGotIdentifier() throws BusinessException {
-	    	String json = "{"
-		    			+ "\"login\": \"316683136\","
-		    			+ "\"password\": \"1234\","
-		    			+ "\"kind\": \"Person\","
-		    			+ "\"name\": \"Incidencia\","
-		    			+ "\"description\": \"Descripcion\","
-		    			+ "\"location\": \"1.4,12.3\","
-		    			+ "\"tags\": [\"tag1\",\"tag2\"],"
-		    			+ "\"properties\": ["
-		    			+ "{\"prop1\": \"val1\"},"
-		    			+ "{\"prop2\": \"val2\"}"
-		    			+ "],"
-		    			+ "\"status\": \"open\","
-		    			+ "\"expiration\": \"14:60\""
-	    			+ "}";
-	    	
-	    	rIncidenceP.jsonStringToIncidence(json);
-    }
-    
-    /**
-     * No existe el agente con esos datos, por lo que se debe lanzar una excepcion.
-     * @throws BusinessException
-     */
-    @Test(expected = BusinessException.class)
-    public void testRIncidencePInvalidAgent() throws BusinessException {
-	    	String json = "{"
-	    					+ "\"identifier\": \"uuid\","
-			    			+ "\"login\": \"AAAAAAAAA\","
-			    			+ "\"password\": \"1234\","
-			    			+ "\"kind\": \"Person\","
-			    			+ "\"name\": \"Incidencia\","
-			    			+ "\"description\": \"Descripcion\","
-			    			+ "\"location\": \"1.4,12.3\","
-			    			+ "\"tags\": [\"tag1\",\"tag2\"],"
-			    			+ "\"properties\": ["
-			    							+ "{\"prop1\": \"val1\"},"
-			    							+ "{\"prop2\": \"val2\"}"
-			    							+ "],"
-			    			+ "\"status\": \"open\","
-			    			+ "\"expiration\": \"14:60\""
-		    			+ "}";
-	    	
-	    	rIncidenceP.jsonStringToIncidence(json);
-    }
-    
-    
+        
 
 }
