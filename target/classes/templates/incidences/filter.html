@@ -1,18 +1,103 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head th:replace="fragments/head" />
-
 <body>
-	<nav th:replace="fragments/nav" />
-	
-	<div class="container" style="text-align: center">
-	
-		<h2>Titulo</h2>
-				
-		<!-- INSERTAR AQUI EL CONTENIDO DE LA VISTA -->
 
-	</div>
+	<nav th:replace="fragments/nav" />
+
+	<div class="container">	
 	
+		<h2>Agregar usuario</h2>
+		
+		<form class="form-horizontal" method="post" action="/incidences/filter">
+		
+			
+
+			<div class="form-group">
+				<div class="col-sm-10">
+				
+					<label class="control-label col-sm-2" for="filterResponse">Respuesta del filtro:</label>
+					<select id="filterResponse" name="filterResponse">
+                        	<option value="acceptAll">No filtrar</option>
+                        	<option value="accept">Aceptar la incidencia</option>
+                        	<option value="markAsDangerous">Marcar como peligrosa</option>
+					</select>
+					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-10">
+			
+				<label class="control-label col-sm-2" for="applyOn">Aplicar sobre:</label>
+					<select id="applyOn" name="applyOn">
+                        	<option value="tag">Tags</option>
+                        	<option value="property">Propiedades</option>
+					</select>
+					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-10">
+			
+				<label class="control-label col-sm-2" for="propertyType">Tipo de la propiedad:</label>
+					<select id="propertyType" name="propertyType">
+						<option value="string">Cadena</option>
+						<option value="double">Número</option>
+					    <option value="boolean">Condición</option>
+					</select>
+					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-10">
+			
+				<label class="control-label col-sm-2" for="applyOn">Operación a comprobar:</label>
+					<select id="filterOperation" name="filterOperation">
+                        <option value="greater">Mayor</option>
+                        <option value="less">Menor</option>
+                        <option value="equals">Igual</option>
+                        <option value="notEquals">Distinto</option>
+                        <option value="contains">Contiene</option>
+                        <option value="notContains">No contiene</option>
+					</select>
+					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="tag">Tag:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="tag" placeholder="Tag" th:text="${filter?.tag}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="propertyName">Nombre de la propiedad:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="propertyName" placeholder="Nombre" th:text="${filter?.propertyName}" />
+				</div>
+			</div>			
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="propertyValue">Valor de la propiedad:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="propertyValue" placeholder="Valor" th:text="${filter?.propertyValue}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Actualizar filtro</button>
+				</div>
+			</div>
+				
+		</form>
+		
+	</div>
+
 	<footer th:replace="fragments/footer" />
 
 </body>

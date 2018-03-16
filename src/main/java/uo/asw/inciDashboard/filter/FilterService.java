@@ -22,6 +22,9 @@ public class FilterService {
 		
 		Filter filter = new Filter();
 		
+//		if(filterResponse.)
+//		"tag" "string" "contains"
+//		
 		try {
 			filter.setFilterResponse(getFilterResponseAsEnum(filterResponse)).
 			setApplyOn(getApplyOnAsEnum(applyOn)).
@@ -40,33 +43,33 @@ public class FilterService {
 	}
 
 	public FilterResponse getFilterResponseAsEnum(String filterResponse) throws BusinessException {
-		if(filterResponse=="acceptAll") return FilterResponse.ACCEPT_ALL;
-		else if(filterResponse=="accept") return FilterResponse.ACCEPT;
-		else if(filterResponse=="markAsDangerous") return FilterResponse.MARK_AS_DANGEROUS;
-		else throw new BusinessException("Wrong param");
+		if(filterResponse.equals("acceptAll")) return FilterResponse.ACCEPT_ALL;
+		else if(filterResponse.equals("accept")) return FilterResponse.ACCEPT;
+		else if(filterResponse.equals("markAsDangerous")) return FilterResponse.MARK_AS_DANGEROUS;
+		else throw new BusinessException("Wrong Filter Response param: " + filterResponse);
 	}
 	
 	public ApplyOn getApplyOnAsEnum(String applyOn) throws BusinessException {
-		if(applyOn=="tag") return ApplyOn.TAG;
-		else if(applyOn=="property") return ApplyOn.PROPERTY;
-		else throw new BusinessException("Wrong param");
+		if(applyOn.equals("tag")) return ApplyOn.TAG;
+		else if(applyOn.equals("property")) return ApplyOn.PROPERTY;
+		else throw new BusinessException("Wrong Apply On param: " + applyOn);
 	}
 	
 	public PropertyType getPropertyTypeAsEnum(String propertyType) throws BusinessException {
-		if(propertyType=="string") return PropertyType.STRING;
-		else if(propertyType=="double") return PropertyType.DOUBLE;
-		else if(propertyType=="boolean") return PropertyType.BOOLEAN;
-		else throw new BusinessException("Wrong param");
+		if(propertyType.equals("string")) return PropertyType.STRING;
+		else if(propertyType.equals("double")) return PropertyType.DOUBLE;
+		else if(propertyType.equals("boolean")) return PropertyType.BOOLEAN;
+		else throw new BusinessException("Wrong Property Type param: " + propertyType);
 	}
 
 	public FilterOperation getFilterOperationAsEnum(String filterOperation) throws BusinessException {
-		if(filterOperation=="greater") return FilterOperation.GREATER;
-		else if(filterOperation=="less") return FilterOperation.LESS;
-		else if(filterOperation=="equals") return FilterOperation.EQUALS;
-		else if(filterOperation=="notEquals") return FilterOperation.NOT_EQUALS;
-		else if(filterOperation=="contains") return FilterOperation.CONTAINS;
-		else if(filterOperation=="notContains") return FilterOperation.NOT_CONTAINS;
-		else throw new BusinessException("Wrong param");
+		if(filterOperation.equals("greater")) return FilterOperation.GREATER;
+		else if(filterOperation.equals("less")) return FilterOperation.LESS;
+		else if(filterOperation.equals("equals")) return FilterOperation.EQUALS;
+		else if(filterOperation.equals("notEquals")) return FilterOperation.NOT_EQUALS;
+		else if(filterOperation.equals("contains")) return FilterOperation.CONTAINS;
+		else if(filterOperation.equals("notContains")) return FilterOperation.NOT_CONTAINS;
+		else throw new BusinessException("Wrong Filter Operation param: " + filterOperation);
 	}
 	
 }

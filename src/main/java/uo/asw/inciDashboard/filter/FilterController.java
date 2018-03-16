@@ -23,15 +23,15 @@ public class FilterController implements SetFilter {
 	@RequestMapping("/incidences/filter")
 	public String setFilterGet(Model model) {
 		model.addAttribute("filter", dbManagement.getFilter());
-		return "operator/filter";
+		return "incidences/filter";
 	}
 
 	@Override
 	@RequestMapping(value ="/incidences/filter", method = RequestMethod.POST)
 	public String setFilterPost(@RequestParam String filterResponse,
-			@RequestParam(required=false, value="tag")String applyOn, 
-			@RequestParam(required=false, value="string") String propertyType,
-			@RequestParam(required=false, value="contains") String filterOperation,
+			@RequestParam(required=false)String applyOn, 
+			@RequestParam(required=false) String propertyType,
+			@RequestParam(required=false) String filterOperation,
 			@RequestParam(required=false) String tag,
 			@RequestParam(required=false) String propertyName,
 			@RequestParam(required=false) String propertyValue) {
@@ -42,7 +42,7 @@ public class FilterController implements SetFilter {
 		
 		dbManagement.updateFilter(filter);
 		
-		return "operator/filter";
+		return "incidences/filter";
 	}
 
 }

@@ -187,6 +187,11 @@ public class Filter {
 	public long getId() {
 		return id;
 	}
+	
+	public Filter setId(long id) {
+		this.id = id;
+		return this;
+	}
 
 	public FilterResponse getFilterResponse() {
 		return filterResponse;
@@ -264,4 +269,14 @@ public class Filter {
 		return this;
 	}
 
+	public void setValues(Filter filter) {
+		this.filterResponse = filter.filterResponse;
+		this.applyOn = filter.applyOn;
+		this.propertyType = filter.propertyType;
+		this.filterOperation = filter.filterOperation;
+		this.tag = filter.tag;
+		this.propertyName = filter.propertyName;
+		this.propertyValue = filter.propertyValue;
+	}
+	
 }
