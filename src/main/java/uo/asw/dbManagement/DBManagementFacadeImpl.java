@@ -50,13 +50,7 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		return filters.get(0);		
 	}
 
-	public void updateFilter(Filter filter) {
-//		List<Filter> filters = new ArrayList<Filter>();
-//		filterRepository.findAll().forEach(filters::add);
-//		Filter oldFilter = filters.get(0);
-//		
-//		oldFilter.setValues(filter);
-		
+	public void updateFilter(Filter filter) {		
 		filterRepository.save(filter.setId(1));
 	}
 	

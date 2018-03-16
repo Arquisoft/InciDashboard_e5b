@@ -16,9 +16,6 @@ public class FilterController implements SetFilter {
 	@Autowired
 	private DBManagementFacade dbManagement;
 	
-	@Autowired
-	private FilterService filterService;
-	
 	@Override
 	@RequestMapping("/incidences/filter")
 	public String setFilterGet(Model model) {
@@ -29,20 +26,27 @@ public class FilterController implements SetFilter {
 	@Override
 	@RequestMapping(value ="/incidences/filter", method = RequestMethod.POST)
 	public String setFilterPost(@RequestParam String filterResponse,
-			@RequestParam(required=false)String applyOn, 
+			@RequestParam(required=false)	String applyOn, 
 			@RequestParam(required=false) String propertyType,
 			@RequestParam(required=false) String filterOperation,
 			@RequestParam(required=false) String tag,
 			@RequestParam(required=false) String propertyName,
 			@RequestParam(required=false) String propertyValue) {
 		
-		Filter filter = filterService.createFilter(
-				filterResponse, applyOn, propertyType, filterOperation,
-				tag, propertyName, propertyValue);
+		Filter filter = new Filter();
+		
+		filter.setFilterResponse(filterResponse).
+			setApplyOn(applyOn).
+			setPropertyType(propertyType).
+			setFilterOperation(filterOperation);		
+		
+		filter.setTag(tag).
+			setPropertyName(propertyName).
+			setPropertyValue(propertyValue);
 		
 		dbManagement.updateFilter(filter);
 		
-		return "incidences/filter";
+		return "redirect:/incidences/filter";
 	}
 
 }

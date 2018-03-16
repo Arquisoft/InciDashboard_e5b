@@ -3,15 +3,8 @@ package uo.asw.dbManagement.model;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import uo.asw.inciDashboard.filter.properties.ApplyOn;
-import uo.asw.inciDashboard.filter.properties.FilterOperation;
-import uo.asw.inciDashboard.filter.properties.FilterResponse;
-import uo.asw.inciDashboard.filter.properties.PropertyType;
 
 @Entity
 public class Filter {
@@ -26,30 +19,26 @@ public class Filter {
 	 * -ACCEPT --> Si se cumple la operación, deja pasar la incidencia, si no no
 	 * -MARK_AS_DANGEROUS --> Si se cumple la operación, se marca la incidencia como peligrosa
 	 */
-	@Enumerated(EnumType.STRING)
-	private FilterResponse filterResponse = FilterResponse.ACCEPT_ALL; // por defecto acepta todas
+	private String filterResponse = "acceptAll"; // por defecto acepta todas
 	
 	/**
 	 * Decide si la operacion se va a aplicar sobre tags o properties de la incidencia
 	 */
-	@Enumerated(EnumType.STRING)
-	private ApplyOn applyOn = ApplyOn.TAG; // por defecto se aplica sobre tags
+	private String applyOn = "tag"; // por defecto se aplica sobre tags
 	
 	/**
 	 * En caso de que se aplique sobre propiedades de las incidencias,
 	 * indica el tipo Java que va a tener el String contenido en el "value" de la propiedad
 	 */
-	@Enumerated(EnumType.STRING)
-	private PropertyType propertyType = PropertyType.DOUBLE; //only if apply on == PROPERTY, por defecto double
+	private String propertyType = "double"; //only if apply on == PROPERTY, por defecto double
 	
 	/**
 	 * Tipo de operación a realizar: GREATER, LESS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
 	 * Si la operación se cumple y FilterResponse==ACCEPT, se deja pasar la incidencia
 	 * Si la operación se cumple y FilterResponse==ACCEPT, se marca como peligrosa la incidencia
 	 */
-	@Enumerated(EnumType.STRING)
-	private FilterOperation filterOperation = FilterOperation.CONTAINS;// por defecto si se cambiase FilterResponse a ACCEPT,
-																	 // solo se aceptarian las incidencias que contengan el tag indicado
+	private String filterOperation = "contains";// por defecto si se cambiase FilterResponse a ACCEPT,
+	// solo se aceptarian las incidencias que contengan el tag indicado
 	
 	/**
 	 * Guarda el valor del tag con el que se va a comparar
@@ -70,10 +59,10 @@ public class Filter {
 	public Filter() {}
 
 	public Incidence applyFilter(Incidence incidence) {
-		if(filterResponse.equals(FilterResponse.ACCEPT))
+		if(filterResponse.equals("accept"))
 			return acceptResponse(incidence);
 		
-		else if(filterResponse.equals(FilterResponse.MARK_AS_DANGEROUS))
+		else if(filterResponse.equals("markAsDangerous"))
 			return markAsDangerousResponse(incidence);
 		
 		else // ACCEPT_ALL
@@ -104,14 +93,14 @@ public class Filter {
 	}
 
 	private boolean satisfiesOperation(Incidence incidence) {
-		if(applyOn.equals(ApplyOn.TAG))
+		if(applyOn.equals("tag"))
 			return satisfiesTagOperation(incidence);
 		else // Property
 			return satisfiesPropertyOperation(incidence);
 	}
 
 	private boolean satisfiesTagOperation(Incidence incidence) {
-		if(filterOperation.equals(FilterOperation.CONTAINS))
+		if(filterOperation.equals("contains"))
 			return incidence.getTags().contains(tag);
 		
 		else // NOT_CONTAINS 
@@ -122,13 +111,13 @@ public class Filter {
 		String incidencePropertyValue = getPropertyValueByName(incidence, propertyName);
 		if(incidencePropertyValue == null) return false;
 		
-		if(filterOperation.equals(FilterOperation.GREATER))
+		if(filterOperation.equals("greater"))
 			return satisfiesPropertyGreaterOperation(incidence);
 
-		else if(filterOperation.equals(FilterOperation.LESS))
+		else if(filterOperation.equals("less"))
 			return satisfiesPropertyLessOperation(incidence);
 		
-		else if(filterOperation.equals(FilterOperation.EQUALS))
+		else if(filterOperation.equals("equals"))
 			return satisfiesPropertyEqualsOperation(incidence);
 		
 		else //NOT_EQUALS
@@ -152,7 +141,7 @@ public class Filter {
 	}
 	
 	private boolean satisfiesPropertyEqualsOperation(Incidence incidence) {
-		if(propertyType.equals(PropertyType.STRING))
+		if(propertyType.equals("string"))
 			return satisfiesPropertyEqualsStringOperation(incidence);
 		
 		else // BOOLEAN
@@ -193,49 +182,41 @@ public class Filter {
 		return this;
 	}
 
-	public FilterResponse getFilterResponse() {
+	public String getFilterResponse() {
 		return filterResponse;
 	}
 
-
-	public Filter setFilterResponse(FilterResponse filterResponse) {
+	public Filter setFilterResponse(String filterResponse) {
 		this.filterResponse = filterResponse;
 		return this;
 	}
 
-
-	public ApplyOn getApplyOn() {
+	public String getApplyOn() {
 		return applyOn;
 	}
 
-
-	public Filter setApplyOn(ApplyOn applyOn) {
+	public Filter setApplyOn(String applyOn) {
 		this.applyOn = applyOn;
 		return this;
 	}
 
-
-	public PropertyType getPropertyType() {
+	public String getPropertyType() {
 		return propertyType;
 	}
 
-
-	public Filter setPropertyType(PropertyType propertyType) {
+	public Filter setPropertyType(String propertyType) {
 		this.propertyType = propertyType;
 		return this;
 	}
 
-
-	public FilterOperation getFilterOperation() {
+	public String getFilterOperation() {
 		return filterOperation;
 	}
 
-
-	public Filter setFilterOperation(FilterOperation filterOperation) {
+	public Filter setFilterOperation(String filterOperation) {
 		this.filterOperation = filterOperation;
 		return this;
 	}
-
 
 	public String getTag() {
 		return tag;
@@ -267,16 +248,6 @@ public class Filter {
 	public Filter setPropertyValue(String propertyValue) {
 		this.propertyValue = propertyValue;
 		return this;
-	}
-
-	public void setValues(Filter filter) {
-		this.filterResponse = filter.filterResponse;
-		this.applyOn = filter.applyOn;
-		this.propertyType = filter.propertyType;
-		this.filterOperation = filter.filterOperation;
-		this.tag = filter.tag;
-		this.propertyName = filter.propertyName;
-		this.propertyValue = filter.propertyValue;
 	}
 	
 }

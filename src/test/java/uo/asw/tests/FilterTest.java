@@ -16,10 +16,6 @@ import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Filter;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.inciDashboard.filter.RIncidenceP;
-import uo.asw.inciDashboard.filter.properties.ApplyOn;
-import uo.asw.inciDashboard.filter.properties.FilterOperation;
-import uo.asw.inciDashboard.filter.properties.FilterResponse;
-import uo.asw.inciDashboard.filter.properties.PropertyType;
 import uo.asw.util.exception.BusinessException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -189,7 +185,7 @@ public class FilterTest {
     @Test
     public void testFilterAcceptAll() throws BusinessException {
 	   
-    		dbManagement.updateFilter(dbManagement.getFilter().setFilterResponse(FilterResponse.ACCEPT_ALL));
+    		dbManagement.updateFilter(dbManagement.getFilter().setFilterResponse("acceptAll"));
     	
 	    	Incidence incidence1 = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
 	    	Incidence incidence2 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithTagFuego);
@@ -228,9 +224,9 @@ public class FilterTest {
     	
 	    	Filter filter = dbManagement.getFilter();
 	    	
-	    	filter.setFilterResponse(FilterResponse.ACCEPT).
-	    		setApplyOn(ApplyOn.TAG).
-	    		setFilterOperation(FilterOperation.CONTAINS).
+	    	filter.setFilterResponse("accept").
+	    		setApplyOn("tag").
+	    		setFilterOperation("contains").
 	    		setTag(tag);
 	    	
 	    	dbManagement.updateFilter(filter);
@@ -272,9 +268,9 @@ public class FilterTest {
     	
 	    	Filter filter = dbManagement.getFilter();
 	    	
-	    	filter.setFilterResponse(FilterResponse.ACCEPT).
-		    	setApplyOn(ApplyOn.TAG).
-		    	setFilterOperation(FilterOperation.NOT_CONTAINS).
+	    	filter.setFilterResponse("accept").
+		    	setApplyOn("tag").
+		    	setFilterOperation("notContains").
 		    	setTag(tag);
 	    	
 	    	dbManagement.updateFilter(filter);
@@ -318,10 +314,10 @@ public class FilterTest {
 	    	Filter filter = dbManagement.getFilter();
 	    	
 	    	// Equals
-	    	filter.setFilterResponse(FilterResponse.ACCEPT).
-		    	setApplyOn(ApplyOn.PROPERTY).
-		    	setPropertyType(PropertyType.STRING).
-		    	setFilterOperation(FilterOperation.EQUALS).
+	    	filter.setFilterResponse("accept").
+		    	setApplyOn("property").
+		    	setPropertyType("string").
+		    	setFilterOperation("equals").
 		    	setPropertyName("aire").
 		    	setPropertyValue("mucho");
 	    	
@@ -349,7 +345,7 @@ public class FilterTest {
 	    	assertIncidenceDontPassTheFilter(filteredIncidence6); 			// no contiene la propiedad "aire"
 	    	
 	    	//Not Equals
-	    	filter.setFilterOperation(FilterOperation.NOT_EQUALS);
+	    	filter.setFilterOperation("notEquals");
 	    	dbManagement.updateFilter(filter);
 	    	
 	    	filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
@@ -384,10 +380,10 @@ public class FilterTest {
 	    	Filter filter = dbManagement.getFilter();
 	    	
 	    	// Equals
-	    	filter.setFilterResponse(FilterResponse.ACCEPT).
-		    	setApplyOn(ApplyOn.PROPERTY).
-		    	setPropertyType(PropertyType.BOOLEAN).
-		    	setFilterOperation(FilterOperation.EQUALS).
+	    	filter.setFilterResponse("accept").
+		    	setApplyOn("property").
+		    	setPropertyType("boolean").
+		    	setFilterOperation("equals").
 		    	setPropertyName("peligro").
 		    	setPropertyValue("true");
 	    	
@@ -415,7 +411,7 @@ public class FilterTest {
 	    	assertIncidenceDontPassTheFilter(filteredIncidence6); 			// no contiene la propiedad "peligro"
 	    	
 	    	//Not Equals
-	    	filter.setFilterOperation(FilterOperation.NOT_EQUALS);
+	    	filter.setFilterOperation("notEquals");
 	    	dbManagement.updateFilter(filter);
 	    	
 	    	filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
@@ -450,10 +446,10 @@ public class FilterTest {
 	    	Filter filter = dbManagement.getFilter();
 	    	
 	    	// Greater
-	    	filter.setFilterResponse(FilterResponse.ACCEPT).
-		    	setApplyOn(ApplyOn.PROPERTY).
-		    	setPropertyType(PropertyType.STRING).
-		    	setFilterOperation(FilterOperation.GREATER).
+	    	filter.setFilterResponse("accept").
+		    	setApplyOn("property").
+		    	setPropertyType("string").
+		    	setFilterOperation("greater").
 		    	setPropertyName("temperatura").
 		    	setPropertyValue("15");
 	    	
@@ -481,7 +477,7 @@ public class FilterTest {
 	    	assertIncidenceDontPassTheFilter(filteredIncidence6); 			// no contiene la propiedad "temperatura"
 	    	
 	    	//Less
-	    	filter.setFilterOperation(FilterOperation.LESS);
+	    	filter.setFilterOperation("less");
 	    	dbManagement.updateFilter(filter);
 	    	
 	    	filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
@@ -522,10 +518,10 @@ public class FilterTest {
 	    	Filter filter = dbManagement.getFilter();
 	    	
 	    	// Greater
-	    	filter.setFilterResponse(FilterResponse.MARK_AS_DANGEROUS).
-		    	setApplyOn(ApplyOn.PROPERTY).
-		    	setPropertyType(PropertyType.STRING).
-		    	setFilterOperation(FilterOperation.GREATER).
+	    	filter.setFilterResponse("markAsDangerous").
+		    	setApplyOn("property").
+		    	setPropertyType("string").
+		    	setFilterOperation("greater").
 		    	setPropertyName("temperatura").
 		    	setPropertyValue("15");
 	    	
@@ -553,7 +549,7 @@ public class FilterTest {
 	    	assertIncidenceWasntMarkedAsDangerousByTheFilter(incidence6, filteredIncidence6); 	// no contiene la propiedad "temperatura"
 
 	    	//Less
-	    	filter.setFilterOperation(FilterOperation.LESS);
+	    	filter.setFilterOperation("less");
 	    	dbManagement.updateFilter(filter);
 	    	
 	    	filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1.setDangerous(false));
