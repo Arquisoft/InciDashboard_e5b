@@ -43,9 +43,16 @@ public class RIncidenceP {
 		String name = getString(names, json, "name");
 		String description = getString(names, json, "description");
 		String location = getString(names, json, "location");
-		String[] tags = getStringArray(names, json, "tags");
+		
+		String[] tagsArray = getStringArray(names, json, "tags");
+		Set<String> tags = tagsArray != null ? 
+				new HashSet<String>(Arrays.asList(tagsArray)) : 
+					new HashSet<String>();
+		
 //		Map<String, Object> additional ;
-		Set<Property> properties = getSetProperties(names, json);
+		Set<Property> properties =  getSetProperties(names, json) != null ? 
+				 getSetProperties(names, json) : 
+					new HashSet<Property>();
 		
 		String status = getString(names, json, "status");
 		String operatorIdentifier = getString(names, json, "operatorIdentifier");
@@ -68,10 +75,7 @@ public class RIncidenceP {
 				.setProperties(properties)
 				.setStatus(status)
 				.setExpiration(expiration);
-		
-		
-		//System.out.println(incidence);
-		
+				
 		return incidence;
 	}
 	

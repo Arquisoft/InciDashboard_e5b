@@ -9,7 +9,7 @@ import uo.asw.dbManagement.model.Operator;
 
 public interface DBManagementFacade {
 	
-	public Filter getFilter(Long idFilter);
+	public Filter getFilter();
 
 	public void updateFilter(Filter Filter);	
 	

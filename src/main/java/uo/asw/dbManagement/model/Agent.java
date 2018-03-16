@@ -41,17 +41,13 @@ public class Agent {
 	
 	public Agent(String identifier, String password, String kind) {
 		super();
-		this.identifier=identifier;
-		this.password=password;
-		this.kind=kind;
+		this.identifier = identifier;
+		this.password = password;
+		this.kind = kind;
 	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getIdentifier() {

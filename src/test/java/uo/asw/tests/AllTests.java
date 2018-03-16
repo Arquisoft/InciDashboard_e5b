@@ -7,8 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	
-	//FilterTest.class
-	//,ApacheKafkaTest.class
+	RIncidencePTest.class
+	,FilterTest.class
 	
 })
 public class AllTests { }

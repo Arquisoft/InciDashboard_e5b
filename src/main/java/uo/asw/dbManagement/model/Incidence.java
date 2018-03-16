@@ -1,15 +1,16 @@
 package uo.asw.dbManagement.model;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Incidence {
@@ -35,19 +36,9 @@ public class Incidence {
 	@Id
 	@GeneratedValue
 	private long id;
-	
-	@Column(unique=true)
+	@Column(unique=true) 
 	private String identifier;
 	
-	public String getIdentifier() {
-		return identifier;
-	}
-
-
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
-
 	@ManyToOne
 	@JoinColumn(name="agent_id")
 	private Agent agent;
@@ -59,10 +50,22 @@ public class Incidence {
 	private String name;
 	private String description;
 	private String location;
-	private String[] tags;
+	
+	@ElementCollection
+	@CollectionTable(
+		name="incidence_tags",
+	    joinColumns=@JoinColumn(name="incidence_ID")
+	)
+	private Set<String> tags = new HashSet<>();
+	
+	@ElementCollection
+	@CollectionTable(
+		name="incidence_properties",
+	    joinColumns=@JoinColumn(name="incidence_ID")
+	)	
+	private Set<Property> properties = new HashSet<>();
+	
 	//private Map<String, Object> additional;
-	@OneToMany(mappedBy="incidence")
-	private Set<Property> properties;
 	
 	private String status; //open, in process, closed, canceled
 	private String operatorComments;
@@ -71,16 +74,12 @@ public class Incidence {
 	
 	public Incidence() {}
 	
-
 	public Incidence(String identifier) {
-			this.identifier = identifier;
+		this.identifier = identifier;
 	}
 
 	public long getId() {
 		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
 	}
 	public Agent getAgent() {
 		return agent;
@@ -96,6 +95,11 @@ public class Incidence {
 		this.operator = operator;
 		return this;
 	}
+	
+	public String getIdentifier() {
+		return identifier;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -117,16 +121,16 @@ public class Incidence {
 		this.location = location;
 		return this;
 	}
-
-	public String[] getTags() {
+	
+	public Set<String> getTags() {
 		return tags;
 	}
 
-	public Incidence setTags(String[] tags) {
+	public Incidence setTags(Set<String> tags) {
 		this.tags = tags;
 		return this;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -168,9 +172,9 @@ public class Incidence {
 	@Override
 	public String toString() {
 		return "Incidence [id=" + id + ", identifier=" + identifier + ", agent=" + agent + ", operator=" + operator
-				+ ", name=" + name + ", description=" + description + ", location=" + location + ", tags="
-				+ Arrays.toString(tags) + ", properties=" + properties + ", status=" + status + ", operatorComments="
-				+ operatorComments + ", expiration=" + expiration + ", dangerous=" + dangerous + "]";
+				+ ", name=" + name + ", description=" + description + ", location=" + location + ", tags=" + tags
+				+ ", properties=" + properties + ", status=" + status + ", operatorComments=" + operatorComments
+				+ ", expiration=" + expiration + ", dangerous=" + dangerous + "]";
 	}
 
 	@Override
@@ -268,14 +272,12 @@ public class Incidence {
 				return false;
 		} else if (!status.equals(i.status))
 			return false;
-		if (!Arrays.equals(tags, i.tags))
+		if (tags == null) {
+			if (i.tags != null)
+				return false;
+		} else if (!tags.equals(i.tags))
 			return false;
-		
 		return true;
 	}
-
-	
-	
-	
 
 }

@@ -30,25 +30,36 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	@Autowired
 	private AgentsRepository agentsRepository;
 	
-	public Filter getFilter(Long idFilter) {
-		
-		/*List<Filter> filters = new ArrayList<Filter>();
+	/**
+	 * Permite la solicitud del filtro guardado en la BD (sólo hay un filtro). 
+	 * Si no hay ningún filtro en la BD, lo crea, lo guarda en BD y lo devuelve.
+	 */
+	public Filter getFilter() {
+		List<Filter> filters = new ArrayList<Filter>();
 		filterRepository.findAll().forEach(filters::add);
-		return filters.get(0);*/
-		return filterRepository.findById(idFilter);
 		
+		//Si la lista de filtros esta vacia, tenemos que crear un filtro
+		if (filters.isEmpty()) {
+			Filter filter = new Filter();
+			filterRepository.save(filter); // lo guardamos
+			
+			// Lo volvemos a recuperar para que tenga el id actualizado
+			filterRepository.findAll().forEach(filters::add);
+		}
+		
+		return filters.get(0);		
 	}
 
-	public void updateFilter(Filter Filter) {
-		filterRepository.save(Filter);
+	public void updateFilter(Filter filter) {		
+		filterRepository.save(filter.setId(1));
 	}
 	
 	public Incidence getIncidence(Long idIncidence) {
 		return incidencesRepository.findOne(idIncidence);
 	}
 	
-	public List<Incidence> getOperatorIncidences(String identifier) {
-		return incidencesRepository.getOperatorIncidences(identifier);
+	public List<Incidence> getOperatorIncidences(Long idOperator) {
+		return incidencesRepository.getOperatorIncidences(idOperator);
 	}
 
 	public List<Incidence> getIncidencesOfCategory(String[] categories) {
