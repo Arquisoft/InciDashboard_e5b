@@ -1,8 +1,6 @@
 package uo.asw.inciDashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,23 +12,19 @@ import uo.asw.dbManagement.model.Operator;
 import uo.asw.dbManagement.services.OperatorsService;
 import uo.asw.dbManagement.services.RolesService;
 import uo.asw.dbManagement.services.SecurityService;
-import uo.asw.validators.LoginFormValidator;
 import uo.asw.validators.SignUpFormValidator;
 
 @Controller
 public class OperatorsController {
 	
 	@Autowired
-	private OperatorsService usersService;
+	private OperatorsService operatorsService;
 	
 	@Autowired
 	private SecurityService securityService;
 	
 	@Autowired
 	private SignUpFormValidator signUpFormValidator;
-	
-	@Autowired
-	private LoginFormValidator loginFormValidator;
 	
 	@Autowired
 	private RolesService rolesService;
@@ -49,37 +43,36 @@ public class OperatorsController {
 		}
 		
 		operator.setRole(rolesService.getRoles()[0]);
-		usersService.addOperator(operator);
+		operatorsService.addOperator(operator);
 		securityService.autoLogin(operator.getIdentifier(), operator.getPasswordConfirm());
 		return "redirect:home";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
-		model.addAttribute("operator", new Operator());
+	@RequestMapping(value = "/login")
+	public String login() {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.POST)
-	public String login(@Validated Operator operator, BindingResult result, Model model) {
-		loginFormValidator.validate(operator, result);
-		if (result.hasErrors()) {
-			return "login";
-		}
-		securityService.autoLogin(operator.getIdentifier(), operator.getPassword());
-		return "redirect:home";
-	}
-	
-	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.GET)
-	public String goToHomeAfterLogin(Model model) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth.isAuthenticated()) {
-			return "redirect:home";
-		}
-		else {
-			return "redirect:login";
-		}
-	}
+//	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.POST)
+//	public String login(@Validated Operator operator, BindingResult result, Model model) {
+//		loginFormValidator.validate(operator, result);
+//		if (result.hasErrors()) {
+//			return "login";
+//		}
+//		securityService.autoLogin(operator.getIdentifier(), operator.getPassword());
+//		return "redirect:home";
+//	}
+//	
+//	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.GET)
+//	public String goToHomeAfterLogin(Model model) {
+//		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		if(auth.isAuthenticated()) {
+//			return "redirect:home";
+//		}
+//		else {
+//			return "redirect:login";
+//		}
+//	}
 
 }

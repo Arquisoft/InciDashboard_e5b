@@ -1,4 +1,4 @@
-package uo.asw.utils;
+package uo.asw.util;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +14,8 @@ import uo.asw.dbManagement.model.Operator;
 import uo.asw.dbManagement.model.Property;
 import uo.asw.dbManagement.repositories.AgentsRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
-import uo.asw.dbManagement.repositories.OperatorsRepository;
+import uo.asw.dbManagement.services.OperatorsService;
+import uo.asw.util.UuidGenerator;
 
 @Service
 public class InsertSampleDataService {
@@ -23,7 +24,7 @@ public class InsertSampleDataService {
 	private AgentsRepository agentsRepository;
 
 	@Autowired
-	private OperatorsRepository operatorsRepository;
+	private OperatorsService operatorsService;
 	
 	@Autowired
 	private IncidencesRepository incidencesRepository;
@@ -42,8 +43,6 @@ public class InsertSampleDataService {
 		// Creamos operarios e incidencias
 		Operator operator1 = new Operator("99999999A", "NombreOperador1");
 		operator1.setPassword("123456");
-		//operator1.setRole(rolesService.getRoles()[1]); //TODO - cambiar??
-		operator1.setRole("ROLE_OPERATOR");
 		
 		Set<Incidence> operator1Incidences = new HashSet<Incidence>() {
 			{
@@ -72,7 +71,7 @@ public class InsertSampleDataService {
 		operator1.setIncidences(operator1Incidences);
 		
 		
-		operatorsRepository.save(operator1);
+		operatorsService.addOperator(operator1);
 		incidencesRepository.save(operator1Incidences);
 		
 		Operator opreator2 = new Operator("AAAAAAA2", "Juan");
@@ -86,11 +85,11 @@ public class InsertSampleDataService {
 		Operator opreator6 = new Operator("AAAAAAA6", "Alberto");
 		opreator6.setPassword("123456");
 
-		operatorsRepository.save(opreator2);
-		operatorsRepository.save(opreator3);
-		operatorsRepository.save(opreator4);
-		operatorsRepository.save(opreator5);
-		operatorsRepository.save(opreator6);
+		operatorsService.addOperator(opreator2);
+		operatorsService.addOperator(opreator3);
+		operatorsService.addOperator(opreator4);
+		operatorsService.addOperator(opreator5);
+		operatorsService.addOperator(opreator6);
 	}
 	
 	

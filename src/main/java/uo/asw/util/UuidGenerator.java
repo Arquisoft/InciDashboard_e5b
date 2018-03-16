@@ -1,4 +1,4 @@
-package uo.asw.utils;
+package uo.asw.util;
 
 import java.util.UUID;
 

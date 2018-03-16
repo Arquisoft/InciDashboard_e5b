@@ -20,34 +20,38 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired
     private OperatorsRepository operatorsRepository;
 
-	/*@Override
-	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException{
-	    Operator user = operatorsRepository.findByIdentifier(identifier);
-	    
-	    Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-	    grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
-	  
-	    return  new org.springframework.security.core.userdetails.User(
-	            user.getIdentifier(), user.getPassword(), grantedAuthorities);
-	}*/
-    
     @Override
-	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException{
-		Operator operator = operatorsRepository.findByIdentifier(identifier);
-		
+	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
+    		Operator operator = operatorsRepository.findByIdentifier(identifier);
+    		
+    		if(operator == null)
+    				throw new UsernameNotFoundException("Operator con identifier: " + identifier + " no encontrado.");
+    		
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		//grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ESTUDIANTE"));
 		
-		if(operator!=null) {
-			
-			grantedAuthorities.add(new SimpleGrantedAuthority(operator.getRole()));
-			
-			return new org.springframework.security.core.userdetails.User(
-					operator.getIdentifier(), operator.getPassword(), grantedAuthorities);
-		}
+		grantedAuthorities.add(new SimpleGrantedAuthority(operator.getRole()));
 		
-		return new org.springframework.security.core.userdetails.User(
-				"noUsername", "noPassword", grantedAuthorities);
-		
+		return new org.springframework.security.core.userdetails.User(operator.getIdentifier(), operator.getPassword(),
+				grantedAuthorities);
 	}
+    
+//    @Override
+//	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException{
+//		Operator operator = operatorsRepository.findByIdentifier(identifier);
+//		
+//		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+//		//grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ESTUDIANTE"));
+//		
+//		if(operator!=null) {
+//			
+//			grantedAuthorities.add(new SimpleGrantedAuthority(operator.getRole()));
+//			
+//			return new org.springframework.security.core.userdetails.User(
+//					operator.getIdentifier(), operator.getPassword(), grantedAuthorities);
+//		}
+//		
+//		return new org.springframework.security.core.userdetails.User(
+//				"noUsername", "noPassword", grantedAuthorities);
+//		
+//	}
 }
