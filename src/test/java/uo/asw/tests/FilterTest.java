@@ -13,9 +13,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import uo.asw.InciDashboardE5bApplication;
 import uo.asw.dbManagement.DBManagementFacade;
+import uo.asw.dbManagement.model.Filter;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.inciDashboard.filter.RIncidenceP;
+import uo.asw.inciDashboard.filter.properties.ApplyOn;
+import uo.asw.inciDashboard.filter.properties.FilterOperation;
 import uo.asw.inciDashboard.filter.properties.FilterResponse;
+import uo.asw.inciDashboard.filter.properties.PropertyType;
 import uo.asw.util.exception.BusinessException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -110,6 +114,8 @@ public class FilterTest {
 			+ "]"
     		+ "}";
     
+    String tag = "fuego";
+    
     /**
      * Para comprobar que la incidencia pasa el filtro (sin marcarla como peligrosa),
      * comprobamos que la incidencia despues de aplicar el filtro no es null 
@@ -161,7 +167,7 @@ public class FilterTest {
      * @throws BusinessException
      */
     @Test
-    public void testRIncidencePBasicValidData() throws BusinessException {
+    public void testFilterAcceptAll() throws BusinessException {
 	   
     		dbManagement.updateFilter(dbManagement.getFilter().setFilterResponse(FilterResponse.ACCEPT_ALL));
     	
@@ -187,6 +193,140 @@ public class FilterTest {
 	    	assertIncidencePassTheFilter(incidence6, filteredIncidence6);
 	    	
     }
+    
+    /**
+     * Comprobamos que se filtran o no (según corresponda) 
+     * correctamente las incidencias con los siguientes parámetros del filtro:
+     * -FilterResponse = Accept
+     * -ApplyOn = Tag
+     * -FilterOperation = Contains
+     * 
+     * @throws BusinessException
+     */
+    @Test
+    public void testFilterAcceptTagContains() throws BusinessException {
+    	
+	    	Filter filter = dbManagement.getFilter();
+	    	
+	    	filter.setFilterResponse(FilterResponse.ACCEPT).
+	    		setApplyOn(ApplyOn.TAG).
+	    		setFilterOperation(FilterOperation.CONTAINS).
+	    		setTag(tag);
+	    	
+	    	dbManagement.updateFilter(filter);
+	    	
+	    	Incidence incidence1 = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
+	    	Incidence incidence2 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithTagFuego);
+	    	Incidence incidence3 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOutTagFuego);
+	    	Incidence incidence4 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties1);
+	    	Incidence incidence5 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties2);
+	    	Incidence incidence6 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOnlyOneProperty);
+	    	
+	    	Incidence filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
+	    	Incidence filteredIncidence2 = dbManagement.getFilter().applyFilter(incidence2);
+	    	Incidence filteredIncidence3 = dbManagement.getFilter().applyFilter(incidence3);
+	    	Incidence filteredIncidence4 = dbManagement.getFilter().applyFilter(incidence4);
+	    	Incidence filteredIncidence5 = dbManagement.getFilter().applyFilter(incidence5);
+	    	Incidence filteredIncidence6 = dbManagement.getFilter().applyFilter(incidence6);
+	    	
+	    	assertIncidenceDontPassTheFilter(filteredIncidence1); 		// no contiene el tag
+	    	assertIncidencePassTheFilter(incidence2, filteredIncidence2);	// contiene el tag
+	    	assertIncidenceDontPassTheFilter(filteredIncidence3); 		// no contiene el tag
+	    	assertIncidenceDontPassTheFilter(filteredIncidence4); 		// no contiene el tag
+	    	assertIncidenceDontPassTheFilter(filteredIncidence5); 		// no contiene el tag
+	    	assertIncidenceDontPassTheFilter(filteredIncidence6); 		// no contiene el tag
+	    	
+    }
         
+    /**
+     * Comprobamos que se filtran o no (según corresponda) 
+     * correctamente las incidencias con los siguientes parámetros del filtro:
+     * -FilterResponse = Accept
+     * -ApplyOn = Tag
+     * -FilterOperation = Not Contains
+     * 
+     * @throws BusinessException
+     */
+    @Test
+    public void testFilterAcceptTagNotContains() throws BusinessException {
+    	
+	    	Filter filter = dbManagement.getFilter();
+	    	
+	    	filter.setFilterResponse(FilterResponse.ACCEPT).
+		    	setApplyOn(ApplyOn.TAG).
+		    	setFilterOperation(FilterOperation.NOT_CONTAINS).
+		    	setTag(tag);
+	    	
+	    	dbManagement.updateFilter(filter);
+	    	
+	    	Incidence incidence1 = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
+	    	Incidence incidence2 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithTagFuego);
+	    	Incidence incidence3 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOutTagFuego);
+	    	Incidence incidence4 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties1);
+	    	Incidence incidence5 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties2);
+	    	Incidence incidence6 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOnlyOneProperty);
+	    	
+	    	Incidence filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
+	    	Incidence filteredIncidence2 = dbManagement.getFilter().applyFilter(incidence2);
+	    	Incidence filteredIncidence3 = dbManagement.getFilter().applyFilter(incidence3);
+	    	Incidence filteredIncidence4 = dbManagement.getFilter().applyFilter(incidence4);
+	    	Incidence filteredIncidence5 = dbManagement.getFilter().applyFilter(incidence5);
+	    	Incidence filteredIncidence6 = dbManagement.getFilter().applyFilter(incidence6);
+	    	
+	    	assertIncidencePassTheFilter(incidence1, filteredIncidence1); 		// no contiene el tag
+	    	assertIncidenceDontPassTheFilter(filteredIncidence2);					// contiene el tag
+	    	assertIncidencePassTheFilter(incidence3, filteredIncidence3); 		// no contiene el tag
+	    	assertIncidencePassTheFilter(incidence4, filteredIncidence4); 		// no contiene el tag
+	    	assertIncidencePassTheFilter(incidence5, filteredIncidence5); 		// no contiene el tag
+	    	assertIncidencePassTheFilter(incidence6, filteredIncidence6); 		// no contiene el tag
+    	
+    }
+    
+    /**
+     * Comprobamos que se filtran o no (según corresponda) 
+     * correctamente las incidencias con los siguientes parámetros del filtro:
+     * -FilterResponse = Accept
+     * -ApplyOn = Tag
+     * -FilterOperation = Not Contains
+     * 
+     * @throws BusinessException
+     */
+    @Test
+    public void testFilterAcceptPropertyString() throws BusinessException {
+	    	
+	    	Filter filter = dbManagement.getFilter();
+	    	
+	    	filter.setFilterResponse(FilterResponse.ACCEPT).
+		    	setApplyOn(ApplyOn.PROPERTY).
+		    	setPropertyType(PropertyType.STRING).
+		    	setFilterOperation(FilterOperation.EQUALS).
+		    	setPropertyName("aire").
+		    	setPropertyValue("mucho");
+	    	
+	    	dbManagement.updateFilter(filter);
+	    	
+	    	Incidence incidence1 = rIncidenceP.jsonStringToIncidence(jsonBasicIncidence);
+	    	Incidence incidence2 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithTagFuego);
+	    	Incidence incidence3 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOutTagFuego);
+	    	Incidence incidence4 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties1);
+	    	Incidence incidence5 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithProperties2);
+	    	Incidence incidence6 = rIncidenceP.jsonStringToIncidence(jsonIncidenceWithOnlyOneProperty);
+	    	
+	    	Incidence filteredIncidence1 = dbManagement.getFilter().applyFilter(incidence1);
+	    	Incidence filteredIncidence2 = dbManagement.getFilter().applyFilter(incidence2);
+	    	Incidence filteredIncidence3 = dbManagement.getFilter().applyFilter(incidence3);
+	    	Incidence filteredIncidence4 = dbManagement.getFilter().applyFilter(incidence4);
+	    	Incidence filteredIncidence5 = dbManagement.getFilter().applyFilter(incidence5);
+	    	Incidence filteredIncidence6 = dbManagement.getFilter().applyFilter(incidence6);
+	    	
+	    	assertIncidenceDontPassTheFilter(filteredIncidence1); 			// no tiene propiedades
+	    	assertIncidenceDontPassTheFilter(filteredIncidence2);				// no tiene propiedades
+	    	assertIncidenceDontPassTheFilter(filteredIncidence3); 			// no tiene propiedades
+	    	assertIncidencePassTheFilter(incidence4, filteredIncidence4); 	// contiene la propiedad "aire" con valor "mucho"
+	    	assertIncidenceDontPassTheFilter(filteredIncidence5); 			// contiene la propiedad "aire" con valor "poco"
+	    	assertIncidenceDontPassTheFilter(filteredIncidence6); 			// no contiene la propiedad "aire"
+	    	
+    }
+    
 
 }
