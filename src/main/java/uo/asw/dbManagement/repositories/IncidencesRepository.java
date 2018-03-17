@@ -12,8 +12,7 @@ public interface IncidencesRepository extends CrudRepository<Incidence, Long>{
 	@Query("SELECT o.incidences FROM Operator o WHERE o.identifier = ?1") //TODO - revisar
 	public List<Incidence> getOperatorIncidences(String identifier);
 	
-	//@Query("SELECT i FROM Incidence i WHERE i.tags MEMBER OF ?1") //TODO - revisar
-	@Query("SELECT i FROM Incidence i where ?1 IN i.tags")//TODO - está mal!! Hay que implementarlo
+	@Query("SELECT i FROM Incidence i where ?1 IN i.tags")//¿?¿?¿?¿
 	public List<Incidence> getIncidencesOfCategory(String category);
 	
 	@Query("SELECT i.tags FROM Incidence i where i = ?1")

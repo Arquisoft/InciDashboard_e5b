@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import uo.asw.dbManagement.DBManagementFacade;
+import uo.asw.dbManagement.DBManagementFacadeImpl;
+import uo.asw.dbManagement.model.Category;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.services.OperatorsService;
 
@@ -38,26 +40,25 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String showIncidencesOfCategorySelect(Model model) {
 		//TODO - Devuelve una vista con un formulario para indicar las categorias
 		// Dicha vista hara una peticion get a la direccion del metodo de abajo
-		List<String> categorys=operatorsService.findAllCategorys();
+		//List<String> categorys=dBManagement.findAllCategorys();
+		List<Category> categorys=dBManagement.findCategorys();
 		model.addAttribute("categorys", categorys);
+		model.addAttribute("selectCategory", new Category(""));
 		return "incidences/categories/select";
 	}
 	
 	@Override
-	@RequestMapping("/incidences/categories/show")
-	public String showIncidencesOfCategoryGet(Model model, List<String> categorys) {
-		/*
-		 * TODO
-		 * Recibe una lista de categorias en la petición, y hay que pasar dicha lista a dbManagement
-		 */
+	@RequestMapping("/incidences/categories/show/{category_id}")
+	public String showIncidencesOfCategoryGet(Model model, @PathVariable Long category_id) {
+
+		Category c=dBManagement.findCategoryById(category_id);
 		
-//		model.addAttribute("listIncidences", 
-//				dBManagement.getIncidencesOfCategory(categorys));
-		String[] s = new String[1];//TODO quitar?
-		model.addAttribute("listIncidences", 
-				dBManagement.getIncidencesOfCategory(s));
-		// Deberia devolver las incidencias paginadas Page<Incidence>
-		return "incidences/categories/show";
+		List<Incidence> incidencesOfCategory=dBManagement.getIncidencesOfCategory(c.getName());
+		
+		model.addAttribute("selectCategory", c);
+		model.addAttribute("incidencesOfCategory", incidencesOfCategory);
+		
+		return "incidences/categories/select :: tableIncidences";
 	}
 
 	@Override
