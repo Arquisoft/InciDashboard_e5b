@@ -32,6 +32,8 @@ public class InsertSampleDataService {
 	@SuppressWarnings("serial")
 	@PostConstruct
 	public void init() {
+		
+		
 		// Creamos agentes
 		Agent agent1 = new Agent("316683136", "1234", "Person");
 		agent1.setName("Juan");
@@ -70,7 +72,7 @@ public class InsertSampleDataService {
 		
 		operator1.setIncidences(operator1Incidences);
 		
-		
+		/*
 		operatorsService.addOperator(operator1);
 		incidencesRepository.save(operator1Incidences);
 		
@@ -90,6 +92,8 @@ public class InsertSampleDataService {
 		operatorsService.addOperator(opreator4);
 		operatorsService.addOperator(opreator5);
 		operatorsService.addOperator(opreator6);
+	
+	*/
 	}
 	
 	
