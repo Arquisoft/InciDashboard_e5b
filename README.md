@@ -19,9 +19,13 @@ Skeleton of participants module
 
 # Funcionamiento:
 
+1. Arrancar HSQLDB
+2. Arrancar Apache Zookeeper
+3. Arrancar Apache Kafka
+
 Para arrancarlo todo y que funcione, se debe ejecutar el siguiente comando, estando situado en la carpeta InciDashboard_e5b:
 ``mvn spring-boot:run``
 
    
 ## Interfaz HTML
-  1. Escribir en el navegador: http://localhost:8080/ COMPLETAR!
+  1. Escribir en el navegador: http://localhost:8090/ COMPLETAR!
