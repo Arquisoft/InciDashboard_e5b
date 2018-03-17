@@ -19,10 +19,10 @@
 					<tr>
 						<th>id</th>
 						<th th:text="#{name}">Nombre</th>
-						<th th:text="#{description}">Descripción</th>
-						<th th:text="#{location}">Localización</th>
+						<th th:text="#{description}">DescripciÃ³n</th>
+						<th th:text="#{location}">LocalizaciÃ³n</th>
 						<th th:text="#{status}">Estado</th>
-						<th th:text="#{expiration}">Expiración</th>
+						<th th:text="#{expiration}">ExpiraciÃ³n</th>
 						<th  th:text="#{operatorComments}">Comentarios del operador</th>
 						<th th:text="#{dangerous}">Nivel de Peligro</th>
 					</tr>
@@ -42,9 +42,16 @@
 			</table>
 		</div>
 		
-			<iframe width="600" height="450" frameborder="0" style="border: 0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&q=Incidencia+Chunga&center=43.3634557,-5.845935" allowfullscreen> </iframe>
-
-		
+        <h3> prueba mapas </h3>
+        
+        <iframe width="600" height="450" frameborder="0" style="border:0"
+                th:src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk
+                        &center=${incidence.location}
+                        &zoom=16" 
+                allowfullscreen>
+        </iframe>
+			
+        <div th:replace="fragments/map"/>
 		
 		
 		<footer th:replace="fragments/pagination"/>
