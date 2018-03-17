@@ -72,9 +72,9 @@ public class InsertSampleDataService {
 		
 		operator1.setIncidences(operator1Incidences);
 		
-		/*
+		
 		operatorsService.addOperator(operator1);
-		incidencesRepository.save(operator1Incidences);
+		//incidencesRepository.save(operator1Incidences);
 		
 		Operator opreator2 = new Operator("AAAAAAA2", "Juan");
 		opreator2.setPassword("123456");
@@ -93,7 +93,7 @@ public class InsertSampleDataService {
 		operatorsService.addOperator(opreator5);
 		operatorsService.addOperator(opreator6);
 	
-	*/
+	
 	}
 	
 	
