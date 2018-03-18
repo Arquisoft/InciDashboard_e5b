@@ -3,15 +3,23 @@ package uo.asw.inciDashboard.currentIncidences;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import uo.asw.dbManagement.model.Incidence;
 
 @Controller
 public class CurrentIncidencesController implements GetCurrentIncidences {
+	
+
+	 @Autowired
+	    private QueryInfo queryInfo;
 
 	/* TODO
 	 * Ofrece una monitorización continua de la evolución de los valores de las propiedades más representativas de los sensores, 
@@ -20,15 +28,24 @@ public class CurrentIncidencesController implements GetCurrentIncidences {
 	 */
 	
 	@Override
-	@RequestMapping("/incidences/currentIncidences")
+	@RequestMapping("/incidences")
 	public String getCurrentIncidences() {
-		// TODO - implementar??
-		Page<Incidence> incidences = new PageImpl<Incidence>(new ArrayList<Incidence>());
-		//model.addAttribute("incidencesList", incidences.getContent()); ???????
-		//
-		//model.addAttribute("page", incidences);
-		return "incidences/currentIncidences";
+		
+        return "currentIncidences";
 	}
 
+	
+	@RequestMapping("/incidences")
+	public String vistaIncidences(Model model, HttpSession session) {
+		Incidence incidence = (Incidence) session.getAttribute("incidence");
+    	if (incidence == null || incidence.getAgent() == null )
+    		return "redirect:/";
+    	
+    	DashboardData data = queryInfo.queryInfo();
+    	
+    	model.addAttribute("sugerencias", data.getIncidencias());
+        return "vistaIncidencias";
+	}
+	
 }
 
