@@ -1,6 +1,7 @@
 package uo.asw.inciDashboard.storedIncidences;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,29 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
 		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
 		//model.addAttribute("incidence", dBManagement.getIncidence());
-		model.addAttribute("incidence", dBManagement.getIncidence(idIncidence));
-		return "incidences/update";
+		Incidence incidence=dBManagement.getIncidence(idIncidence);
+		
+		model.addAttribute("incidence", incidence);
+		
+		//¿?¿?¿?¿
+		List<String> estados=new ArrayList<String>();
+		estados.add("Abierta");
+		estados.add("En proceso");
+		estados.add("Cerrada");
+		estados.add("Anulada");
+		
+		 List<String> myList = new ArrayList<String>();//Lista de estados menos el de la propia incidencia 
+		 
+		 for (String estado : estados) {
+			if(!estado.equals(incidence.getStatus())) {
+				myList.add(estado);
+			}
+		}
+		 
+		 model.addAttribute("incidenceStatus", myList);
+		 //¿?¿?¿
+		 
+		return "incidences/operator :: incidenceStatus";
 	}
 
 	@Override

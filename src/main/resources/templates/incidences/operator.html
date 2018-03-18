@@ -14,6 +14,8 @@
         <th>Identificador</th>
         <th>Nombre</th>
         <th>Descripcion</th>
+        <th>Estado</th>
+		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
@@ -25,6 +27,25 @@
 	    <td th:text="${incidence.identifier}"> Identificador1</td>
 	    <td th:text="${incidence.name}"> Incidencia1</td>
 	    <td th:text="${incidence.description}">Muy grave</td>
+	    <td>
+	    	<select id="incidenceStatus" name="incidenceStatus" th:fragment="incidenceStatus">
+                       <option selected th:value="${incidence.status}" 
+                       th:text="${incidence.status}"></option>
+                       <options items="${listStatus}"/>
+			</select>
+	    </td>
+	    <td> 
+	    		<button type="button" th:id="${'updateIncidenceButton' + incidence.id}"
+ 				class="btn btn-info">Actualizar</button>
+ 				<script th:inline="javascript">
+ 				/*<![CDATA[*/
+ 		 		$("#updateIncidenceButton[[${incidence.id}]]").click(function() {
+ 		 				 var urlUpdate = '/incidences/update/[[${incidence.id}]]';
+ 						  $("#incidenceStatus").load(urlUpdate);
+ 		 		});
+ 		 		/*]]>*/
+ 				</script>
+ 		</td>
 	  </tr>
 	</tbody>
   </table>
