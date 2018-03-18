@@ -36,11 +36,40 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	@Autowired
 	private CategoriesRepository categoriesRepository;
 	
+	@Override
+	public void updateIncidence(Incidence incidence) {
+		incidencesRepository.save(incidence);
+	}
+	
+	@Override
+	public List<Incidence> getOperatorIncidences(String idOperator) {
+		return incidencesRepository.getOperatorIncidences(idOperator);
+	}
+	
+	@Override
+	public List<Incidence> getIncidencesOfCategory(String category,String operator_identifier){
+
+		List<Incidence> incidencesForCategory=new ArrayList<Incidence>();
+		
+		for (Incidence incidence : getOperatorIncidences(operator_identifier)) {
+			if(conatinsInArray(incidence.getTags(), category)) {
+				incidencesForCategory.add(incidence);
+			}
+		}
+		return incidencesForCategory;
+		
+	}
+	
+	@Override
+	public Incidence getIncidence(Long idIncidence) {
+		return incidencesRepository.findOne(idIncidence);
+	}
+	
 	/**
 	 * Permite la solicitud del filtro guardado en la BD (sólo hay un filtro). 
 	 * Si no hay ningún filtro en la BD, lo crea, lo guarda en BD y lo devuelve.
 	 */
-	
+	@Override
 	public Filter getFilter() {
 		
 		List<Filter> filters = new ArrayList<Filter>();
@@ -57,46 +86,10 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		
 		return filters.get(0);		
 	}
-
+	
+	@Override
 	public void updateFilter(Filter filter) {		
 		filterRepository.save(filter.setId(1));
-	}
-	
-	public Incidence getIncidence(Long idIncidence) {
-		return incidencesRepository.findOne(idIncidence);
-	}
-	
-	public List<Incidence> getOperatorIncidences(String idOperator) {
-		
-		return incidencesRepository.getOperatorIncidences(idOperator);
-	}
-	
-	public List<Incidence> getIncidencesOfCategory(String category,String operator_identifier){
-
-		List<Incidence> incidencesForCategory=new ArrayList<Incidence>();
-		
-		for (Incidence incidence : getOperatorIncidences(operator_identifier)) {
-			if(conatinsInArray(incidence.getTags(), category)) {
-				incidencesForCategory.add(incidence);
-			}
-		}
-		return incidencesForCategory;
-		
-	}
-	
-	public boolean conatinsInArray(Set<String> array, String element) {
-		
-		for (String e : array) {
-			
-			if(e.equals(element)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void updateIncidence(Incidence incidence) {
-		incidencesRepository.save(incidence);
 	}
 
 	@Override
@@ -121,6 +114,17 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	@Override
 	public Category findCategoryById(Long id) {
 		return categoriesRepository.findOne(id);
+	}
+	
+	public boolean conatinsInArray(Set<String> array, String element) {
+		
+		for (String e : array) {
+			
+			if(e.equals(element)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/*
