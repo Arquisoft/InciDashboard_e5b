@@ -29,13 +29,14 @@ public class SecurityService {
 	
 		return null;
 	}
-
+	
 	public void autoLogin(String identifier, String password) {
+		
 		UserDetails userDetails = userDetailsService.loadUserByUsername(identifier);
-		
+				
 		UsernamePasswordAuthenticationToken aToken = new UsernamePasswordAuthenticationToken(userDetails, password,
-				userDetails.getAuthorities());
-		
+						userDetails.getAuthorities());
+
 		authenticationManager.authenticate(aToken);
 		
 		if (aToken.isAuthenticated()) {

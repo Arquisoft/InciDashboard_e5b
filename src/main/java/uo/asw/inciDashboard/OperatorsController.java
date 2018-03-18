@@ -53,26 +53,5 @@ public class OperatorsController {
 		return "login";
 	}
 	
-//	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.POST)
-//	public String login(@Validated Operator operator, BindingResult result, Model model) {
-//		loginFormValidator.validate(operator, result);
-//		if (result.hasErrors()) {
-//			return "login";
-//		}
-//		securityService.autoLogin(operator.getIdentifier(), operator.getPassword());
-//		return "redirect:home";
-//	}
-//	
-//	@RequestMapping(value = "/goToHomeAfterLogin", method = RequestMethod.GET)
-//	public String goToHomeAfterLogin(Model model) {
-//		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		if(auth.isAuthenticated()) {
-//			return "redirect:home";
-//		}
-//		else {
-//			return "redirect:login";
-//		}
-//	}
 
 }

@@ -3,9 +3,10 @@ package uo.asw.inciDashboard.storedIncidences;
 import java.util.List;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 public interface ShowIncidencesOfCategory {
 
-	public String showIncidencesOfCategoryGet(Model model,List<String> categorys);
+	public String showIncidencesOfCategoryGet(Model model, @PathVariable Long category_id);
 	
 }

@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uo.asw.dbManagement.model.Agent;
+import uo.asw.dbManagement.model.Category;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Operator;
 import uo.asw.dbManagement.model.Property;
 import uo.asw.dbManagement.repositories.AgentsRepository;
+import uo.asw.dbManagement.repositories.CategoriesRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.services.OperatorsService;
 import uo.asw.util.UuidGenerator;
@@ -28,6 +30,9 @@ public class InsertSampleDataService {
 	
 	@Autowired
 	private IncidencesRepository incidencesRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
 
 	@SuppressWarnings("serial")
 	@PostConstruct
@@ -41,6 +46,13 @@ public class InsertSampleDataService {
 		
 		agentsRepository.save(agent1);
 	
+		//Creamos categorias
+		Category categoriaTiempo=new Category("tiempo");
+		Category categoriaNormal=new Category("normal");
+		
+		categoriesRepository.save(categoriaTiempo);
+		categoriesRepository.save(categoriaNormal);
+		//
 		
 		// Creamos operarios e incidencias
 		Operator operator1 = new Operator("99999999A", "NombreOperador1");
@@ -58,12 +70,13 @@ public class InsertSampleDataService {
 			    	Set<Property> i2Properties = new HashSet<Property>();
 			    	i2Properties.add(new Property("temperatura", "20"));
 			    	i2Properties.add(new Property("aire", "poco"));
-				
-			    //String[] i1Tags = {"tiempo", "normal"};
-			    	Set<String> i1Tags = new HashSet<>(); i1Tags.add("tiempo"); i1Tags.add("normal");
+			    	
+		
+			    Set<String> i1Tags = new HashSet<>(); i1Tags.add(categoriaTiempo.getName()); 
+			    Set<String> i2Tags = new HashSet<>(); i2Tags.add(categoriaNormal.getName());
 			    	
 				i1.setAgent(agent1).setOperator(operator1).setName("NombreInc1").setDescription("DescripcionInc1").setProperties(i1Properties).setTags(i1Tags);
-				i2.setAgent(agent1).setOperator(operator1).setName("NombreInc2").setDescription("DescripcionInc2").setProperties(i2Properties);
+				i2.setAgent(agent1).setOperator(operator1).setName("NombreInc2").setDescription("DescripcionInc2").setProperties(i2Properties).setTags(i2Tags);
 				
 				add(i2);
 				add(i1);
@@ -74,7 +87,9 @@ public class InsertSampleDataService {
 		
 		
 		operatorsService.addOperator(operator1);
-		//incidencesRepository.save(operator1Incidences);
+		
+		//Estaba comentado pero lo descomenté porque sino no funciona
+		incidencesRepository.save(operator1Incidences);
 		
 		Operator opreator2 = new Operator("AAAAAAA2", "Juan");
 		opreator2.setPassword("123456");

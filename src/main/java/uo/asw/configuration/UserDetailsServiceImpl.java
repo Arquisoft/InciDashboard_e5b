@@ -21,18 +21,18 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     private OperatorsRepository operatorsRepository;
 
     @Override
-	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
-    		Operator operator = operatorsRepository.findByIdentifier(identifier);
-    		
-    		if(operator == null)
-    				throw new UsernameNotFoundException("Operator con identifier: " + identifier + " no encontrado.");
-    		
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		
-		grantedAuthorities.add(new SimpleGrantedAuthority(operator.getRole()));
-		
+    public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
+    	    		Operator operator = operatorsRepository.findByIdentifier(identifier);
+    	    		
+      	if(operator == null)
+    	    	throw new UsernameNotFoundException("Operator con identifier: " + identifier + " no encontrado.");
+    	    	
+    	Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+    	grantedAuthorities.add(new SimpleGrantedAuthority(operator.getRole()));
+ 		
 		return new org.springframework.security.core.userdetails.User(operator.getIdentifier(), operator.getPassword(),
 				grantedAuthorities);
+		
 	}
     
 //    @Override

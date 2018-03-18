@@ -38,7 +38,7 @@ public class Incidence {
 	private long id;
 	@Column(unique=true) 
 	private String identifier;
-	
+
 	@ManyToOne
 	@JoinColumn(name="agent_id")
 	private Agent agent;
@@ -56,7 +56,7 @@ public class Incidence {
 		name="incidence_tags",
 	    joinColumns=@JoinColumn(name="incidence_ID")
 	)
-	private Set<String> tags = new HashSet<>();
+	private Set<String> tags = new HashSet<String>();
 	
 	@ElementCollection
 	@CollectionTable(

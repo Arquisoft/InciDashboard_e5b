@@ -69,6 +69,46 @@ public class OperatorsService {
 		return incidencesRepository.getOperatorIncidences(identifier);
 	}
 	
+	/*public List<String> findAllCategorys(){
+		
+		List<String> categorys=new ArrayList<String>();
+		
+		for (Incidence incidence : incidencesRepository.findAll()) {
+			String[] categorysForOperator=incidencesRepository.findCategorysForIncidence(incidence);
+			for (String category : categorysForOperator) {
+				if(!categorys.contains(category)) {
+					categorys.add(category);
+				}
+			}
+		}
+		return categorys;
+		
+	}*/
+	
+	/*public List<Incidence> getIncidencesOfCategory(String category){
+		
+		List<Incidence> incidencesForCategory=new ArrayList<Incidence>();
+		
+		for (Incidence incidence : incidencesRepository.findAll()) {
+			if(conatinsInArray(incidence.getTags(), category)) {
+				incidencesForCategory.add(incidence);
+			}
+		}
+		return incidencesForCategory;
+		
+	}
+	
+	public boolean conatinsInArray(String[] array, String element) {
+		
+		for (String e : array) {
+			
+			if(e.equals(element)) {
+				return true;
+			}
+		}
+		return true;
+	}*/
+	
 	/*public Page<Operator> searchUsersByidentifierAndName(Pageable pageable, String searchText){
 		
 		Page<Operator> operators = new PageImpl<Operator>(new LinkedList<Operator>());
