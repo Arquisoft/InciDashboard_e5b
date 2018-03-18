@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,7 +55,10 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 
 		Category c=dBManagement.findCategoryById(category_id);
 		
-		List<Incidence> incidencesOfCategory=dBManagement.getIncidencesOfCategory(c.getName());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String operator_identifier = auth.getName();
+		
+		List<Incidence> incidencesOfCategory=dBManagement.getIncidencesOfCategoryForOperator(c.getName(),operator_identifier);
 		
 		model.addAttribute("selectCategory", c);
 		model.addAttribute("incidencesOfCategory", incidencesOfCategory);

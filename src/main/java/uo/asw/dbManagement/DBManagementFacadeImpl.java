@@ -18,6 +18,7 @@ import uo.asw.dbManagement.repositories.CategoriesRepository;
 import uo.asw.dbManagement.repositories.FilterRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
+import uo.asw.dbManagement.services.OperatorsService;
 
 @Service
 public class DBManagementFacadeImpl implements DBManagementFacade{
@@ -36,6 +37,9 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	
 	@Autowired
 	private CategoriesRepository categoriesRepository;
+	
+	@Autowired
+	private OperatorsService operatorsService;
 	
 	/**
 	 * Permite la solicitud del filtro guardado en la BD (sólo hay un filtro). 
@@ -110,11 +114,11 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		
 	}
 	
-	public List<Incidence> getIncidencesOfCategory(String category){
-		
+	public List<Incidence> getIncidencesOfCategoryForOperator(String category,String operator_identifier){
+
 		List<Incidence> incidencesForCategory=new ArrayList<Incidence>();
 		
-		for (Incidence incidence : incidencesRepository.findAll()) {
+		for (Incidence incidence : operatorsService.getOperatorIncidences(operator_identifier)) {
 			if(conatinsInArray(incidence.getTags(), category)) {
 				incidencesForCategory.add(incidence);
 			}

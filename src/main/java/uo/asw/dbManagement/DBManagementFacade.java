@@ -20,7 +20,7 @@ public interface DBManagementFacade {
 
 	public List<Incidence> getIncidencesOfCategory(String[] categories); //TODO - Cuando este implementado y funcione, hacer que devuelva Page<Incidence> para meter paginacion
 	
-	public List<Incidence> getIncidencesOfCategory(String category);
+	public List<Incidence> getIncidencesOfCategoryForOperator(String category,String operator_identifier);
 	
 	public void updateIncidence(Incidence incidence);
 	
