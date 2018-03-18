@@ -17,7 +17,6 @@ import uo.asw.dbManagement.repositories.CategoriesRepository;
 import uo.asw.dbManagement.repositories.FilterRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
-import uo.asw.dbManagement.services.OperatorsService;
 
 @Service
 public class DBManagementFacadeImpl implements DBManagementFacade{
@@ -36,9 +35,6 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	
 	@Autowired
 	private CategoriesRepository categoriesRepository;
-	
-	@Autowired
-	private OperatorsService operatorsService;
 	
 	/**
 	 * Permite la solicitud del filtro guardado en la BD (sólo hay un filtro). 
@@ -72,52 +68,14 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	
 	public List<Incidence> getOperatorIncidences(String idOperator) {
 		
-		
-		
 		return incidencesRepository.getOperatorIncidences(idOperator);
 	}
 	
-	/*
-	 * Este no funciona por la consulta SQL
-	 */
-	public List<Incidence> getIncidencesOfCategory(String[] categories) {
-		
-		List<Incidence> incidenciasConAlMenosUnaDeEsasCategorias=new ArrayList<Incidence>();
-		for (String category : categories) {
-			List<Incidence> incidenciasConEsaCategoria=incidencesRepository.getIncidencesOfCategory(category);
-			for (Incidence incidence : incidenciasConEsaCategoria) {
-				if(!incidenciasConAlMenosUnaDeEsasCategorias.contains(incidence)) {
-					incidenciasConAlMenosUnaDeEsasCategorias.add(incidence);
-				}
-			}
-		}
-		return incidenciasConAlMenosUnaDeEsasCategorias;
-		
-	}
-	
-	public List<String> findAllCategorys(){
-		
-		List<String> categorys=new ArrayList<String>();
-		
-		for (Incidence incidence : incidencesRepository.findAll()) {
-			//Set<String> categorysForOperatorSinSeparar=incidencesRepository.findCategorysForIncidence(incidence.getId());
-			Set<String> categorysForIncidence = incidence.getTags();
-			//String[] categorysForOperator=separarCategorysEnArray(categorysForOperatorSinSeparar);
-			for (String category : categorysForIncidence) {
-				if(!categorys.contains(category)) {
-					categorys.add(category);
-				}
-			}
-		}
-		return categorys;
-		
-	}
-	
-	public List<Incidence> getIncidencesOfCategoryForOperator(String category,String operator_identifier){
+	public List<Incidence> getIncidencesOfCategory(String category,String operator_identifier){
 
 		List<Incidence> incidencesForCategory=new ArrayList<Incidence>();
 		
-		for (Incidence incidence : operatorsService.getOperatorIncidences(operator_identifier)) {
+		for (Incidence incidence : getOperatorIncidences(operator_identifier)) {
 			if(conatinsInArray(incidence.getTags(), category)) {
 				incidencesForCategory.add(incidence);
 			}
@@ -152,7 +110,7 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	}
 
 	@Override
-	public List<Category> findCategorys() {
+	public List<Category> findAllCategorys() {
 		
 		List<Category> categories = new ArrayList<Category>();
 		categoriesRepository.findAll().forEach(categories::add);
@@ -164,5 +122,37 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	public Category findCategoryById(Long id) {
 		return categoriesRepository.findOne(id);
 	}
+	
+	/*
+	public List<Incidence> getIncidencesOfCategory(String[] categories) {
+		
+		List<Incidence> incidenciasConAlMenosUnaDeEsasCategorias=new ArrayList<Incidence>();
+		for (String category : categories) {
+			List<Incidence> incidenciasConEsaCategoria=incidencesRepository.getIncidencesOfCategory(category);
+			for (Incidence incidence : incidenciasConEsaCategoria) {
+				if(!incidenciasConAlMenosUnaDeEsasCategorias.contains(incidence)) {
+					incidenciasConAlMenosUnaDeEsasCategorias.add(incidence);
+				}
+			}
+		}
+		return incidenciasConAlMenosUnaDeEsasCategorias;
+		
+	}*/
+	
+	/*public List<String> findAllCategorys(){
+	
+	List<String> categorys=new ArrayList<String>();
+	
+	for (Incidence incidence : incidencesRepository.findAll()) {
+		Set<String> categorysForIncidence = incidence.getTags();
+		for (String category : categorysForIncidence) {
+			if(!categorys.contains(category)) {
+				categorys.add(category);
+			}
+		}
+	}
+	return categorys;
+	
+	}*/
 
 }

@@ -47,6 +47,10 @@ public class OperatorsService {
 		return operatorsRepository.findOne(id);
 	}
 	
+	public Operator findByIdentifier(String identifier) {
+		return operatorsRepository.findByIdentifier(identifier);
+	}
+	
 	public void addOperator(Operator operator) {
 		operator.setPassword(bCryptPasswordEncoder.encode(operator.getPassword()));
 		operatorsRepository.save(operator);
@@ -63,10 +67,6 @@ public class OperatorsService {
 	public boolean passwordsIguales(String password,String passwordEncriptada) {
 		
 		return bCryptPasswordEncoder.matches(password, passwordEncriptada);
-	}
-	
-	public List<Incidence> getOperatorIncidences(String identifier) {
-		return incidencesRepository.getOperatorIncidences(identifier);
 	}
 	
 	/*public List<String> findAllCategorys(){
