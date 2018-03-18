@@ -1,7 +1,6 @@
 package uo.asw.dbManagement;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -136,11 +135,6 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 			}
 		}
 		return false;
-	}
-	
-	private String[] separarCategorysEnArray(String[] array) {
-		
-		return array[0].split(",");
 	}
 
 	public void updateIncidence(Incidence incidence) {

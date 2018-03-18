@@ -38,7 +38,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		 	return "incidences/operator";
 	}
 	
-	@RequestMapping("/incidences/categories/select")
+	@RequestMapping("/incidences/categories/select_show")
 	public String showIncidencesOfCategorySelect(Model model) {
 		//TODO - Devuelve una vista con un formulario para indicar las categorias
 		// Dicha vista hara una peticion get a la direccion del metodo de abajo
@@ -46,7 +46,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		List<Category> categorys=dBManagement.findCategorys();
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("selectCategory", new Category(""));
-		return "incidences/categories/select";
+		return "incidences/categories/select_show";
 	}
 	
 	@Override
@@ -63,7 +63,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		model.addAttribute("selectCategory", c);
 		model.addAttribute("incidencesOfCategory", incidencesOfCategory);
 		
-		return "incidences/categories/select :: tableIncidences";
+		return "incidences/categories/select_show :: tableIncidences";
 	}
 
 	@Override
