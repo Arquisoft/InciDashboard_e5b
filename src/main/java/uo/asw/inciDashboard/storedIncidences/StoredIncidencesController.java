@@ -29,9 +29,17 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String showOperatorIncidences(Model model,Principal principal) {
 				
 			String identifier=principal.getName();
-					
 			List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(identifier);
+			
+			List<String> estados=new ArrayList<String>();
+			estados.add("Abierta");
+			estados.add("En proceso");
+			estados.add("Cerrada");
+			estados.add("Anulada");
+			
 			model.addAttribute("operatorIncidences", operatorIncidences);
+			model.addAttribute("habilitarEstados", false);
+			model.addAttribute("listStatus", estados);
 		 	return "incidences/operator";
 	}
 	
@@ -64,33 +72,24 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	}
 
 	@Override
-	@RequestMapping("/incidences/update/{idIncidence}")
+	@RequestMapping("/incidences/update/changeStatusOn/{idIncidence}")
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
 		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
 		//model.addAttribute("incidence", dBManagement.getIncidence());
 		Incidence incidence=dBManagement.getIncidence(idIncidence);
+		List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(incidence.getIdentifier());
 		
-		model.addAttribute("incidence", incidence);
-		
-		//¿?¿?¿?¿
 		List<String> estados=new ArrayList<String>();
 		estados.add("Abierta");
 		estados.add("En proceso");
 		estados.add("Cerrada");
 		estados.add("Anulada");
 		
-		 List<String> myList = new ArrayList<String>();//Lista de estados menos el de la propia incidencia 
+		//model.addAttribute("operatorIncidences", operatorIncidences);
+		model.addAttribute("habilitarEstados", true);
+		model.addAttribute("listStatus", estados);
 		 
-		 for (String estado : estados) {
-			if(!estado.equals(incidence.getStatus())) {
-				myList.add(estado);
-			}
-		}
-		 
-		 model.addAttribute("incidenceStatus", myList);
-		 //¿?¿?¿
-		 
-		return "incidences/operator :: incidenceStatus";
+		return "incidences/operator :: incidenceStatusCombo"+idIncidence;
 	}
 
 	@Override

@@ -28,21 +28,46 @@
 	    <td th:text="${incidence.name}"> Incidencia1</td>
 	    <td th:text="${incidence.description}">Muy grave</td>
 	    <td>
-	    	<select id="incidenceStatus" name="incidenceStatus" th:fragment="incidenceStatus">
-                       <option selected th:value="${incidence.status}" 
-                       th:text="${incidence.status}"></option>
-                       <options items="${listStatus}"/>
-			</select>
+	    	
+	    	<div th:if="${habilitarEstados}">
+	    		
+	    		<select th:disabled="${not habilitarEstados}" th:id="${'incidenceStatusCombo' + incidence.id}" 
+	    		th:name="${'incidenceStatusCombo' + incidence.id}"
+	    		th:fragment="${'incidenceStatusCombo' + incidence.id}">
+	    	
+                 <option th:each="status: ${listStatus}"
+                 		th:text="${status}"/>
+				</select>
+					
+	    	</div>
+	    		
+	    	<div th:unless="${habilitarEstados}">
+	    		
+	    		<select th:disabled="${not habilitarEstados}" 
+	    		th:id="${'incidenceStatusCombo' + incidence.id}" 
+	    		th:name="${'incidenceStatusCombo' + incidence.id}"
+	    		th:fragment="${'incidenceStatusCombo' + incidence.id}">
+	    	
+                 <option th:each="status: ${listStatus}"
+                 		th:selected="${status} == ${incidence.status}"
+                 		th:text="${status}"/>
+				</select>
+			
+	    	</div>
+	    	
+	   
 	    </td>
 	    <td> 
 	    		<button type="button" th:id="${'updateIncidenceButton' + incidence.id}"
- 				class="btn btn-info">Actualizar</button>
+ 				class="btn btn-info">Cambiar estado</button>
  				<script th:inline="javascript">
  				/*<![CDATA[*/
- 		 		$("#updateIncidenceButton[[${incidence.id}]]").click(function() {
- 		 				 var urlUpdate = '/incidences/update/[[${incidence.id}]]';
- 						  $("#incidenceStatus").load(urlUpdate);
- 		 		});
+ 					$(function () {
+		 		 		$("#updateIncidenceButton[[${incidence.id}]]").click(function() {
+		 		 				 var urlUpdate = '/incidences/update/changeStatusOn/[[${incidence.id}]]';
+		 						  $("#incidenceStatusCombo[[${incidence.id}]]").load(urlUpdate);
+		 		 		});
+	 				});
  		 		/*]]>*/
  				</script>
  		</td>
