@@ -35,7 +35,7 @@
  				/*<![CDATA[*/
  					$(function () {
 		 		 		$("#updateIncidenceButton[[${incidence.id}]]").click(function() {
-		 		 				 var urlUpdate = '/incidences/update/changeStatusOn/[[${incidence.id}]]';
+		 		 				 var urlUpdate = '/incidences/update/changeStatus/[[${incidence.id}]]';
 		 						  $("#tableUpdate").load(urlUpdate);
 		 		 		});
 	 				});
@@ -62,8 +62,18 @@
 					</select>
 	    		
 	    	
-	   				<button type="button" th:id="saveIncidenceButton"
+	   				<button type="button" th:id="${'saveIncidenceButton' + selectIncidence.id}"
  					class="btn btn-info">Guardar estado</button>
+ 					<script th:inline="javascript">
+ 					/*<![CDATA[*/
+		 		 	$("#saveIncidenceButton[[${selectIncidence.id}]]").click(function() {
+		 		 			var estado_seleccionado=$("#incidenceStatusCombo").val();
+		 		 			var urlUpdate = '/incidences/update/saveStatus/[[${selectIncidence.id}]]/'+estado_seleccionado;
+	 						$("#tableIncidences").load(urlUpdate);
+		 		 	});
+ 		 			/*]]>*/
+ 					</script>
+ 				
 	    		</div>
  				
 

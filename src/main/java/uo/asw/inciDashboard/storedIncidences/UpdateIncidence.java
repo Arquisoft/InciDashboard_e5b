@@ -1,5 +1,7 @@
 package uo.asw.inciDashboard.storedIncidences;
 
+import java.security.Principal;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,6 @@ public interface UpdateIncidence {
 
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence);
 	
-	public String updateIncidencePost(@ModelAttribute Incidence incidence);
+	public String saveIncidenceGet(Model model, Principal principal, @PathVariable Long idIncidence, @PathVariable String statusIncidence);
 	
 }

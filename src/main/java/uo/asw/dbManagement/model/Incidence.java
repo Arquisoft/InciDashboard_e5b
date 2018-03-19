@@ -77,6 +77,11 @@ public class Incidence {
 	public Incidence(String identifier) {
 		this.identifier = identifier;
 	}
+	
+	public Incidence(long id, String identifier) {
+		this.id=id;
+		this.identifier = identifier;
+	}
 
 	public long getId() {
 		return id;

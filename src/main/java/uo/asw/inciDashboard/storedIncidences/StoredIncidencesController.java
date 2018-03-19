@@ -34,7 +34,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 			model.addAttribute("operatorIncidences", operatorIncidences);
 			model.addAttribute("updateHabilitado", false);
 			model.addAttribute("listStatus", new ArrayList<String>());
-			model.addAttribute("selectIncidence", new Incidence(""));
+			model.addAttribute("selectIncidence", new Incidence(-1,""));
 			
 		 	return "incidences/operator";
 	}
@@ -68,34 +68,48 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	}
 
 	@Override
-	@RequestMapping("/incidences/update/changeStatusOn/{idIncidence}")
+	@RequestMapping("/incidences/update/changeStatus/{idIncidence}")
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
 		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
-		//model.addAttribute("incidence", dBManagement.getIncidence());
+
 		Incidence incidence=dBManagement.getIncidence(idIncidence);
-		List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(incidence.getIdentifier());
 		
 		List<String> estados=new ArrayList<String>();
 		estados.add("Abierta");
-		estados.add("En proceso");
+		estados.add("En_proceso");
 		estados.add("Cerrada");
 		estados.add("Anulada");
 		
-		//model.addAttribute("operatorIncidences", operatorIncidences);
 		model.addAttribute("updateHabilitado", true);
 		model.addAttribute("listStatus", estados);
 		model.addAttribute("selectIncidence", incidence);
-		//model.addAttribute("currentIncidence", incidence);
 		 
 		return "incidences/operator :: tableUpdate";
 	}
 
 	@Override
+	@RequestMapping("/incidences/update/saveStatus/{idIncidence}/{statusIncidence}")
+	public String saveIncidenceGet(Model model, Principal principal, @PathVariable Long idIncidence, @PathVariable String statusIncidence) {
+		
+		Incidence incidence=dBManagement.getIncidence(idIncidence);
+		incidence.setStatus(statusIncidence);
+		
+		dBManagement.updateIncidence(incidence);
+		
+		String identifier=principal.getName();
+		List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(identifier);
+		
+		model.addAttribute("operatorIncidences", operatorIncidences);
+		
+	 	return "incidences/operator :: tableIncidences";
+	}
+
+	/*@Override
 	@RequestMapping(value ="/incidences/update/{idIncidence}", method = RequestMethod.POST)
 	public String updateIncidencePost(@ModelAttribute Incidence incidence) { 
 		//dBManagement.updateIncidence(incidence);
 		//Retornar alguna vista
 		return "";
-	}
+	}*/
 
 }
