@@ -31,15 +31,11 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 			String identifier=principal.getName();
 			List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(identifier);
 			
-			List<String> estados=new ArrayList<String>();
-			estados.add("Abierta");
-			estados.add("En proceso");
-			estados.add("Cerrada");
-			estados.add("Anulada");
-			
 			model.addAttribute("operatorIncidences", operatorIncidences);
-			model.addAttribute("habilitarEstados", false);
-			model.addAttribute("listStatus", estados);
+			model.addAttribute("updateHabilitado", false);
+			model.addAttribute("listStatus", new ArrayList<String>());
+			model.addAttribute("selectIncidence", new Incidence(""));
+			
 		 	return "incidences/operator";
 	}
 	
@@ -86,10 +82,12 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		estados.add("Anulada");
 		
 		//model.addAttribute("operatorIncidences", operatorIncidences);
-		model.addAttribute("habilitarEstados", true);
+		model.addAttribute("updateHabilitado", true);
 		model.addAttribute("listStatus", estados);
+		model.addAttribute("selectIncidence", incidence);
+		//model.addAttribute("currentIncidence", incidence);
 		 
-		return "incidences/operator :: incidenceStatusCombo"+idIncidence;
+		return "incidences/operator :: tableUpdate";
 	}
 
 	@Override

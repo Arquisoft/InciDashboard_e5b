@@ -27,36 +27,46 @@
 	    <td th:text="${incidence.identifier}"> Identificador1</td>
 	    <td th:text="${incidence.name}"> Incidencia1</td>
 	    <td th:text="${incidence.description}">Muy grave</td>
+	    <td th:text="${incidence.status}">Estado1</td>
 	    <td>
-	    	
-	    	<select th:disabled="${not habilitarEstados}"
-	    	th:id="${'incidenceStatusCombo' + incidence.id}" 
-	    	th:name="${'incidenceStatusCombo' + incidence.id}"
-	    	th:fragment="${'incidenceStatusCombo' + incidence.id}">
-	    	
-            <option th:each="status: ${listStatus}"
-                 		th:selected="${status} == ${incidence.status}"
-                 		th:text="${status}"/>
-			</select>
-	    	
-	   
-	    </td>
-	    <td> 
-	    		<button type="button" th:id="${'updateIncidenceButton' + incidence.id}"
+	    	<button type="button" th:id="${'updateIncidenceButton' + incidence.id}"
  				class="btn btn-info">Cambiar estado</button>
  				<script th:inline="javascript">
  				/*<![CDATA[*/
  					$(function () {
 		 		 		$("#updateIncidenceButton[[${incidence.id}]]").click(function() {
 		 		 				 var urlUpdate = '/incidences/update/changeStatusOn/[[${incidence.id}]]';
-		 						  $("#incidenceStatusCombo[[${incidence.id}]]").load(urlUpdate);
+		 						  $("#tableUpdate").load(urlUpdate);
 		 		 		});
 	 				});
  		 		/*]]>*/
  				</script>
- 		</td>
+	    
+	    </td>
 	  </tr>
 	</tbody>
+  </table>
+  </div>
+  
+  <h2>Actualizar estado</h2>                                                                                  
+  <div class="table-responsive">          
+  <table class="table table-hover" th:fragment="tableUpdate" id="tableUpdate">
+				
+				<div th:if="${updateHabilitado}">
+					<p th:text="${'Cambiar el estado de la incidencia con identificador:' + selectIncidence.identifier}"></p>
+					
+	    			<select id="incidenceStatusCombo" name="incidenceStatusCombo">
+	    	
+            		<option th:each="status: ${listStatus}"
+                 		th:text="${status}"/>
+					</select>
+	    		
+	    	
+	   				<button type="button" th:id="saveIncidenceButton"
+ 					class="btn btn-info">Guardar estado</button>
+	    		</div>
+ 				
+
   </table>
   </div>
 
