@@ -29,31 +29,15 @@
 	    <td th:text="${incidence.description}">Muy grave</td>
 	    <td>
 	    	
-	    	<div th:if="${habilitarEstados}">
-	    		
-	    		<select th:disabled="${not habilitarEstados}" th:id="${'incidenceStatusCombo' + incidence.id}" 
-	    		th:name="${'incidenceStatusCombo' + incidence.id}"
-	    		th:fragment="${'incidenceStatusCombo' + incidence.id}">
+	    	<select th:disabled="${not habilitarEstados}"
+	    	th:id="${'incidenceStatusCombo' + incidence.id}" 
+	    	th:name="${'incidenceStatusCombo' + incidence.id}"
+	    	th:fragment="${'incidenceStatusCombo' + incidence.id}">
 	    	
-                 <option th:each="status: ${listStatus}"
-                 		th:text="${status}"/>
-				</select>
-					
-	    	</div>
-	    		
-	    	<div th:unless="${habilitarEstados}">
-	    		
-	    		<select th:disabled="${not habilitarEstados}" 
-	    		th:id="${'incidenceStatusCombo' + incidence.id}" 
-	    		th:name="${'incidenceStatusCombo' + incidence.id}"
-	    		th:fragment="${'incidenceStatusCombo' + incidence.id}">
-	    	
-                 <option th:each="status: ${listStatus}"
+            <option th:each="status: ${listStatus}"
                  		th:selected="${status} == ${incidence.status}"
                  		th:text="${status}"/>
-				</select>
-			
-	    	</div>
+			</select>
 	    	
 	   
 	    </td>
