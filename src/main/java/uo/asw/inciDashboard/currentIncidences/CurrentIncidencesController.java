@@ -2,16 +2,23 @@
 package uo.asw.inciDashboard.currentIncidences;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import uo.asw.dbManagement.model.Incidence;
 
 @Controller
 public class CurrentIncidencesController implements GetCurrentIncidences {
+	
+	@Autowired
+	private ReceiveFilteredIncidenceImpl receiveService;
+	
 
 	/* TODO
 	 * Ofrece una monitorización continua de la evolución de los valores de las propiedades más representativas de los sensores, 
@@ -19,16 +26,19 @@ public class CurrentIncidencesController implements GetCurrentIncidences {
 	 * También se ofrecerá la posibilidad de visualizar las incidencias geolocalizadas en un mapa, así como los valores actuales y los estados. 
 	 */
 	
-	@Override
 	@RequestMapping("/incidences/currentIncidences")
-	public String getCurrentIncidences() {
-		// TODO - implementar??
-		Page<Incidence> incidences = new PageImpl<Incidence>(new ArrayList<Incidence>());
-		//model.addAttribute("incidencesList", incidences.getContent()); ???????
-		//
-		//model.addAttribute("page", incidences);
+	public String getCurrentIncidences(Model model) {
+		List<Incidence> incidencias = receiveService.getListaincidencias();
+		model.addAttribute("incidenceList", incidencias); 
+		//Page<Incidence> incidences =  (Page<Incidence>) receiveService.getListaincidencias();
 		return "incidences/currentIncidences";
 	}
 
+
+	@Override
+	public String getCurrentIncidences() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
