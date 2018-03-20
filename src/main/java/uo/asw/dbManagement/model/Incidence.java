@@ -74,6 +74,40 @@ public class Incidence {
 	
 	public Incidence() {}
 	
+	/** TODO Constructor hecho para hacer pruebas luego que se borre
+	 * 
+	 * @param id
+	 * @param identifier
+	 * @param agent
+	 * @param operator
+	 * @param name
+	 * @param description
+	 * @param location
+	 * @param tags
+	 * @param properties
+	 * @param status
+	 * @param operatorComments
+	 * @param expiration
+	 * @param dangerous
+	 */
+	public Incidence(long id, String identifier, Agent agent, Operator operator, String name, String description,
+			String location, Set<String> tags, Set<Property> properties, String status, String operatorComments,
+			String expiration, boolean dangerous) {
+		this.id = id;
+		this.identifier = identifier;
+		this.agent = agent;
+		this.operator = operator;
+		this.name = name;
+		this.description = description;
+		this.location = location;
+		this.tags = tags;
+		this.properties = properties;
+		this.status = status;
+		this.operatorComments = operatorComments;
+		this.expiration = expiration;
+		this.dangerous = dangerous;
+	}
+
 	public Incidence(String identifier) {
 		this.identifier = identifier;
 	}

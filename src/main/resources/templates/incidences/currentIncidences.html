@@ -29,11 +29,11 @@
 						<td th:text="${incidence.id}"></td>
 						<td th:text="${incidence.name}"></td>
 						<td th:text="${incidence.description}"></td>
-						<td><a th:href="${incidence.location}" th:text="#{location}"></a></td>
-						<td><a th:href="${incidence.status}" th:text="#{}"></a></td>
-						<td><a th:href="${incidence.expiration}" th:text="#{}"></a></td>
-						<td><a th:href="${incidence.operatorComments}" th:text="#{}"></a></td>
-						<td><a th:href="${incidence.dangerous}" th:text="#{}"></a></td>
+						<td th:text="${incidence.location}" ></td>
+						<td th:text="${incidence.status}" ></td>
+						<td th:text="${incidence.expiration}" ></td>
+						<td th:text="${incidence.operatorComments}"></td>
+						<td th:text="${incidence.dangerous}" ></td>
 					</tr>
 				</tbody>
 			</table>
