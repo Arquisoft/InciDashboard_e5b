@@ -11,4 +11,22 @@
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/custom.css" />
+	<script>
+$(document).ready(function(){
+    $("tr").each(function(){
+        $(this).children("td").each(function(){
+            switch ($(this).html()) {
+                case 'true':
+                    $(this).css("background-color", "#F00");
+                break;
+                case 'false':
+                    $(this).css("background-color", "#0F0");
+                break;
+               
+            }
+        })
+    })
+});
+</script>
+	
 </head>
