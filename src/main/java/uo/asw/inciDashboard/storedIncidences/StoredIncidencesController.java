@@ -91,17 +91,18 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	@RequestMapping("/incidences/update/saveStatus/{idIncidence}/{statusIncidence}")
 	public String saveIncidenceGet(Model model, Principal principal, @PathVariable Long idIncidence, @PathVariable String statusIncidence) {
 		
-		Incidence incidence=dBManagement.getIncidence(idIncidence);
-		incidence.setStatus(statusIncidence);
-		
-		dBManagement.updateIncidence(incidence);
+		//Actualizamos la incidencia con el nuevo estado
+		dBManagement.updateStatusIncidence(idIncidence, statusIncidence);
 		
 		String identifier=principal.getName();
 		List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(identifier);
 		
 		model.addAttribute("operatorIncidences", operatorIncidences);
+		model.addAttribute("updateHabilitado", false);
+		model.addAttribute("listStatus", new ArrayList<String>());
+		model.addAttribute("selectIncidence", new Incidence(-1,""));
 		
-	 	return "incidences/operator :: tableIncidences";
+	 	return "incidences/operator :: viewIncidences";
 	}
 
 	/*@Override

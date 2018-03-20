@@ -116,6 +116,11 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		return categoriesRepository.findOne(id);
 	}
 	
+	@Override
+	public void updateStatusIncidence(Long id, String status) {
+		incidencesRepository.updateStatusIncidence(id, status);
+	}
+	
 	public boolean conatinsInArray(Set<String> array, String element) {
 		
 		for (String e : array) {
