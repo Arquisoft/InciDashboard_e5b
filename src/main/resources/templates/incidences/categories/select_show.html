@@ -35,22 +35,20 @@
   </table>
   </div>
 
-
-  <h2>Incidencias con la categoría escogida</h2>                                                                                      
-  <div class="table-responsive">     
-  <table class="table table-hover" th:fragment="tableIncidences" id="tableIncidences">
-    <div>
-    	
-    </div>
-    	
-    <div>
+                                                                                     
+  <div class="table-responsive" th:fragment="tableIncidences" id="tableIncidences">
+  
+  <h2 th:text="${'Incidencias de la categoría: ' + selectCategory.name}">Incidencias de la categoría: xxxxx</h2>
+       
+  <table class="table table-hover">
+  	    	
     	<thead>    
       <tr>
-      	<th th:text="${'Categoría: ' + selectCategory.name}">Categoria seleccionada</th> 
-        <th>Identificador</th>
         <th>Nombre</th>
         <th>Descripcion</th>
         <th>Estado</th>
+        <th>¿Peligrosa?</th>
+        <th>Comentarios del operario</th>
 		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
@@ -59,17 +57,17 @@
     </thead>
 	<tbody>
 	  <tr th:each="incidence : ${incidencesOfCategory}">
-	    <td></td>
-	    <td th:text="${incidence.identifier}"> Identificador1</td>
-	    <td th:text="${incidence.name}"> Incidencia1</td>
-	    <td th:text="${incidence.description}">Muy grave</td>
-	    <td th:text="${incidence.status}">Estado</td>
+	   <td th:text="${incidence.name}"> Incidencia1</td>
+	    <td th:text="${incidence.description}">Descripcion</td>
+	    <td th:text="${incidence.status}">Estado1</td>
+	    <td th:text="${incidence.dangerous}">true</td> 
+	   	<td th:text="${incidence.operatorComments}">Comentarios</td>
 	  </tr>
 	</tbody>
-    </div>
     
   </table>
   </div>
+  
 </div>
 
 <footer th:replace="fragments/footer"/>

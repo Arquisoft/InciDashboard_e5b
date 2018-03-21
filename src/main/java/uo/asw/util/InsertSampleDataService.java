@@ -76,9 +76,9 @@ public class InsertSampleDataService {
 			    Set<String> i2Tags = new HashSet<>(); i2Tags.add(categoriaNormal.getName());
 			    	
 				i1.setAgent(agent1).setOperator(operator1).setName("NombreInc1").setDescription("DescripcionInc1").setProperties(i1Properties).setTags(i1Tags);
-				i1.setStatus("Cerrada");
+				i1.setStatus("Abierta");
 				i2.setAgent(agent1).setOperator(operator1).setName("NombreInc2").setDescription("DescripcionInc2").setProperties(i2Properties).setTags(i2Tags);
-				i2.setStatus("Cerrada");
+				i2.setStatus("Abierta");
 				
 				add(i2);
 				add(i1);
