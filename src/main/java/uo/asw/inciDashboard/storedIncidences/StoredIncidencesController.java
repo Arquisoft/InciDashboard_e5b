@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Category;
@@ -79,14 +80,15 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		 
 		return "incidences/operator :: tableUpdate";
 	}
-
+	
 	@Override
-	@RequestMapping("/incidences/update/saveStatus/{idIncidence}/{statusIncidence}")
-	public String saveIncidenceGet(Model model, Principal principal, @PathVariable Long idIncidence, @PathVariable String statusIncidence) {
+	@RequestMapping("/incidences/update/saveStatus/{idIncidence}")
+	public String updateIncidencePost(Model model, Principal principal, @PathVariable Long idIncidence, 
+			@RequestParam String statusIncidence, @RequestParam(required=false, value="") String operatorComments) {
 		
-		//Actualizamos la incidencia con el nuevo estado
+		//Actualizamos la incidencia con el nuevo estado y el nuevo comentario
 		Incidence incidence = dBManagement.getIncidence(idIncidence);
-		dBManagement.updateIncidence(incidence.setStatus(statusIncidence));
+		dBManagement.updateIncidence(incidence.setStatus(statusIncidence).setOperatorComments(operatorComments));
 		
 		String identifier=principal.getName();
 		List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(identifier);
@@ -96,7 +98,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		model.addAttribute("listStatus", new ArrayList<String>());
 		model.addAttribute("selectIncidence", new Incidence(-1,""));
 		
-	 	return "incidences/operator :: viewIncidences";
+		return "incidences/operator :: viewIncidences";
 	}
 
 }
