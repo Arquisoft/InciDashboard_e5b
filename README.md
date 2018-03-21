@@ -28,9 +28,10 @@ Para arrancarlo todo y que funcione, se debe ejecutar el siguiente comando, esta
 
    
 ## Interfaz HTML
-  1. Escribir en el navegador: http://localhost:8090/ COMPLETAR!
+  1. Escribir en el navegador: http://localhost:8090/ 
   2. En el menu escoger entre identificarse o registrarse y hacer click.
   3. Al hacer click en el boton identificarse y si usted es operario deberá introducir su identifier y password.
+   ``EJEMPLO: IDENTIFIER: AAAAAAA2 PASSWORD: 123456``
   4. Si selecciona registrarse deberá introducir sus datos.
   5. Una vez identificado, aparecerán en el menu 3 botones inicio/incidencias/filtro.
   6. Inicio es la pagina principal.

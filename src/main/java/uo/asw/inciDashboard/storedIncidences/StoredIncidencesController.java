@@ -40,7 +40,7 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	
 	@RequestMapping("/incidences/categories/select_show")
 	public String showIncidencesOfCategorySelect(Model model) {
-		List<Category> categorys=dBManagement.findAllCategorys();
+		List<Category> categorys=dBManagement.findAllCategories();
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("selectCategory", new Category(""));
 		return "incidences/categories/select_show";

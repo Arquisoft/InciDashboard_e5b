@@ -17,6 +17,8 @@ import uo.asw.dbManagement.repositories.AgentsRepository;
 import uo.asw.dbManagement.repositories.CategoriesRepository;
 import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.services.OperatorsService;
+import uo.asw.inciDashboard.currentIncidences.ReceiveFilteredIncidenceImpl;
+import uo.asw.inciDashboard.filter.ReceiveIncidenceImpl;
 import uo.asw.util.UuidGenerator;
 
 @Service
@@ -110,6 +112,11 @@ public class InsertSampleDataService {
 		operatorsService.addOperator(opreator5);
 		operatorsService.addOperator(opreator6);
 	
+		
+		
+		
+		
+		
 	
 	}
 	
