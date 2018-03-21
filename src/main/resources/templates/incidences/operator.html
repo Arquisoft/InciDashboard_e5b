@@ -26,8 +26,6 @@
     </thead>
 	<tbody>
 	  <tr th:each="incidence : ${operatorIncidences}">
-	   <!-- <td th:text="${incidence.id}"> id1</td> 
-	   <td th:text="${incidence.identifier}"> Identificador1</td> -->
 	    <td th:text="${incidence.name}"> Incidencia1</td>
 	    <td th:text="${incidence.description}">Descripcion</td>
 	    <td th:text="${incidence.status}">Estado1</td>
@@ -40,8 +38,8 @@
  				/*<![CDATA[*/
  					$(function () {
 		 		 		$("#updateIncidenceButton[[${incidence.id}]]").click(function() {
-		 		 				 var urlUpdate = '/incidences/update/changeStatus/[[${incidence.id}]]';
-		 						  $("#tableUpdate").load(urlUpdate);
+		 		 			var urlUpdate = '/incidences/update/changeStatus/[[${incidence.id}]]';
+		 					$("#tableUpdate").load(urlUpdate);
 		 		 		});
 	 				});
  		 		/*]]>*/
@@ -65,10 +63,11 @@
 			<table class="table table-hover" th:fragment="rowUpdateIncidence" id="rowUpdateIncidence">
      			<thead>
       			<tr>
-        			<th>Id</th>
-        			<th>Identificador</th>
-        			<th>Nombre</th>
-        			<th>Descripcion</th>
+			        	<th>Nombre</th>
+			        <th>Descripcion</th>
+			        <th>Estado</th>
+			        <th>¿Peligrosa?</th>
+			        <th>Comentarios del operario</th>
 					<th class="col-md-1"> </th>
 					<th class="col-md-1"> </th>
 					<th class="col-md-1"> </th>
@@ -76,31 +75,29 @@
      			 </tr>
     		</thead>
 			<tbody>
-	  			 	<td th:text="${selectIncidence.id}"> id1</td>
-	   				<td th:text="${selectIncidence.identifier}"> Identificador1</td>
-	    			<td th:text="${selectIncidence.name}"> Incidencia1</td>
-	    			<td th:text="${selectIncidence.description}">Muy grave</td>
-
+	  			<td th:text="${selectIncidence.name}"> Incidencia1</td>
+			    <td th:text="${selectIncidence.description}">Descripcion</td>
+			    <td th:text="${selectIncidence.status}">Estado1</td>
+			    <td th:text="${selectIncidence.dangerous}">true</td> 
+			   	<td th:text="${selectIncidence.operatorComments}">Comentarios</td>
 			</tbody>
   			</table>
   
 	    			<select id="incidenceStatusCombo" name="incidenceStatusCombo">
+	    				<option th:each="status: ${listStatus}" th:text="${status}"/>
+				</select>
 	    	
-            		<option th:each="status: ${listStatus}"
-                 		th:text="${status}"/>
-					</select>
-	    	
-	   				<button type="button" th:id="${'saveIncidenceButton' + selectIncidence.id}"
- 					class="btn btn-info">Guardar estado</button>
- 					<script th:inline="javascript">
- 					/*<![CDATA[*/
-		 		 	$("#saveIncidenceButton[[${selectIncidence.id}]]").click(function() {
-		 		 			var estado_seleccionado=$("#incidenceStatusCombo").val();
-		 		 			var urlUpdate = '/incidences/update/saveStatus/[[${selectIncidence.id}]]/'+estado_seleccionado;
-	 						$("#viewIncidences").load(urlUpdate);
-		 		 	});
- 		 			/*]]>*/
- 					</script>
+   				<button type="button" th:id="${'saveIncidenceButton' + selectIncidence.id}"
+						class="btn btn-info">Guardar estado</button>
+				<script th:inline="javascript">
+					/*<![CDATA[*/
+			 		 	$("#saveIncidenceButton[[${selectIncidence.id}]]").click(function() {
+			 		 			var estado_seleccionado=$("#incidenceStatusCombo").val();
+			 		 			var urlUpdate = '/incidences/update/saveStatus/[[${selectIncidence.id}]]/'+estado_seleccionado;
+		 						$("#viewIncidences").load(urlUpdate);
+			 		 	});
+		 			/*]]>*/
+				</script>
  				
 	    		</div>
  				

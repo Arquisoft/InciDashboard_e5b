@@ -31,7 +31,5 @@ public interface DBManagementFacade {
 	public List<Category> findAllCategorys();
 	
 	public Category findCategoryById(Long id);
-	
-	public void updateStatusIncidence(Long id, String status);
-	
+		
 }

@@ -53,7 +53,10 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		List<Incidence> incidencesForCategory=new ArrayList<Incidence>();
 		
 		for (Incidence incidence : getOperatorIncidences(operator_identifier)) {
-			if(conatinsInArray(incidence.getTags(), category)) {
+//			if(conatinsInArray(incidence.getTags(), category)) { //TODO - quitar
+//				incidencesForCategory.add(incidence);
+//			}
+			if(incidence.getTags().contains(category)) {
 				incidencesForCategory.add(incidence);
 			}
 		}
@@ -117,12 +120,7 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		return categoriesRepository.findOne(id);
 	}
 	
-	@Override
-	public void updateStatusIncidence(Long id, String status) {
-		incidencesRepository.updateStatusIncidence(id, status);
-	}
-	
-	public boolean conatinsInArray(Set<String> array, String element) {
+	public boolean conatinsInArray(Set<String> array, String element) { // XXX ??????????
 		
 		for (String e : array) {
 			

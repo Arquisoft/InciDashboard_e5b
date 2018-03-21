@@ -85,7 +85,8 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	public String saveIncidenceGet(Model model, Principal principal, @PathVariable Long idIncidence, @PathVariable String statusIncidence) {
 		
 		//Actualizamos la incidencia con el nuevo estado
-		dBManagement.updateStatusIncidence(idIncidence, statusIncidence);
+		Incidence incidence = dBManagement.getIncidence(idIncidence);
+		dBManagement.updateIncidence(incidence.setStatus(statusIncidence));
 		
 		String identifier=principal.getName();
 		List<Incidence> operatorIncidences=dBManagement.getOperatorIncidences(identifier);
