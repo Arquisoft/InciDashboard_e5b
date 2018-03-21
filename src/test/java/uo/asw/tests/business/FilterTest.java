@@ -1,4 +1,4 @@
-package uo.asw.tests;
+package uo.asw.tests.business;
 
 import static org.junit.Assert.assertTrue;
 
