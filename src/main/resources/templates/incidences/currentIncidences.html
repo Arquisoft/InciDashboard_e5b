@@ -18,11 +18,11 @@
 						<th>id</th>
 						<th>Nombre</th>
 						<th>Descripcion</th>
-						<th>Localizacion</th>
 						<th>Estado</th>
 						<th>Expiracion</th>
 						<th>Comentarios del operador</th>
 						<th>Nivel de Peligro</th>
+						<th>Localizacion</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,11 +30,12 @@
 						<td th:text="${incidence.id}"></td>
 						<td th:text="${incidence.name}"></td>
 						<td th:text="${incidence.description}"></td>
-						<td th:text="${incidence.location}" ></td>
 						<td th:text="${incidence.status}" ></td>
 						<td th:text="${incidence.expiration}" ></td>
 						<td th:text="${incidence.operatorComments}"></td>
 						<td th:text="${incidence.dangerous}" ></td>
+						<td><iframe width="300" height="225" frameborder="0" style="border:0"
+th:src="@{https://www.google.com/maps/embed/v1/view?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&ampcenter={location}&ampzoom=18&ampmaptype=satellite (location=${incidence.location})}" allowfullscreen></iframe></td>
 					</tr>
 				</tbody>
 			</table>
@@ -42,13 +43,9 @@
 		       <h3> prueba grafico </h3>
 		      <!--Div that will hold the pie chart-->
     <div align=center id="chart_div"></div>
-        <h3> prueba mapas </h3>
         
-        <div th:replace="fragments/map"/>
   
-    
-		<footer th:replace="fragments/pagination"/>
-	</div>
+ 
 	<footer th:replace="fragments/footer" />
 
 </body>
