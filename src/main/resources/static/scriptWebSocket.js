@@ -6,7 +6,7 @@ var socket = new SockJS('/stomp');
 var stompClient = Stomp.over(socket);
 
   stompClient.connect({ }, function(frame) {
-  stompClient.subscribe("/topic/incidencias", function(data) {
+  stompClient.subscribe("/topic/incidences", function(data) {
     var incidencia = JSON.parse(data.body);
     var encontrado = false;
 
