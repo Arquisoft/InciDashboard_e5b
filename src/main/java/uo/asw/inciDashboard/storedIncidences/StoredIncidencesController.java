@@ -9,10 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import uo.asw.dbManagement.DBManagementFacade;
 import uo.asw.dbManagement.model.Category;
@@ -41,9 +39,6 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	
 	@RequestMapping("/incidences/categories/select_show")
 	public String showIncidencesOfCategorySelect(Model model) {
-		//TODO - Devuelve una vista con un formulario para indicar las categorias
-		// Dicha vista hara una peticion get a la direccion del metodo de abajo
-		//List<String> categorys=dBManagement.findAllCategorys();
 		List<Category> categorys=dBManagement.findAllCategorys();
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("selectCategory", new Category(""));
@@ -70,8 +65,6 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 	@Override
 	@RequestMapping("/incidences/update/changeStatus/{idIncidence}")
 	public String updateIncidenceGet(Model model, @PathVariable Long idIncidence) {
-		// TODO Habra que sacar la incidencia de la BD para meterla en la plantilla
-
 		Incidence incidence=dBManagement.getIncidence(idIncidence);
 		
 		List<String> estados=new ArrayList<String>();
@@ -104,13 +97,5 @@ public class StoredIncidencesController implements ShowOperatorIncidences, ShowI
 		
 	 	return "incidences/operator :: viewIncidences";
 	}
-
-	/*@Override
-	@RequestMapping(value ="/incidences/update/{idIncidence}", method = RequestMethod.POST)
-	public String updateIncidencePost(@ModelAttribute Incidence incidence) { 
-		//dBManagement.updateIncidence(incidence);
-		//Retornar alguna vista
-		return "";
-	}*/
 
 }
