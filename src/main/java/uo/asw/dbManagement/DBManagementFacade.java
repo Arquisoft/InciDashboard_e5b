@@ -28,7 +28,7 @@ public interface DBManagementFacade {
 	
 	public Operator getOperator(String identifier);//TODO - añadir a la documentacion
 	
-	public List<Category> findAllCategorys();
+	public List<Category> findAllCategories();
 	
 	public Category findCategoryById(Long id);
 		

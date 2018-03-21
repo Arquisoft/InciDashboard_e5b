@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Operator;
-import uo.asw.dbManagement.repositories.IncidencesRepository;
 import uo.asw.dbManagement.repositories.OperatorsRepository;
 
 @Service
@@ -23,9 +21,6 @@ public class OperatorsService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@Autowired
-	private IncidencesRepository incidencesRepository;
-	
 	
 	@PostConstruct
 	public void init() {
@@ -36,12 +31,6 @@ public class OperatorsService {
 		operatorsRepository.findAll().forEach(operators::add);
 		return operators;
 	}
-	
-	/*public Page<Operator> getUsers(Pageable pageable) {
-		Page<Operator> operators = new PageImpl<Operator>(new LinkedList<Operator>());
-		operators=operatorsRepository.findAll(pageable);
-		return operators;
-	}*/
 	
 	public Operator getOperator(Long id) {
 		return operatorsRepository.findOne(id);

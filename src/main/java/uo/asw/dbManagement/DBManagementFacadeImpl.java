@@ -107,7 +107,7 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	}
 
 	@Override
-	public List<Category> findAllCategorys() {
+	public List<Category> findAllCategories() {
 		
 		List<Category> categories = new ArrayList<Category>();
 		categoriesRepository.findAll().forEach(categories::add);
@@ -131,36 +131,5 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 		return false;
 	}
 	
-	/*
-	public List<Incidence> getIncidencesOfCategory(String[] categories) {
-		
-		List<Incidence> incidenciasConAlMenosUnaDeEsasCategorias=new ArrayList<Incidence>();
-		for (String category : categories) {
-			List<Incidence> incidenciasConEsaCategoria=incidencesRepository.getIncidencesOfCategory(category);
-			for (Incidence incidence : incidenciasConEsaCategoria) {
-				if(!incidenciasConAlMenosUnaDeEsasCategorias.contains(incidence)) {
-					incidenciasConAlMenosUnaDeEsasCategorias.add(incidence);
-				}
-			}
-		}
-		return incidenciasConAlMenosUnaDeEsasCategorias;
-		
-	}*/
-	
-	/*public List<String> findAllCategorys(){
-	
-	List<String> categorys=new ArrayList<String>();
-	
-	for (Incidence incidence : incidencesRepository.findAll()) {
-		Set<String> categorysForIncidence = incidence.getTags();
-		for (String category : categorysForIncidence) {
-			if(!categorys.contains(category)) {
-				categorys.add(category);
-			}
-		}
-	}
-	return categorys;
-	
-	}*/
 
 }
