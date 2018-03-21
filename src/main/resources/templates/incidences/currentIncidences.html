@@ -25,10 +25,10 @@
 						<th>Localizacion</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tablaIncidenciasBody">
 					<tr th:each="incidence : ${incidenceList}">
 						<td th:text="${incidence.id}"></td>
-						<td th:text="${incidence.name}"></td>
+						<td  class="nameIncidencia" th:text="${incidence.name}"></td>
 						<td th:text="${incidence.description}"></td>
 						<td th:text="${incidence.status}" ></td>
 						<td th:text="${incidence.expiration}" ></td>
