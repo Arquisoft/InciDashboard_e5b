@@ -11,6 +11,7 @@
   <table class="table table-hover" th:fragment="tableIncidences" id="tableIncidences">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Identificador</th>
         <th>Nombre</th>
         <th>Descripcion</th>
@@ -20,11 +21,13 @@
 		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
 		<th class="col-md-1"> </th>
+		<th class="col-md-1"> </th>
       </tr>
     </thead>
 	<tbody>
 	  <tr th:each="incidence : ${operatorIncidences}">
-	    <td th:text="${incidence.identifier}"> Identificador1</td>
+	   <td th:text="${incidence.id}"> id1</td>
+	   <td th:text="${incidence.identifier}"> Identificador1</td>
 	    <td th:text="${incidence.name}"> Incidencia1</td>
 	    <td th:text="${incidence.description}">Muy grave</td>
 	    <td th:text="${incidence.status}">Estado1</td>
@@ -55,8 +58,30 @@
 				    
 				    <h2>Actualizar estado</h2> 
 				    
-					<p th:text="${'Cambiar el estado de la incidencia con identificador:' + selectIncidence.identifier}"></p>
+					<p>Cambiar el estado de la incidencia:</p>
 					
+			<table class="table table-hover" th:fragment="rowUpdateIncidence" id="rowUpdateIncidence">
+     			<thead>
+      			<tr>
+        			<th>Id</th>
+        			<th>Identificador</th>
+        			<th>Nombre</th>
+        			<th>Descripcion</th>
+					<th class="col-md-1"> </th>
+					<th class="col-md-1"> </th>
+					<th class="col-md-1"> </th>
+					<th class="col-md-1"> </th>
+     			 </tr>
+    		</thead>
+			<tbody>
+	  			 	<td th:text="${selectIncidence.id}"> id1</td>
+	   				<td th:text="${selectIncidence.identifier}"> Identificador1</td>
+	    			<td th:text="${selectIncidence.name}"> Incidencia1</td>
+	    			<td th:text="${selectIncidence.description}">Muy grave</td>
+
+			</tbody>
+  			</table>
+  
 	    			<select id="incidenceStatusCombo" name="incidenceStatusCombo">
 	    	
             		<option th:each="status: ${listStatus}"
