@@ -44,7 +44,10 @@ public class DBManagementFacadeImpl implements DBManagementFacade{
 	@Override
 	public List<Incidence> getOperatorIncidences(String idOperator) {
 		List<Incidence> incidences=incidencesRepository.getOperatorIncidences(idOperator);
-		return incidencesRepository.orderIncidencesById(incidences);
+		if(incidences.size()>0) {
+			incidences=incidencesRepository.orderIncidencesById(incidences);
+		}
+		return incidences;
 	}
 	
 	@Override
