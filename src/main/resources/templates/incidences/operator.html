@@ -17,11 +17,6 @@
         <th>¿Peligrosa?</th>
         <th>Comentarios del operario</th>
 		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
       </tr>
     </thead>
 	<tbody>
@@ -29,11 +24,11 @@
 	    <td th:text="${incidence.name}"> Incidencia1</td>
 	    <td th:text="${incidence.description}">Descripcion</td>
 	    <td th:text="${incidence.status}">Estado1</td>
-	    <td th:text="${incidence.dangerous}">true</td> 
+	    <td th:text="${incidence.dangerous}? 'Sí' : 'No'">Sí/no</td> 
 	   	<td th:text="${incidence.operatorComments}">Comentarios</td>
 	    <td>
 	    	<button type="button" th:id="${'updateIncidenceButton' + incidence.id}"
- 				class="btn btn-info">Cambiar estado</button>
+ 				class="btn btn-info">Actualizar</button>
  				<script th:inline="javascript">
  				/*<![CDATA[*/
  					$(function () {
@@ -56,9 +51,9 @@
 				
 				<div th:if="${updateHabilitado}">
 				    
-				    <h2>Actualizar estado</h2> 
+				    <h2>Actualizar incidencia</h2> 
 				    
-					<p>Cambiar el estado de la incidencia:</p>
+					<p>Modifica la incidencia la incidencia:</p>
 					
 			<table class="table table-hover" th:fragment="rowUpdateIncidence" id="rowUpdateIncidence">
      			<thead>
@@ -68,17 +63,13 @@
 			        <th>Estado</th>
 			        <th>¿Peligrosa?</th>
 			        <th>Comentarios del operario</th>
-					<th class="col-md-1"> </th>
-					<th class="col-md-1"> </th>
-					<th class="col-md-1"> </th>
-					<th class="col-md-1"> </th>
      			 </tr>
     		</thead>
 			<tbody>
 	  			<td th:text="${selectIncidence.name}"> Incidencia1</td>
 			    <td th:text="${selectIncidence.description}">Descripcion</td>
 			    <td th:text="${selectIncidence.status}">Estado1</td>
-			    <td th:text="${selectIncidence.dangerous}">true</td> 
+			    <td th:text="${selectIncidence.dangerous}? 'Sí' : 'No'">true</td> 
 			   	<td th:text="${selectIncidence.operatorComments}">Comentarios</td>
 			</tbody>
   			</table>
@@ -98,7 +89,7 @@
 			    </div>
 	    	
    				<button type="button" th:id="${'saveIncidenceButton' + selectIncidence.id}"
-						class="btn btn-info">Guardar estado</button>
+						class="btn btn-info">Guardar cambios</button>
 				<script th:inline="javascript">
 					/*<![CDATA[*/
 			 		 	$("#saveIncidenceButton[[${selectIncidence.id}]]").click(function() {
