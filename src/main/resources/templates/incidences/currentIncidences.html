@@ -97,8 +97,11 @@ $(document).ready(function(){
 							<td th:text="${incidence.expiration}" ></td>
 							<td th:text="${incidence.operatorComments}"></td>
 							<td th:text="${incidence.dangerous}? 'Sí' : 'No'" ></td>
-							<td><iframe width="300" height="225" frameborder="0" style="border:0"
-	th:src="@{https://www.google.com/maps/embed/v1/view?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&ampcenter={location}&ampzoom=18&ampmaptype=satellite (location=${incidence.location})}" allowfullscreen></iframe></td>
+							<td>
+								<iframe width="300" height="225" frameborder="0" style="border:0"
+									th:src="@{https://www.google.com/maps/embed/v1/view?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&ampcenter={location}&ampzoom=18&ampmaptype=satellite (location=${incidence.location})}" 
+									allowfullscreen></iframe>
+							</td>
 						</tr>
 					</tbody>
 				</table>
