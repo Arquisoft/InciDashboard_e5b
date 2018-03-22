@@ -23,8 +23,8 @@ Skeleton of participants module
    * Para ello, acceder a la carpeta data/hsqldb/bin y lanzar el runServer.bat (o runServer.sh en caso de Linux/Mac).
 2. Es necesario tener instalado Apache Kafka. 
    * Las instrucciones para su instalación y despliegue se encuentran en https://kafka.apache.org/quickstart.
-2. Arrancar Apache Zookeeper 
-   * Para lanzarlo en Mac/Linux: ``bin/zookeeper-server-start.sh config/zookeeper.properties``
+2. Arrancar Apache Zookeeper
+   * Para lanzarlo en Mac/Linux: ``bin/zookeeper-server-start.sh config/zookeeper.properties``
    * Para lanzarlo en Windows: ``bin\windows\zookeeper-server-start.bat config\zookeeper.properties``
 3. Arrancar Apache Kafka
    * Para lanzarlo en Mac/Linux: ``bin/kafka-server-start.sh config/server.properties``
