@@ -19,7 +19,8 @@ Skeleton of participants module
 
 # Funcionamiento:
 
-1. Arrancar HSQLDB: Para ello, acceder a la carpeta data/hsqldb/bin y lanzar el runServer.bat (o runServer.sh en caso de Linux/Mac).
+1. Arrancar HSQLDB
+   * Para ello, acceder a la carpeta data/hsqldb/bin y lanzar el runServer.bat (o runServer.sh en caso de Linux/Mac).
 2. Es necesario tener instalado Apache Kafka. 
    * Las instrucciones para su instalación y despliegue se encuentran en https://kafka.apache.org/quickstart.
 2. Arrancar Apache Zookeeper 
