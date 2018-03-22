@@ -19,9 +19,15 @@ Skeleton of participants module
 
 # Funcionamiento:
 
-1. Arrancar HSQLDB
-2. Arrancar Apache Zookeeper
+1. Arrancar HSQLDB: Para ello, acceder a la carpeta data/hsqldb/bin y lanzar el runServer.bat (o runServer.sh en caso de Linux/Mac).
+2. Es necesario tener instalado Apache Kafka. 
+   * Las instrucciones para su instalación y despliegue se encuentran en https://kafka.apache.org/quickstart.
+2. Arrancar Apache Zookeeper 
+   * Para lanzarlo en Mac/Linux: bin/zookeeper-server-start.sh config/zookeeper.properties
+   * Para lanzarlo en Windows: bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 3. Arrancar Apache Kafka
+   * Para lanzarlo en Mac/Linux: bin/kafka-server-start.sh config/server.properties
+   * Para lanzarlo en Windows: bin\windows\kafka-server-start.bat config\server.properties
 
 Para arrancarlo todo y que funcione, se debe ejecutar el siguiente comando, estando situado en la carpeta InciDashboard_e5b:
 ``mvn spring-boot:run``
@@ -31,7 +37,7 @@ Para arrancarlo todo y que funcione, se debe ejecutar el siguiente comando, esta
   1. Escribir en el navegador: http://localhost:8090/ 
   2. En el menu escoger entre identificarse o registrarse y hacer click.
   3. Al hacer click en el boton identificarse y si usted es operario deberá introducir su identifier y password.
-   ``EJEMPLO: IDENTIFIER: AAAAAAA2 PASSWORD: 123456``
+   ``EJEMPLO: IDENTIFIER: 99999999A PASSWORD: 123456``.
   4. Si selecciona registrarse deberá introducir sus datos.
   5. Una vez identificado, aparecerán en el menu 3 botones inicio/incidencias/filtro.
   6. Inicio es la pagina principal.
