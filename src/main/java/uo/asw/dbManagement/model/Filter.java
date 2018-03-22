@@ -59,10 +59,10 @@ public class Filter {
 	public Filter() {}
 
 	public Incidence applyFilter(Incidence incidence) {
-		if(filterResponse.equals("accept"))
+		if("accept".equals(filterResponse))
 			return acceptResponse(incidence);
 		
-		else if(filterResponse.equals("markAsDangerous"))
+		else if("markAsDangerous".equals(filterResponse))
 			return markAsDangerousResponse(incidence);
 		
 		else // ACCEPT_ALL
@@ -93,14 +93,14 @@ public class Filter {
 	}
 
 	private boolean satisfiesOperation(Incidence incidence) {
-		if(applyOn.equals("tag"))
+		if("tag".equals(applyOn))
 			return satisfiesTagOperation(incidence);
 		else // Property
 			return satisfiesPropertyOperation(incidence);
 	}
 
 	private boolean satisfiesTagOperation(Incidence incidence) {
-		if(filterOperation.equals("contains"))
+		if("contains".equals(filterOperation))
 			return incidence.getTags().contains(tag);
 		
 		else // NOT_CONTAINS 
@@ -111,13 +111,13 @@ public class Filter {
 		String incidencePropertyValue = getPropertyValueByName(incidence, propertyName);
 		if(incidencePropertyValue == null) return false;
 		
-		if(filterOperation.equals("greater"))
+		if("greater".equals(filterOperation))
 			return satisfiesPropertyGreaterOperation(incidence);
 
-		else if(filterOperation.equals("less"))
+		else if("less".equals(filterOperation))
 			return satisfiesPropertyLessOperation(incidence);
 		
-		else if(filterOperation.equals("equals"))
+		else if("equals".equals(filterOperation))
 			return satisfiesPropertyEqualsOperation(incidence);
 		
 		else //NOT_EQUALS
@@ -141,7 +141,7 @@ public class Filter {
 	}
 	
 	private boolean satisfiesPropertyEqualsOperation(Incidence incidence) {
-		if(propertyType.equals("string"))
+		if("string".equals(propertyType))
 			return satisfiesPropertyEqualsStringOperation(incidence);
 		
 		else // BOOLEAN

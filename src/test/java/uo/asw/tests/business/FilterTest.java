@@ -41,7 +41,7 @@ public class FilterTest {
     	
     }
     
-    String jsonBasicIncidence = "{"
+    private String jsonBasicIncidence = "{"
 			+ "\"identifier\": \"uuid\","
 			+ "\"login\": \"316683136\","
 			+ "\"password\": \"1234\","
@@ -50,7 +50,7 @@ public class FilterTest {
 			+ "\"description\": \"Descripcion\""
 		+ "}";
 
-    String jsonIncidenceWithTagFuego = "{"
+    private String jsonIncidenceWithTagFuego = "{"
     		+ "\"identifier\": \"uuid\","
     		+ "\"login\": \"316683136\","
     		+ "\"password\": \"1234\","
@@ -60,7 +60,7 @@ public class FilterTest {
     		+ "\"tags\": [\"fuego\",\"calor\"]"
     		+ "}";
     
-    String jsonIncidenceWithOutTagFuego = "{"
+    private String jsonIncidenceWithOutTagFuego = "{"
     		+ "\"identifier\": \"uuid\","
     		+ "\"login\": \"316683136\","
     		+ "\"password\": \"1234\","
@@ -70,7 +70,7 @@ public class FilterTest {
     		+ "\"tags\": [\"calor\"]"
     		+ "}";
     
-    String jsonIncidenceWithProperties1 = "{"
+    private String jsonIncidenceWithProperties1 = "{"
     		+ "\"identifier\": \"uuid\","
     		+ "\"login\": \"316683136\","
     		+ "\"password\": \"1234\","
@@ -84,7 +84,7 @@ public class FilterTest {
 			+ "]"
     		+ "}";
         	
-    String jsonIncidenceWithProperties2 = "{"
+    private String jsonIncidenceWithProperties2 = "{"
     		+ "\"identifier\": \"uuid\","
     		+ "\"login\": \"316683136\","
     		+ "\"password\": \"1234\","
@@ -98,7 +98,7 @@ public class FilterTest {
 			+ "]"
     		+ "}";
     
-    String jsonIncidenceWithOnlyOneProperty = "{"
+    private String jsonIncidenceWithOnlyOneProperty = "{"
     		+ "\"identifier\": \"uuid\","
     		+ "\"login\": \"316683136\","
     		+ "\"password\": \"1234\","
@@ -110,7 +110,7 @@ public class FilterTest {
 			+ "]"
     		+ "}";
     
-    String tag = "fuego";
+    private String tag = "fuego";
     
     /**
      * Para comprobar que la incidencia pasa el filtro (sin marcarla como peligrosa),
