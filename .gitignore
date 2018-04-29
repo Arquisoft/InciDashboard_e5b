@@ -24,4 +24,3 @@ target/
 */target/**
 .DS_Store
 .settings
-src/main/java/uo/asw/inciDashboard/filter/ReceiveIncidenceImpl.java
