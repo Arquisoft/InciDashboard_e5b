@@ -22,9 +22,7 @@ public class ReceiveFilteredIncidenceImpl implements ReceiveFilteredIncidence {
 	 */
 	@Override
 	public void receiveFilteredIncidence(Incidence incidence) {
-		
 		listaincidencias.add(incidence);
-	
 	}
 	
 	
