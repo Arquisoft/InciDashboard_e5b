@@ -1,46 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- head.html -->
+
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js">
-	</script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">	
-	</script>
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/custom.css" />
 	<!--  WebSockets  -->
-	<link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/main.css" rel="stylesheet">
-    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
-    <script src="/webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
-    <script src="../scriptWebSocket.js"></script>
-	
-<script>
-$(document).ready(function(){
-    $("tr").each(function(){
-        $(this).children("td").each(function(){
-            switch ($(this).html()) {
-                case 'true':
-                    $(this).css("background-color", "#F00");
-                break;
-                case 'false':
-                    $(this).css("background-color", "#0F0");
-                break;
-               
-            }
-        })
-    })
-});
-</script>
+	<script src="/webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+	<script src="../scriptWebSocket.js"></script>
+
  <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    
+	 // COntadores del numero de incidencias peligrosas o no peligrosas
+	 var nTrue = 0;
+	 var nFalse = 0;
+    
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
       // Set a callback to run when the Google Visualization API is loaded.
@@ -54,12 +35,9 @@ $(document).ready(function(){
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Incidencia1', 3],
-          ['Incidencia2', 1],
-          ['Incidencia3', 1],
-          ['Incidencia4', 1],
-          ['Incidencia5', 2]
-        ]);
+			['Incidencias no peligrosas', nFalse],
+			['Incidencias  peligrosas', nTrue]
+		]);
         // Set chart options
         var options = {'title':'Incidencias en tiempo real',
                        'width':700,
@@ -69,6 +47,7 @@ $(document).ready(function(){
         chart.draw(data, options);
       }
     </script>
+
 </head>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -77,14 +56,18 @@ $(document).ready(function(){
 
 <body>
 	<nav th:replace="fragments/nav" />
-	
+
 	<div class="container" style="text-align: center">
-	<h2>Incidencias</h2>
-				<div class="table-responsive">
+
+		<h2>Incidencias actuales</h2>
+		
+		<!--Div that will hold the pie chart-->
+		<div align=center id="chart_div"></div>
+
+		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>id</th>
 						<th>Nombre</th>
 						<th>Descripcion</th>
 						<th>Estado</th>
@@ -95,27 +78,14 @@ $(document).ready(function(){
 					</tr>
 				</thead>
 				<tbody id="tablaIncidenciasBody">
-					<tr th:each="incidence : ${incidenceList}">
-						<td th:text="${incidence.id}"></td>
-						<td  class="nameIncidencia" th:text="${incidence.name}"></td>
-						<td th:text="${incidence.description}"></td>
-						<td th:text="${incidence.status}" ></td>
-						<td th:text="${incidence.expiration}" ></td>
-						<td th:text="${incidence.operatorComments}"></td>
-						<td th:text="${incidence.dangerous}" ></td>
-						<td><iframe width="300" height="225" frameborder="0" style="border:0"
-th:src="@{https://www.google.com/maps/embed/v1/view?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&ampcenter={location}&ampzoom=18&ampmaptype=satellite (location=${incidence.location})}" allowfullscreen></iframe></td>
-					</tr>
+					<!-- Sera rellenada con los web sockets -->
 				</tbody>
 			</table>
 		</div>
-		       <h3> prueba grafico </h3>
-		      <!--Div that will hold the pie chart-->
-    <div align=center id="chart_div"></div>
-        
-  
- 
+	</div>
+
 	<footer th:replace="fragments/footer" />
 
 </body>
+
 </html>

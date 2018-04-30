@@ -9,19 +9,19 @@ import uo.asw.dbManagement.model.Agent;
 import uo.asw.dbManagement.model.Incidence;
 import uo.asw.dbManagement.model.Operator;
 
-import java.util.Date;
-
 @Service
-public class ScheduleTask {
+public class ScheduleTask { // TODO - quitar
 
     @Autowired
     private SimpMessagingTemplate template;
 
     // this will send a message to an endpoint on which a client can subscribe
-    @Scheduled(fixedRate = 5000)
-    public void trigger() {
-    	añadirIncidencias();
-    }
+	@Scheduled(fixedRate = 10000)
+	public void trigger() {
+		añadirIncidencias();
+	}
+	
+	int cont = 1;
     
     /** Metodo creado para añadir incidencias a la lista con el fin de hacer pruebas
 	 * 
@@ -49,10 +49,10 @@ public class ScheduleTask {
 		Operator opreator5 = new Operator("AAAAAAA5", "Pepe");
 		opreator5.setPassword("123456");
 		
-		Incidence i1 = new Incidence(1, "XXX", agent1, opreator5, "Fuego", "Coche ardiendo", "43.35,-5.85", null, null, "Abierta", "Mucho humo", "12/02/2018", true);
-		Incidence i2 = new Incidence(2, "ZZZ", agent2, opreator2, "Inundacion", "Calle inundada lluvia", "43.56,-5.90", null, null, "Abierta", "Mucha agua", "12/02/2018", true);
-		Incidence i3 = new Incidence(3, "YYY", agent3, opreator3, "Accidente", "Colision entre dos coches", "43.29,-5.69", null, null, "Abierta", "Ya esta solucionado", "12/02/2018", true);
-		Incidence i4 = new Incidence(4, "WWW", agent4, opreator4, "Accidente", "Colision entre coche y camión", "43.10,-5.69", null, null, "Abierta", "Ya esta solucionado", "12/02/2018", false);
+		Incidence i1 = new Incidence(cont++, "XXX", agent1, opreator5, "Fuego", "Coche ardiendo", "43.35,-5.85", null, null, "Abierta", "Mucho humo", "12/02/2018", true);
+		Incidence i2 = new Incidence(cont++, "ZZZ", agent2, opreator2, "Inundacion", "Calle inundada lluvia", "43.56,-5.90", null, null, "Abierta", "Mucha agua", "12/02/2018", true);
+		Incidence i3 = new Incidence(cont++, "YYY", agent3, opreator3, "Accidente", "Colision entre dos coches", "43.29,-5.69", null, null, "Abierta", "Ya esta solucionado", "12/02/2018", true);
+		Incidence i4 = new Incidence(cont++, "WWW", agent4, opreator4, "Accidente", "Colision entre coche y camión", "43.10,-5.69", null, null, "Abierta", "Ya esta solucionado", "12/02/2018", false);
 		
 		
 		this.template.convertAndSend("/topic/incidences", i1);
