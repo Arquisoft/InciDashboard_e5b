@@ -27,7 +27,9 @@ var stompClient = Stomp.over(socket);
         <td >" + incidencia.expiration + "</td>\
         <td >" + incidencia.operatorComments + "</td>\
         <td >" + incidencia.dangerous + "</td>\
-      </tr>\
+        <td > <iframe width=\"300\" height=\"225\" frameborder=\"0\" style=\"border:0\"" +
+        		"src=\"https://www.google.com/maps/embed/v1/view?key=AIzaSyAnjyWNjAWTI8Cr80Uqv0thhdpLUpm3cNk&center=" + incidencia.location +"&zoom=18&maptype=satellite\" allowfullscreen></iframe></td>" +
+        				" </tr>\
       ";
        tabla.append(htmlstring);
     }
