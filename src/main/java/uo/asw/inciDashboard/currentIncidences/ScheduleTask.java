@@ -16,9 +16,6 @@ public class ScheduleTask {
 
     @Autowired
     private SimpMessagingTemplate template;
-    
-    @Autowired
-    private ReceiveFilteredIncidenceImpl receiveFilteredIncidenceImpl;
 
     // this will send a message to an endpoint on which a client can subscribe
     @Scheduled(fixedRate = 5000)
