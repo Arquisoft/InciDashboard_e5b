@@ -4,6 +4,8 @@ package uo.asw.inciDashboard.currentIncidences;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ public class CurrentIncidencesController implements GetCurrentIncidences {
 	 */
 	
 	@RequestMapping("/incidences/currentIncidences")
+	@SendTo("/incidences/currentIncidences")
 	public String getCurrentIncidences(Model model) {
 		List<Incidence> incidencias = receiveService.getListaincidencias();
 		model.addAttribute("incidenceList", incidencias); 
