@@ -27,14 +27,6 @@ public class InsertIncidencesUsingKafkaService {
 				+ "\"description\": \"Descripcion\","
 				+ "\"tags\": [\"calor\"]"
 			+ "}";
-//		String jsonIncidenceWithOutTagFuego = 
-//				"\"identifier\": \""+ identifier + "\","
-//				+ "\"login\": \"31668313G\","
-//				+ "\"password\": \"1234\","
-//				+ "\"kind\": \"Person\","
-//				+ "\"name\": \"IncidenciaPrueba"+i+"\","
-//				+ "\"description\": \"Descripcion\","
-//				+ "\"tags\": [\"calor\"]";
 
 		kafkaProducer.send("incidences", jsonIncidenceWithOutTagFuego);
 	}

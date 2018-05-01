@@ -24,9 +24,6 @@ public class RIncidenceP {
 	@Autowired
 	private DBManagementFacade dbManagement;
 	
-	@Autowired
-	private ReceiveIncidence receiveIncidence;
-	
 	/**
 	 * Se encarga de parsear el String que le llega, convirtiéndolo a un objeto JSON, 
 	 * y transformando dicho JSON en un objeto Incidence.
@@ -79,9 +76,6 @@ public class RIncidenceP {
 				.setProperties(properties)
 				.setStatus(status)
 				.setExpiration(expiration);
-				
-		// Mandamos la inci!!!!x
-		receiveIncidence.receiveIncidence(incidence);
 		
 		return incidence;
 	}
