@@ -12,10 +12,11 @@ public class InsertIncidencesUsingKafkaService {
 	@Autowired
 	private KafkaProducer kafkaProducer;
 
+	int i = 1;
+	
 	// this will send a message to an endpoint on which a client can subscribe
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 5000)
 	public void trigger() {
-		int i = 1;
 
 		String identifier = UuidGenerator.getUuid();
 		String jsonIncidenceWithOutTagFuego = "{"
@@ -27,8 +28,30 @@ public class InsertIncidencesUsingKafkaService {
 				+ "\"description\": \"Descripcion\","
 				+ "\"tags\": [\"calor\"]"
 			+ "}";
+		
+		String jsonIncidenceComplete = "{"
+			+ "\"identifier\": \""+ identifier + "\","
+    			+ "\"login\": \"31668313G\","
+    			+ "\"password\": \"1234\","
+    			+ "\"kind\": \"Person\","
+    			+ "\"name\": \"Incidencia\","
+    			+ "\"description\": \"Descripcion muy larga .............\","
+    			+ "\"location\": \"43.35,-5.85\","
+    			+ "\"tags\": [\"tag1\",\"tag2\"],"
+    			+ "\"properties\": ["
+    			+ "{\"prop1\": \"val1\"},"
+    			+ "{\"prop2\": \"val2\"}"
+    			+ "],"
+    			+ "\"status\": \"open\","
+    			+ "\"expiration\": \"14:60\""
+			+ "}";
 
-		kafkaProducer.send("incidences", jsonIncidenceWithOutTagFuego);
+		if(i%2 == 0)
+			kafkaProducer.send("incidences", jsonIncidenceWithOutTagFuego);
+		else
+			kafkaProducer.send("incidences", jsonIncidenceComplete);
+		
+		i++;
 	}
 	
 }
