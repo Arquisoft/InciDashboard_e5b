@@ -24,6 +24,9 @@ public class RIncidenceP {
 	@Autowired
 	private DBManagementFacade dbManagement;
 	
+	@Autowired
+	private ReceiveIncidence receiveIncidence;
+	
 	/**
 	 * Se encarga de parsear el String que le llega, convirtiéndolo a un objeto JSON, 
 	 * y transformando dicho JSON en un objeto Incidence.
@@ -49,7 +52,6 @@ public class RIncidenceP {
 				new HashSet<String>(Arrays.asList(tagsArray)) : 
 					new HashSet<String>();
 		
-//		Map<String, Object> additional ;
 		Set<Property> properties =  getSetProperties(names, json) != null ? 
 				 getSetProperties(names, json) : 
 					new HashSet<Property>();
@@ -59,6 +61,8 @@ public class RIncidenceP {
 		String expiration = getString(names, json, "expiration");
 		
 		Agent agent = dbManagement.getAgent(login,password,kind);
+		agent.setIncidences(new HashSet<Incidence>());
+		
 		Operator operator = dbManagement.getOperator(operatorIdentifier);
 		
 		Check.isNotNull(identifier, "Every incidence must have an identifier");
@@ -76,6 +80,9 @@ public class RIncidenceP {
 				.setStatus(status)
 				.setExpiration(expiration);
 				
+		// Mandamos la inci!!!!x
+		receiveIncidence.receiveIncidence(incidence);
+		
 		return incidence;
 	}
 	

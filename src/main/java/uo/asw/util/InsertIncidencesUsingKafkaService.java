@@ -20,7 +20,7 @@ public class InsertIncidencesUsingKafkaService {
 		String identifier = UuidGenerator.getUuid();
 		String jsonIncidenceWithOutTagFuego = "{"
 				+ "\"identifier\": \""+ identifier + "\","
-				+ "\"login\": \"316683136\","
+				+ "\"login\": \"31668313G\","
 				+ "\"password\": \"1234\","
 				+ "\"kind\": \"Person\","
 				+ "\"name\": \"IncidenciaPrueba"+i+"\","
@@ -29,7 +29,7 @@ public class InsertIncidencesUsingKafkaService {
 			+ "}";
 //		String jsonIncidenceWithOutTagFuego = 
 //				"\"identifier\": \""+ identifier + "\","
-//				+ "\"login\": \"316683136\","
+//				+ "\"login\": \"31668313G\","
 //				+ "\"password\": \"1234\","
 //				+ "\"kind\": \"Person\","
 //				+ "\"name\": \"IncidenciaPrueba"+i+"\","

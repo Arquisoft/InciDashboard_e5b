@@ -39,7 +39,7 @@ public class InsertSampleDataService {
 		
 		
 		// Creamos agentes
-		Agent agent1 = new Agent("316683136", "1234", "Person");
+		Agent agent1 = new Agent("31668313G", "1234", "Person");
 		agent1.setName("Juan");
 		agent1.setEmail("email@email.com");
 		

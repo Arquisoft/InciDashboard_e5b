@@ -9,9 +9,6 @@ import uo.asw.inciDashboard.currentIncidences.ReceiveFilteredIncidence;
 
 @Component
 public class ReceiveIncidenceImpl implements ReceiveIncidence {
-
-	@Autowired
-	private RIncidenceP rIncidenceP; 
 	
 	@Autowired
 	private DBManagementFacade dbManagement; 

@@ -16,8 +16,8 @@ public class MessageListener {
 
     private static final Logger logger = Logger.getLogger(MessageListener.class);
 
-    @Autowired
-	private ReceiveIncidence receiveIncidence;
+//    @Autowired
+//	private ReceiveIncidence receiveIncidence;
     
     @Autowired
 	private RIncidenceP rIncidenceP; 
