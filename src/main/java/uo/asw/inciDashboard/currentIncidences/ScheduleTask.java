@@ -16,10 +16,10 @@ public class ScheduleTask { // TODO - quitar
     private SimpMessagingTemplate template;
 
     // this will send a message to an endpoint on which a client can subscribe
-	@Scheduled(fixedRate = 10000)
-	public void trigger() {
-		añadirIncidencias();
-	}
+//	@Scheduled(fixedRate = 10000)
+//	public void trigger() {
+//		añadirIncidencias();
+//	}
 	
 	int cont = 1;
     
