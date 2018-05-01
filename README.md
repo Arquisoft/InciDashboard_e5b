@@ -6,11 +6,6 @@
 
 # InciDashboard_e5b
 
-[![Join the chat at https://gitter.im/Arquisoft/InciDashboard_e5b](https://badges.gitter.im/Arquisoft/InciDashboard_e5b.svg)](https://gitter.im/Arquisoft/InciDashboard_e5b?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-Skeleton of participants module
-
-# Authors
 ## Autores
 - Carlos Sanabria Miranda (@CarlosSanabriaM)
 - Manuel Fernández Antuña (@uo2999)
@@ -18,7 +13,7 @@ Skeleton of participants module
 - Mª Rosa Valdés Pire (@RosaValdesPire)
 
 
-# Funcionamiento:
+## Funcionamiento:
 
 1. Arrancar HSQLDB
    * Para ello, acceder a la carpeta data/hsqldb/bin y lanzar el runServer.bat (o runServer.sh en caso de Linux/Mac).
@@ -35,7 +30,7 @@ Para arrancarlo todo y que funcione, se debe ejecutar el siguiente comando, esta
 ``mvn spring-boot:run``
 
    
-## Interfaz HTML
+### Interfaz HTML
   1. Escribir en el navegador: http://localhost:8090/ 
   2. En el menu escoger entre identificarse o registrarse y hacer click.
   3. Al hacer click en el boton identificarse y si usted es operario deberá introducir su identifier y password.
