@@ -4,6 +4,8 @@ $(document).ready(function() {
 	var socket = new SockJS('/stomp');
 
 	var stompClient = Stomp.over(socket);
+	
+	var arrayIncidences = [];
 
 	stompClient.connect({}, function(frame) {
 		stompClient.subscribe("/topic/incidences", function(data) {
@@ -38,7 +40,7 @@ $(document).ready(function() {
 					for(var i = 0; i<incidencia.properties.length; i++){
 						var key = incidencia.properties[i].name;
 						var value = incidencia.properties[i].value;
-						propertiesString.push(key+"-"+value);
+						propertiesString.push(key+"="+value+" ");
 					}
 				}
 				
@@ -60,7 +62,8 @@ $(document).ready(function() {
 				        "<td id='dangerous"+ incidencia.identifier +"'>" + textoDangerous + "</td>" +
 				        "<td>" + mapa + "</td>" +
 			        "</tr>";
-				tabla.append(htmlstring);
+				
+				tabla.prepend(htmlstring);
 				
 				
 				// Si la incidencia es peligrosa, incrementamos el numero de incidencias peligrosas
