@@ -39,9 +39,9 @@
 			['Incidencias  peligrosas', nTrue]
 		]);
         // Set chart options
-        var options = {'title':'Incidencias en tiempo real',
+        var options = {'title':'Gráfico de peligrosidad',
                        'width':700,
-                       'height':700 };
+                       'height':350 };
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -64,16 +64,16 @@
 		<!--Div that will hold the pie chart-->
 		<div align=center id="chart_div"></div>
 
-		<div class="table-responsive">
+		<div class="table-responsive" id="tablaIncidencias">
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>Nombre</th>
 						<th>Descripcion</th>
-						<th>Estado</th>
-						<th>Expiracion</th>
-						<th>Comentarios del operador</th>
-						<th>Nivel de Peligro</th>
+						<th>Expiración</th>
+						<th>Tags</th>
+						<th>Propiedades</th>
+						<th>¿Peligrosa?</th>
 						<th>Localizacion</th>
 					</tr>
 				</thead>
