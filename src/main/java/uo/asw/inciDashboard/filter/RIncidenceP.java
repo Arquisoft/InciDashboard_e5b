@@ -58,12 +58,13 @@ public class RIncidenceP {
 		String expiration = getString(names, json, "expiration");
 		
 		Agent agent = dbManagement.getAgent(login,password,kind);
-		agent.setIncidences(new HashSet<Incidence>());
 		
 		Operator operator = dbManagement.getOperator(operatorIdentifier);
 		
 		Check.isNotNull(identifier, "Every incidence must have an identifier");
 		Check.isNotNull(agent, "Every incidence must have an existing agent");
+		
+		agent.setIncidences(new HashSet<Incidence>());
 		
 		Incidence incidence = new Incidence(identifier);
 		incidence
